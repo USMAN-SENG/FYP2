@@ -10,8 +10,8 @@ import { useRef, useState } from "react";
 
 export default class SignUpScreen extends Component {
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  // const emailRef = useRef();
+  // const passwordRef = useRef();
 
 
   render() {
