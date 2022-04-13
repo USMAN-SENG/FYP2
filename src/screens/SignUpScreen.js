@@ -14,7 +14,8 @@ export default function  SignUpScreen()  {
   const passwordRef = useRef();
 
   async function handleSignup() {
-    console.log(`${emailRef.current.value} + ${passwordRef.current.value}`);
+    console.log(`${emailRef.current.value} + ${passwordRef.current.value}`); //manage to get the data from the text field
+    
    // setLoading(true);
     // try {
       //await signup(emailRef.current.value, passwordRef.current.value);
