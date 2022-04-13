@@ -6,7 +6,14 @@ import {AccountCircle,Email,Lock} from '@mui/icons-material';
 import EmailConfirmBanner from '../components/EmailConfirmBanner';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { useRef, useState } from "react";
+
 export default class SignUpScreen extends Component {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+
   render() {
     return (
       <div>
@@ -27,14 +34,7 @@ export default class SignUpScreen extends Component {
               </div>
               <div className='flex flex-col justify-center items-center w-3/5 h-full'>
                 
-                <div className='flex flex-row'>
-                  <AccountCircle sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="First Name" variant="standard" sx={{width:"17rem"}} />
-                </div>
-                <div className='flex flex-row'>
-                  <AccountCircle sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="First Name" variant="standard" sx={{width:"17rem"}} />
-                </div>
+              
                 <div className='flex flex-row'>
                   <Email sx={{ color: 'action.active', mr: 1, my: 2 }} />
                   <TextField label="Email" variant="standard" sx={{width:"17rem"}} />
