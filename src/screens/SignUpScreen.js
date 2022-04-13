@@ -10,8 +10,20 @@ import { useRef, useState } from "react";
 
 export default function  SignUpScreen()  {
 
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  async function handleSignup() {
+    console.log(`${emailRef.current.value} + ${passwordRef.current.value}`);
+   // setLoading(true);
+    // try {
+      //await signup(emailRef.current.value, passwordRef.current.value);
+    // } catch {
+      // alert("Error!");
+    // }
+    //setLoading(false);
+  }
+
 
 
     return (
@@ -36,14 +48,14 @@ export default function  SignUpScreen()  {
               
                 <div className='flex flex-row'>
                   <Email sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Email" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={emailRef} label="Email" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div className='flex flex-row'>
                   <Lock sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Password" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={passwordRef} label="Password" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div>
-                  <Button variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
+                  <Button onClick={handleSignup} variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
                 </div>
               </div>
             </div>
