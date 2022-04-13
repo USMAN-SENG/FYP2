@@ -8,13 +8,12 @@ import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from "react";
 
-export default class SignUpScreen extends Component {
+export default function  SignUpScreen()  {
 
   // const emailRef = useRef();
   // const passwordRef = useRef();
 
 
-  render() {
     return (
       <div>
         <div>
@@ -56,5 +55,5 @@ export default class SignUpScreen extends Component {
         <SmallFooter />
       </div>
     )
-  }
+  
 }
