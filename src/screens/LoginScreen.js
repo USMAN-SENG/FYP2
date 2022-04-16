@@ -5,9 +5,30 @@ import TextField from '@mui/material/TextField';
 import {Email,Lock} from '@mui/icons-material';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { useRef, useState } from "react";
+import { login,useAuth } from "../firebase";
+
 
 export default function LoginScreen () {
   
+  const loginEmailRef = useRef(); // get the email input
+  const loginPasswordRef = useRef(); // get the password input
+
+  const [ loading, setLoading ] = useState(false); // disable button
+
+  const currentUser = useAuth(); // get the info of currentUser
+
+  async function handleLogin() {
+    setLoading(true);
+    try {
+      await login(loginEmailRef.current.value, loginPasswordRef.current.value);
+      console.log('succeful log in');
+    } catch {
+      alert("Error!");
+    }
+    setLoading(false);
+  }
+
     return (
       <div>
         <div>
@@ -28,14 +49,17 @@ export default function LoginScreen () {
               <div className='flex flex-col justify-center items-center w-3/5 h-full'>
                 <div className='flex flex-row'>
                   <Email sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Email" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={loginEmailRef} label="Email" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div className='flex flex-row'>
                   <Lock sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Password" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={loginPasswordRef} label="Password" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div>
-                  <Button variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>login</Button>
+                  <Button disabled={ loading  }
+                   onClick={handleLogin} 
+                   variant='outlined' 
+                   sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>login</Button>
                 </div>
               </div>
             </div>

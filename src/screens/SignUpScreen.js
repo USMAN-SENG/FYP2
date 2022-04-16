@@ -60,7 +60,7 @@ export default function  SignUpScreen()  {
                   <TextField inputRef={passwordRef} label="Password" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div> 
-                  <Button onClick={handleSignup} disabled={ loading || currentUser } variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
+                  <Button onClick={handleSignup} disabled={ loading } variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
                 </div>
               </div>
             </div>
