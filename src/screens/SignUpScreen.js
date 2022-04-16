@@ -7,22 +7,26 @@ import EmailConfirmBanner from '../components/EmailConfirmBanner';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from "react";
+import { signup, login, logout, useAuth } from "../firebase";
 
 export default function  SignUpScreen()  {
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = useRef(); // get the email input
+  const passwordRef = useRef(); // get the password input
+
+  const [ loading, setLoading ] = useState(false); // disable button
+  const currentUser = useAuth(); // get the info of currentUser
 
   async function handleSignup() {
-    console.log(`${emailRef.current.value} + ${passwordRef.current.value}`); //manage to get the data from the text field
-    
-   // setLoading(true);
-    // try {
-      //await signup(emailRef.current.value, passwordRef.current.value);
-    // } catch {
-      // alert("Error!");
-    // }
-    //setLoading(false);
+    //console.log(`${emailRef.current.value} + ${passwordRef.current.value}`); //manage to get the data from the text field
+
+   setLoading(true); // disable button
+    try {
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      alert("Error!"); // error when you use the same email to sign up again
+    }
+    setLoading(false); // enable button
   }
 
 
@@ -55,8 +59,8 @@ export default function  SignUpScreen()  {
                   <Lock sx={{ color: 'action.active', mr: 1, my: 2 }} />
                   <TextField inputRef={passwordRef} label="Password" variant="standard" sx={{width:"17rem"}} />
                 </div>
-                <div>
-                  <Button onClick={handleSignup} variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
+                <div> 
+                  <Button onClick={handleSignup} disabled={ loading || currentUser } variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
                 </div>
               </div>
             </div>
