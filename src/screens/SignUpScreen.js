@@ -43,7 +43,12 @@ export default function  SignUpScreen()  {
                 <span className='font-bold text-4xl text-gray-100'>Signup</span>
                 <span className='text-sm '>For new Account</span>
                 <div className='mt-20'>
-                <Button variant="contained"><Link to={"/login"}> Login</Link></Button>
+                <Button sx={{ m: 3 }} variant="contained">
+                  <Link to={"/login"}> Login </Link>
+                </Button>
+                <Button  variant="contained">
+                  <Link to={"/WorkHours"}> WorkHours </Link>
+                </Button>
                 <br/>
                 <span className='text-xs text-white'>If Already have Account</span>
                 </div>
@@ -65,9 +70,10 @@ export default function  SignUpScreen()  {
               </div>
             </div>
           </Paper>
-          <div className='w-2/3 m-5'>
+          {/* note: add email confirmatiom later */}
+          {/* <div className='w-2/3 m-5'>
             <EmailConfirmBanner />
-          </div>
+          </div> */}
         </div>
         <SmallFooter />
       </div>
