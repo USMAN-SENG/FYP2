@@ -33,7 +33,7 @@ export default function WorkHours() {
 
     <Grid container  direction="column"  justifyContent="center" alignItems="center" sx={{ minHeight: "100vh" }}>
         <Grid item >
-            <Paper elevation={24}  sx={{ minHeight: "70vh" , minWidth:"75vh" }}>
+            <Paper elevation={24}  sx={{ minHeight: "70vh" , minWidth:"100vh" }}>
               <form >
                 { formStep === 1 && 
                   (<ChooseWorkHours   hours={hours}  />)
