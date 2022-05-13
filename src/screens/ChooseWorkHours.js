@@ -9,30 +9,48 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 
-
 const MIN = 1;
 const MAX = 12;
 
 export function ChooseWorkHours({ hours }) {
 	const [period, setPeriod] = useState("AM");
 	const [time, setTime] = useState(7);
+	const [sunday, setSunday] = useState(true);
+	const [monday, setMonday] = useState(true);
+	const [saturday, setSaturday] = useState(false)
+	const [daysInclude,setDaysInclude] = useState([])
+	let daysIncludeArray = daysInclude ;
+
+	function addToListOfDays() {
+
+		if(sunday===true)
+			daysIncludeArray.push(0)
+
+		if(monday===true)
+			daysIncludeArray.push(1)
+
+		//console.log(daysIncludeArray)
+		alert(daysIncludeArray);
+	}
+	
+	function changeMondayState() {
+		setMonday(!monday);
+		addToListOfDays();
+	}
+
 
 	const handleSelect = (event) => {
 		setPeriod(event.target.value);
 	};
-  
+
 	const handleTime = (event) => {
+		let newTimeValue = event.target.value;
 
-    let newTimeValue= event.target.value ;
-
-    if (newTimeValue > MAX)
-      newTimeValue=MAX ;
-    if (newTimeValue < MIN)
-      newTimeValue=MIN;
+		if (newTimeValue > MAX) newTimeValue = MAX;
+		if (newTimeValue < MIN) newTimeValue = MIN;
 
 		setTime(newTimeValue);
 	};
-  
 
 	return (
 		<section>
@@ -51,7 +69,8 @@ export function ChooseWorkHours({ hours }) {
 				alignItems="center"
 			>
 				<Grid item md={2}>
-					<FormControlLabel control={<Checkbox />} label="Monday" />
+					<FormControlLabel control={<Checkbox checked={monday} 
+					onChange={changeMondayState} />} label="Monday" />
 				</Grid>
 
 				<Grid item md={4}>
@@ -60,13 +79,12 @@ export function ChooseWorkHours({ hours }) {
 							<Input
 								type="number"
 								value={time}
-								
 								inputProps={{ max: MAX, min: MIN }}
 								sx={{ mx: "6px" }}
-                onChange={handleTime}
+								onChange={handleTime}
 							></Input>
 
-							<Select  value={period} onChange={handleSelect}>
+							<Select value={period} onChange={handleSelect}>
 								<MenuItem value={"AM"}>AM</MenuItem>
 								<MenuItem value={"PM"}>PM</MenuItem>
 							</Select>

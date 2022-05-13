@@ -28,7 +28,7 @@ export default function WorkHours() {
     '10:00 PM',
     '11:00 PM',
   ];
-
+   //  0 = sunday , 1 = monday ...
   return (
 
     <Grid container  direction="column"  justifyContent="center" alignItems="center" sx={{ minHeight: "100vh" }}>
