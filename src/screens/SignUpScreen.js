@@ -47,7 +47,7 @@ export default function  SignUpScreen()  {
                   <Link to={"/login"}> Login </Link>
                 </Button>
                 <Button  variant="contained">
-                  <Link to={"/WorkHours"}> WorkHours </Link>
+                  <Link to={"/CustomizeAppoinment"}> WorkHours </Link>
                 </Button>
                 <br/>
                 <span className='text-xs text-white'>If Already have Account</span>

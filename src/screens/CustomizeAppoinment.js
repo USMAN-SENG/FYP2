@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 
  
 
-export default function WorkHours() {
+export default function CustomizeAppoinment() {
 
   const [ formStep, setFormStep ] = useState(1);
 
@@ -36,7 +36,7 @@ export default function WorkHours() {
             <Paper elevation={24}  sx={{ minHeight: "70vh" , minWidth:"100vh" }}>
               <form >
                 { formStep === 1 && 
-                  (<ChooseWorkHours   hours={hours}  />)
+                  (<ChooseWorkHours  />)
                 }
 
                 { formStep === 2 && 
