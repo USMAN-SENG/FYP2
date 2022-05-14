@@ -19,7 +19,11 @@ export function ChooseWorkHours() {
 	//const [period, setPeriod] = useState("AM");
 	//const [time, setTime] = useState(7);
 	const [sunday, setSunday] = useState(true);
-	const [monday, setMonday] = useState(true);
+	const [monday, setMonday] = useState(false);
+	const [tuesday, setTuesday] = useState(false);
+	const [wednesday, setWednesday] = useState(false);
+	const [thursday, setThursday] = useState(false);
+	const [friday, setFriday] = useState(false);
 	const [saturday, setSaturday] = useState(false);
 	//const [daysInclude, setDaysInclude] = useState([]);
 	let daysIncludeArray = [];
@@ -34,9 +38,33 @@ export function ChooseWorkHours() {
 		//alert(daysIncludeArray);
 	}
 
+	function changeSundayState() {
+		setMonday(!sunday);
+	}
+
 	function changeMondayState() {
 		setMonday(!monday);
 		addToListOfDays();
+	}
+
+	function changeTuesdayState() {
+		setMonday(!tuesday);
+	}
+
+	function changeWednesdayState() {
+		setMonday(!wednesday);
+	}
+
+	function changeThursdayState() {
+		setMonday(!thursday);
+	}
+
+	function changeFridayState() {
+		setMonday(!friday);
+	}
+
+	function changeSaturdayState() {
+		setMonday(!saturday);
 	}
 
 	// const handleSelect = (event) => {
