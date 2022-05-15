@@ -35,19 +35,19 @@ export function FullFooter() {
 }
 export function SmallFooter(){
     return (
-        <div className='bg-gray-800 flex h-20 items-center px-5'>
-            <span className='text-white font-bold text-xl my-3'>Offline Appointment Booking System</span>
+        <div className='bg-[#DFDFDF] flex flex-col h-20 items-center px-5'>
             <div className='flex flex-row  mx-10'>
                 <div className='mx-5'>
-                    <FacebookTwoTone fontSize="medium" color="primary"  />
+                    <FacebookTwoTone fontSize="medium" color="primary" />
                 </div>
                 <div className='mx-5'>
-                    <Twitter fontSize="medium" color="primary"  />
+                    <Twitter fontSize="medium" color="primary" />
                 </div>
                 <div className='mx-5'>
-                    <Instagram fontSize="medium" color="primary"  />
+                     <Instagram fontSize="medium" color="primary"  />
                 </div>
             </div>
+            <span className='text-black font-bold text-xl my-3'>Offline Appointment Booking System</span>
         </div>
     )
 }
