@@ -13,6 +13,12 @@ import { CheckboxDays } from "./formComponents/checkboxDays";
 const MIN = 1;
 const MAX = 12;
 
+const MIN_START_TIME = 1;
+const MAX_START_TIME = 11;
+
+const MIN_END_TIME = 2;
+const MAX_END_TIME = 12;
+
 export function ChooseWorkHours() {
 	//const [period, setPeriod] = useState("AM");
 	//const [time, setTime] = useState(7);
@@ -41,7 +47,7 @@ export function ChooseWorkHours() {
 	const [saturdayEndPeriod, setSaturdayEndPeriod] = useState("AM");
 	// time states
 	const [sundayStartTime, setSundayStartTime] = useState(7);
-	const [sundayEndTime, setSundayEndTime] = useState(7);
+	const [sundayEndTime, setSundayEndTime] = useState(sundayStartTime + 1);
 	const [mondayStartTime, setMondayStartTime] = useState(7);
 	const [mondayEndTime, setMondayEndTime] = useState(7);
 	const [tuesdayStartTime, setTuesdayStartTime] = useState(7);
@@ -148,14 +154,19 @@ export function ChooseWorkHours() {
 	// };
 
 	const handleStartTime = (event, day) => {
-		let newTimeValue = event.target.value;
+		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);
 		//console.log(mondayStartTime);
 		if (newTimeValue > MAX) newTimeValue = MAX;
 		if (newTimeValue < MIN) newTimeValue = MIN;
+		//console.log(typeof(newTimeValue));
+		
+		let endTiemValue = 1 + newTimeValue ;
 		// put if statement here
 		if (day === "sunday") {
 			setSundayStartTime(newTimeValue);
+			if (newTimeValue <= 11)
+			setSundayEndTime(endTiemValue);
 		} else if (day === "monday") {
 			setMondayStartTime(newTimeValue);
 			//console.log(day , newTimeValue);
