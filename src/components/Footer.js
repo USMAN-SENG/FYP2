@@ -2,10 +2,10 @@ import React from 'react'
 import {FacebookTwoTone,Twitter,Instagram} from '@mui/icons-material'
 export function FullFooter() {
   return (
-    <div className='bg-gray-800 flex h-50 px-10 py-5 mb-1 mx-1'>
+    <div className='bg-cyan-800 flex h-50 px-10 py-5 mb-1 mx-1'>
         <div className='flex flex-row'>
             <div className='flex flex-col'>
-                <span className='text-white font-bold text-3xl my-3'>Offline Appointment Booking System</span>
+                <span className='text-black font-bold text-3xl my-3'>Offline Appointment Booking System</span>
                 <span className='text-gray-200 text-xs'>
                     Company Name Private Limited,<br/>
                     Address<br/>
