@@ -15,32 +15,38 @@ const MAX = 12;
 
 export function CheckboxDays({
 	labelDay,
-	changeMondayState,
+	dayState,
+	changeDayStates,
+	startTime,
+	handleStartTime,
+	endTime,
+	handleEndTime,
 }) {
 
-	const [time, setTime] = useState(7);
+	// const [time, setTime] = useState(7);
 	const [period, setPeriod] = useState("AM");
-	const [sunday, setSunday] = useState(true);
-	const [monday, setMonday] = useState(true);
-	const [saturday, setSaturday] = useState(false);
+	// const [sunday, setSunday] = useState(true);
+	// const [monday, setMonday] = useState(true);
+	// const [saturday, setSaturday] = useState(false);
 
-	const handleTime = (event) => {
-		let newTimeValue = event.target.value;
+	// const handleTime = (event) => {
+	// 	let newTimeValue = event.target.value;
+	// 	parseInt(newTimeValue);
+	// 	console.log(dayState);
+	// 	if (newTimeValue > MAX) newTimeValue = MAX;
+	// 	if (newTimeValue < MIN) newTimeValue = MIN;
 
-		if (newTimeValue > MAX) newTimeValue = MAX;
-		if (newTimeValue < MIN) newTimeValue = MIN;
-
-		setTime(newTimeValue);
-	};
+	// 	setTime(newTimeValue);
+	// };
 
 	const handleSelect = (event) => {
 		setPeriod(event.target.value);
 	};
 
-	function changeMondayState() {
-		setMonday(!monday);
+	// function changeMondayState() {
+	// 	setMonday(!monday);
 		
-	}
+	// }
 
 	return (
 		<Grid
@@ -52,19 +58,19 @@ export function CheckboxDays({
 		>
 			<Grid item md={2}>
 				<FormControlLabel
-					control={<Checkbox checked={monday} onChange={changeMondayState} />}
+					control={<Checkbox checked={dayState} onChange={changeDayStates} />}
 					label={labelDay}
 				/>
 			</Grid>
 
-			<HoursAndPeriod   time={time} handleTime={handleTime} period={period} handleSelect={handleSelect}  />
+			<HoursAndPeriod   time={startTime} handleTime={handleStartTime} period={period} handleSelect={handleSelect}  />
 
 			<Grid item md={1}>
 				<p>To</p>
 			</Grid>
 			{/* find a way to start from the next hour  */}
 
-			<HoursAndPeriod   time={time} handleTime={handleTime} period={period} handleSelect={handleSelect}  />
+			<HoursAndPeriod   time={endTime} handleTime={handleEndTime} period={period} handleSelect={handleSelect}  />
 			
 		</Grid>
 	);

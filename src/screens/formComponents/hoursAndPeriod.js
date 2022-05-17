@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 const MIN = 1;
 const MAX = 12;
 
+
+
 export function HoursAndPeriod({ time, handleTime, period, handleSelect }) {
 	return (
 		<Grid item md={4}>
@@ -20,7 +22,7 @@ export function HoursAndPeriod({ time, handleTime, period, handleSelect }) {
 							min: MIN,
 						}}
 						sx={{
-							mx: "3px",
+							mx: "6px",
 						}}
 						onChange={handleTime}
 					></Input>
