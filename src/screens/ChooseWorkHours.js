@@ -49,17 +49,17 @@ export function ChooseWorkHours() {
 	const [sundayStartTime, setSundayStartTime] = useState(7);
 	const [sundayEndTime, setSundayEndTime] = useState(sundayStartTime + 1);
 	const [mondayStartTime, setMondayStartTime] = useState(7);
-	const [mondayEndTime, setMondayEndTime] = useState(7);
+	const [mondayEndTime, setMondayEndTime] = useState(mondayStartTime + 1);
 	const [tuesdayStartTime, setTuesdayStartTime] = useState(7);
-	const [tuesdayEndTime, setTuesdayEndTime] = useState(7);
+	const [tuesdayEndTime, setTuesdayEndTime] = useState(tuesdayStartTime + 1);
 	const [wednesdayStartTime, setWednesdayStartTime] = useState(7);
-	const [wednesdayEndTime, setWednesdayEndTime] = useState(7);
+	const [wednesdayEndTime, setWednesdayEndTime] = useState(wednesdayStartTime + 1);
 	const [thursdayStartTime, setThursdayStartTime] = useState(7);
-	const [thursdayEndTime, setThursdayEndTime] = useState(7);
+	const [thursdayEndTime, setThursdayEndTime] = useState(thursdayStartTime + 1);
 	const [fridayStartTime, setFridayStartTime] = useState(7);
-	const [fridayEndTime, setFridayEndTime] = useState(7);
+	const [fridayEndTime, setFridayEndTime] = useState(fridayStartTime + 1);
 	const [saturdayStartTime, setSaturdayStartTime] = useState(7);
-	const [saturdayEndTime, setSaturdayEndTime] = useState(7);
+	const [saturdayEndTime, setSaturdayEndTime] = useState(saturdayStartTime + 1);
 
 	//const [daysInclude, setDaysInclude] = useState([]);
 	let daysIncludeArray = [];
@@ -157,56 +157,69 @@ export function ChooseWorkHours() {
 		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);
 		//console.log(mondayStartTime);
-		if (newTimeValue > MAX) newTimeValue = MAX;
-		if (newTimeValue < MIN) newTimeValue = MIN;
+		if (newTimeValue > MAX_START_TIME) newTimeValue = MAX_START_TIME;
+		if (newTimeValue < MIN_START_TIME) newTimeValue = MIN_START_TIME;
 		//console.log(typeof(newTimeValue));
-		
-		let endTiemValue = 1 + newTimeValue ;
+
+		let endTiemValue = 1 + newTimeValue;
 		// put if statement here
 		if (day === "sunday") {
 			setSundayStartTime(newTimeValue);
-			if (newTimeValue <= 11)
 			setSundayEndTime(endTiemValue);
 		} else if (day === "monday") {
 			setMondayStartTime(newTimeValue);
+			setMondayEndTime(endTiemValue);
 			//console.log(day , newTimeValue);
 		} else if (day === "tuesday") {
 			setTuesdayStartTime(newTimeValue);
+			setTuesdayEndTime(endTiemValue);
 			//console.log(day , newTimeValue);
 		} else if (day === "wednesday") {
 			setWednesdayStartTime(newTimeValue);
+			setWednesdayEndTime(endTiemValue);
 		} else if (day === "thursday") {
 			setThursdayStartTime(newTimeValue);
+			setThursdayEndTime(endTiemValue);
 		} else if (day === "friday") {
 			setFridayStartTime(newTimeValue);
+			setFridayEndTime(endTiemValue);
 		} else if (day === "saturday") {
 			setSaturdayStartTime(newTimeValue);
+			setSaturdayEndTime(endTiemValue);
 		}
 	};
 
 	const handleEndTime = (event, day) => {
-		let newTimeValue = event.target.value;
+		let newTimeValue = Number(event.target.value) ;
 		parseInt(newTimeValue);
 		//console.log(mondayStartTime);
-		if (newTimeValue > MAX) newTimeValue = MAX;
-		if (newTimeValue < MIN) newTimeValue = MIN;
+		if (newTimeValue > MAX_END_TIME) newTimeValue = MAX_END_TIME;
+		if (newTimeValue < MIN_END_TIME) newTimeValue = MIN_END_TIME;
+
+		let startTiemValue = newTimeValue - 1;
 		// put if statement here
 		if (day === "sunday") {
 			setSundayEndTime(newTimeValue);
+			setSundayStartTime(startTiemValue);
 		} else if (day === "monday") {
 			setMondayEndTime(newTimeValue);
-			//console.log(day ,'end', newTimeValue);
+			setMondayStartTime(startTiemValue);
 		} else if (day === "tuesday") {
 			setTuesdayEndTime(newTimeValue);
+			setTuesdayStartTime(startTiemValue);
 			//console.log(day , newTimeValue);
 		} else if (day === "wednesday") {
 			setWednesdayEndTime(newTimeValue);
+			setWednesdayStartTime(startTiemValue);
 		} else if (day === "thursday") {
 			setThursdayEndTime(newTimeValue);
+			setThursdayStartTime(startTiemValue);
 		} else if (day === "friday") {
 			setFridayEndTime(newTimeValue);
+			setFridayStartTime(startTiemValue);
 		} else if (day === "saturday") {
 			setSaturdayEndTime(newTimeValue);
+			setSaturdayStartTime(startTiemValue);
 		}
 	};
 
