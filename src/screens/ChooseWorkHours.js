@@ -53,7 +53,9 @@ export function ChooseWorkHours() {
 	const [tuesdayStartTime, setTuesdayStartTime] = useState(7);
 	const [tuesdayEndTime, setTuesdayEndTime] = useState(tuesdayStartTime + 1);
 	const [wednesdayStartTime, setWednesdayStartTime] = useState(7);
-	const [wednesdayEndTime, setWednesdayEndTime] = useState(wednesdayStartTime + 1);
+	const [wednesdayEndTime, setWednesdayEndTime] = useState(
+		wednesdayStartTime + 1
+	);
 	const [thursdayStartTime, setThursdayStartTime] = useState(7);
 	const [thursdayEndTime, setThursdayEndTime] = useState(thursdayStartTime + 1);
 	const [fridayStartTime, setFridayStartTime] = useState(7);
@@ -153,73 +155,114 @@ export function ChooseWorkHours() {
 	// 	setTime(newTimeValue);
 	// };
 
+	const handleStartSelect = (event, day) => {
+		let newStartSelectValue = event.target.value;
+
+		//console.log(day , newStartSelectValue);
+
+		if (day === "sunday") {
+			setSundayStartPeriod(newStartSelectValue);
+		} else if (day === "monday") {
+			setMondayStartPeriod(newStartSelectValue);
+
+			//console.log(day , newTimeValue);
+		} else if (day === "tuesday") {
+			setTuesdayStartPeriod(newStartSelectValue);
+
+			//console.log(day , newTimeValue);
+		} else if (day === "wednesday") {
+			setWednesdayStartPeriod(newStartSelectValue);
+		} else if (day === "thursday") {
+			setThursdayStartPeriod(newStartSelectValue);
+		} else if (day === "friday") {
+			setFridayStartPeriod(newStartSelectValue);
+		} else if (day === "saturday") {
+			setSaturdayStartPeriod(newStartSelectValue);
+		}
+	};
+
+	const handleEndSelect = (event, day) => {
+		let newEndSelectValue = event.target.value;
+
+		console.log(day, "end", newEndSelectValue);
+
+		if (day === "sunday") {
+			setSundayEndPeriod(newEndSelectValue);
+		} else if (day === "monday") {
+			setMondayEndPeriod(newEndSelectValue);
+
+			//console.log(day , newTimeValue);
+		} else if (day === "tuesday") {
+			setTuesdayEndPeriod(newEndSelectValue);
+
+			//console.log(day , newTimeValue);
+		} else if (day === "wednesday") {
+			setWednesdayEndPeriod(newEndSelectValue);
+		} else if (day === "thursday") {
+			setThursdayEndPeriod(newEndSelectValue);
+		} else if (day === "friday") {
+			setFridayEndPeriod(newEndSelectValue);
+		} else if (day === "saturday") {
+			setSaturdayEndPeriod(newEndSelectValue);
+		}
+	};
+
 	const handleStartTime = (event, day) => {
 		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);
 		//console.log(mondayStartTime);
-		if (newTimeValue > MAX_START_TIME) newTimeValue = MAX_START_TIME;
-		if (newTimeValue < MIN_START_TIME) newTimeValue = MIN_START_TIME;
+		if (newTimeValue > MAX) newTimeValue = MAX;
+		if (newTimeValue < MIN) newTimeValue = MIN;
 		//console.log(typeof(newTimeValue));
 
-		let endTiemValue = 1 + newTimeValue;
+		//let endTiemValue = 1 + newTimeValue;
 		// put if statement here
 		if (day === "sunday") {
 			setSundayStartTime(newTimeValue);
-			setSundayEndTime(endTiemValue);
 		} else if (day === "monday") {
 			setMondayStartTime(newTimeValue);
-			setMondayEndTime(endTiemValue);
+
 			//console.log(day , newTimeValue);
 		} else if (day === "tuesday") {
 			setTuesdayStartTime(newTimeValue);
-			setTuesdayEndTime(endTiemValue);
+
 			//console.log(day , newTimeValue);
 		} else if (day === "wednesday") {
 			setWednesdayStartTime(newTimeValue);
-			setWednesdayEndTime(endTiemValue);
 		} else if (day === "thursday") {
 			setThursdayStartTime(newTimeValue);
-			setThursdayEndTime(endTiemValue);
 		} else if (day === "friday") {
 			setFridayStartTime(newTimeValue);
-			setFridayEndTime(endTiemValue);
 		} else if (day === "saturday") {
 			setSaturdayStartTime(newTimeValue);
-			setSaturdayEndTime(endTiemValue);
 		}
 	};
 
 	const handleEndTime = (event, day) => {
-		let newTimeValue = Number(event.target.value) ;
+		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);
 		//console.log(mondayStartTime);
-		if (newTimeValue > MAX_END_TIME) newTimeValue = MAX_END_TIME;
-		if (newTimeValue < MIN_END_TIME) newTimeValue = MIN_END_TIME;
+		if (newTimeValue > MAX) newTimeValue = MAX;
+		if (newTimeValue < MIN) newTimeValue = MIN;
 
-		let startTiemValue = newTimeValue - 1;
+		//let startTiemValue = newTimeValue - 1;
 		// put if statement here
 		if (day === "sunday") {
 			setSundayEndTime(newTimeValue);
-			setSundayStartTime(startTiemValue);
 		} else if (day === "monday") {
 			setMondayEndTime(newTimeValue);
-			setMondayStartTime(startTiemValue);
 		} else if (day === "tuesday") {
 			setTuesdayEndTime(newTimeValue);
-			setTuesdayStartTime(startTiemValue);
+
 			//console.log(day , newTimeValue);
 		} else if (day === "wednesday") {
 			setWednesdayEndTime(newTimeValue);
-			setWednesdayStartTime(startTiemValue);
 		} else if (day === "thursday") {
 			setThursdayEndTime(newTimeValue);
-			setThursdayStartTime(startTiemValue);
 		} else if (day === "friday") {
 			setFridayEndTime(newTimeValue);
-			setFridayStartTime(startTiemValue);
 		} else if (day === "saturday") {
 			setSaturdayEndTime(newTimeValue);
-			setSaturdayStartTime(startTiemValue);
 		}
 	};
 
@@ -233,6 +276,7 @@ export function ChooseWorkHours() {
 				Add office working hours
 			</Typography>
 
+			{/*note:  add one for break time  */}
 			<CheckboxDays
 				labelDay="Monday"
 				dayState={monday}
@@ -241,6 +285,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "monday")}
 				endTime={mondayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "monday")}
+				startPeriod={mondayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "monday")}
+				EndPeriod={mondayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "monday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -251,6 +299,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "tuesday")}
 				endTime={tuesdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "tuesday")}
+				startPeriod={tuesdayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "tuesday")}
+				EndPeriod={tuesdayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "tuesday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -261,6 +313,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "wednesday")}
 				endTime={wednesdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "wednesday")}
+				startPeriod={wednesdayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "wednesday")}
+				EndPeriod={wednesdayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "wednesday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -271,6 +327,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "thursday")}
 				endTime={thursdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "thursday")}
+				startPeriod={thursdayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "thursday")}
+				EndPeriod={thursdayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "thursday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -281,6 +341,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "friday")}
 				endTime={fridayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "friday")}
+				startPeriod={fridayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "friday")}
+				EndPeriod={fridayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "friday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -291,6 +355,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "saturday")}
 				endTime={saturdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "saturday")}
+				startPeriod={saturdayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "saturday")}
+				EndPeriod={saturdayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "saturday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -301,6 +369,10 @@ export function ChooseWorkHours() {
 				handleStartTime={(event) => handleStartTime(event, "sunday")}
 				endTime={sundayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "sunday")}
+				startPeriod={sundayStartPeriod}
+				handleStartPeriod={(event) => handleStartSelect(event, "sunday")}
+				EndPeriod={sundayEndPeriod}
+				handleEndPeriod={(event) => handleEndSelect(event, "sunday")}
 			/>
 			<br />
 		</section>

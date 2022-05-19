@@ -21,6 +21,11 @@ export function CheckboxDays({
 	handleStartTime,
 	endTime,
 	handleEndTime,
+	startPeriod,
+	handleStartPeriod,
+	EndPeriod,
+	handleEndPeriod,
+
 }) {
 
 	// const [time, setTime] = useState(7);
@@ -63,14 +68,14 @@ export function CheckboxDays({
 				/>
 			</Grid>
 
-			<HoursAndPeriod   time={startTime} handleTime={handleStartTime} period={period} handleSelect={handleSelect}  />
+			<HoursAndPeriod   time={startTime} handleTime={handleStartTime} period={startPeriod} handleSelect={handleStartPeriod}  />
 
 			<Grid item md={1}>
 				<p>To</p>
 			</Grid>
 			{/* find a way to start from the next hour  */}
 
-			<HoursAndPeriod   time={endTime} handleTime={handleEndTime} period={period} handleSelect={handleSelect}  />
+			<HoursAndPeriod   time={endTime} handleTime={handleEndTime} period={EndPeriod} handleSelect={handleEndPeriod}  />
 			
 		</Grid>
 	);
