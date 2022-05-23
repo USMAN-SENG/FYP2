@@ -13,11 +13,11 @@ import { CheckboxDays } from "./formComponents/checkboxDays";
 const MIN = 1;
 const MAX = 12;
 
-const MIN_START_TIME = 1;
-const MAX_START_TIME = 11;
+// const MIN_START_TIME = 1;
+// const MAX_START_TIME = 11;
 
-const MIN_END_TIME = 2;
-const MAX_END_TIME = 12;
+// const MIN_END_TIME = 2;
+// const MAX_END_TIME = 12;
 
 export function ChooseWorkHours() {
 	//const [period, setPeriod] = useState("AM");
@@ -67,17 +67,15 @@ export function ChooseWorkHours() {
 	let daysIncludeArray = [];
 
 	function addToListOfDays() {
-		console.log(sunday);
+		//console.log(sunday);
 		// if (sunday === true) daysIncludeArray.push(0);
-
 		// if (monday === true) daysIncludeArray.push(1);
-
 		//console.log(daysIncludeArray)
 		//alert(daysIncludeArray);
 	}
 
 	function changeDayStates(day) {
-		console.log(day);
+		//console.log(day);
 
 		if (day === "sunday") {
 			setSunday(!sunday);
@@ -106,15 +104,6 @@ export function ChooseWorkHours() {
 
 	// function changeSundayState() {
 
-	// 	console.log('sunday');
-	// 	console.log(sunday);
-	// 	setSunday(!sunday);
-	// 	// if(sunday===false)
-	// 	// setSunday(true);
-	// 	// if(sunday===true)
-	// 	// setSunday(false);
-	// 	console.log(sunday);
-	// 	// addToListOfDays()
 	// }
 
 	// function changeMondayState() {
@@ -142,23 +131,10 @@ export function ChooseWorkHours() {
 	// 	setMonday(!saturday);
 	// }
 
-	// const handleSelect = (event) => {
-	// 	setPeriod(event.target.value);
-	// };
-
-	// const handleTime = (event) => {
-	// 	let newTimeValue = event.target.value;
-
-	// 	if (newTimeValue > MAX) newTimeValue = MAX;
-	// 	if (newTimeValue < MIN) newTimeValue = MIN;
-
-	// 	setTime(newTimeValue);
-	// };
-
 	const handleStartSelect = (event, day) => {
 		let newStartSelectValue = event.target.value;
 
-		//console.log(day , newStartSelectValue);
+		//console.log(day ,'start', newStartSelectValue);
 
 		if (day === "sunday") {
 			setSundayStartPeriod(newStartSelectValue);
@@ -184,7 +160,7 @@ export function ChooseWorkHours() {
 	const handleEndSelect = (event, day) => {
 		let newEndSelectValue = event.target.value;
 
-		console.log(day, "end", newEndSelectValue);
+		//console.log(day, "end", newEndSelectValue);
 
 		if (day === "sunday") {
 			setSundayEndPeriod(newEndSelectValue);

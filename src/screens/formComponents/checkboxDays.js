@@ -10,8 +10,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 
-const MIN = 1;
-const MAX = 12;
 
 export function CheckboxDays({
 	labelDay,
@@ -27,31 +25,6 @@ export function CheckboxDays({
 	handleEndPeriod,
 
 }) {
-
-	// const [time, setTime] = useState(7);
-	const [period, setPeriod] = useState("AM");
-	// const [sunday, setSunday] = useState(true);
-	// const [monday, setMonday] = useState(true);
-	// const [saturday, setSaturday] = useState(false);
-
-	// const handleTime = (event) => {
-	// 	let newTimeValue = event.target.value;
-	// 	parseInt(newTimeValue);
-	// 	console.log(dayState);
-	// 	if (newTimeValue > MAX) newTimeValue = MAX;
-	// 	if (newTimeValue < MIN) newTimeValue = MIN;
-
-	// 	setTime(newTimeValue);
-	// };
-
-	const handleSelect = (event) => {
-		setPeriod(event.target.value);
-	};
-
-	// function changeMondayState() {
-	// 	setMonday(!monday);
-		
-	// }
 
 	return (
 		<Grid
