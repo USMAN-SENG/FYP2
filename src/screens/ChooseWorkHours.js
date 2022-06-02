@@ -9,6 +9,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { CheckboxDays } from "./formComponents/checkboxDays";
+import { ButtonStep } from "./formComponents/ButtonStep";
 
 const MIN = 1;
 const MAX = 12;
@@ -19,7 +20,13 @@ const MAX = 12;
 // const MIN_END_TIME = 2;
 // const MAX_END_TIME = 12;
 
-export function ChooseWorkHours() {
+export function ChooseWorkHours( {
+	spacingBetweenButtons,
+	decreaseFormStep,
+	disabledButtons,
+	formStep,
+	increaseFormStep,
+}) {
 	//const [period, setPeriod] = useState("AM");
 	//const [time, setTime] = useState(7);
 	//days states
@@ -62,6 +69,10 @@ export function ChooseWorkHours() {
 	const [fridayEndTime, setFridayEndTime] = useState(fridayStartTime + 1);
 	const [saturdayStartTime, setSaturdayStartTime] = useState(7);
 	const [saturdayEndTime, setSaturdayEndTime] = useState(saturdayStartTime + 1);
+
+	let disablePreviousButton = true;
+	let disableNextButton = false;
+	let disableAddQuestionButton = false;
 
 	//const [daysInclude, setDaysInclude] = useState([]);
 	let daysIncludeArray = [];
@@ -351,6 +362,7 @@ export function ChooseWorkHours() {
 				handleEndPeriod={(event) => handleEndSelect(event, "sunday")}
 			/>
 			<br />
+			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} disableAddQuestionButton={disableAddQuestionButton}  />
 		</section>
 	);
 }

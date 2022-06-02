@@ -1,41 +1,54 @@
-import { ChooseWorkHours } from './ChooseWorkHours';
+import { ButtonStep } from "./formComponents/ButtonStep";
+import { ChooseWorkHours } from "./ChooseWorkHours";
+import {AddFAQ} from "./AddFAQ";
 
-import {  useState } from "react";
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-
+import { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
  
 
 export default function CustomizeAppoinment() {
+	const [formStep, setFormStep] = useState(1);
 
-  const [ formStep, setFormStep ] = useState(1);
+	let spacingBetweenButtons = 45;
+	if (formStep === 2) spacingBetweenButtons = 12;
+	else spacingBetweenButtons = 45;
 
-  
-   //  0 = sunday , 1 = monday ...
-  return (
+	let disabledButtons = false;
 
-    <Grid container  direction="column"  justifyContent="center" alignItems="center" sx={{ minHeight: "100vh" }}>
-        <Grid item >
-            <Paper elevation={24}  sx={{ minHeight: "70vh" , minWidth:"100vh" }}>
-              <form >
-                { formStep === 1 && 
-                  (<ChooseWorkHours  />)
-                }
 
-                { formStep === 2 && 
-                  (<section>
-                    <h2> step 2</h2>
+	function increaseFormStep() {
+		setFormStep(previousStep => previousStep + 1);
+		
+	}
 
-                  </section>)
-                }
-              </form>
-            </Paper>
-            
+	function decreaseFormStep() {
+		if (formStep > 1) setFormStep(previousStep => previousStep - 1);
+		
+	}
 
-        </Grid>
-        
-    </Grid>
+	//  0 = sunday , 1 = monday ...
+	return (
+		<Grid
+			container
+			direction="column"
+			justifyContent="center"
+			alignItems="center"
+			sx={{ minHeight: "100vh" }}
+		>
+			<Grid item>
+				<Paper elevation={24} sx={{ minHeight: "70vh", minWidth: "100vh" }}>
+					<form>
+						{formStep === 1 && <ChooseWorkHours spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}/>}
 
-  )  
+						{formStep === 2 && (
+							 <AddFAQ />
+						)}
+					</form>
+					{/* <ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}  /> */}
+				</Paper>
+			</Grid>
+		</Grid>
+	);
 }
-  

@@ -6,21 +6,22 @@ import { FullFooter } from "../components/Footer";
 import CountUp from "react-countup";
 import { addTestArray } from "../firebase";
 import { useRef, useState } from "react";
+// const fs = require("fs");
 
 const Homepage = (props) => {
-
-	const [ loading, setLoading ] = useState(false); 
+	const [loading, setLoading] = useState(false);
 
 	async function handleAddArray() {
-  
-   setLoading(true); // disable button
-    try {
-      await addTestArray();
-    } catch {
-      alert("Error!"); // error when you use the same email to sign up again
-    }
-    setLoading(false); // enable button
-  }
+		setLoading(true); // disable button
+		try {
+			await addTestArray();
+		} catch {
+			alert("Error!"); // error when you use the same email to sign up again
+		}
+		setLoading(false); // enable button
+	}
+
+	
 
 	return (
 		<div>
@@ -47,7 +48,14 @@ const Homepage = (props) => {
 							<Link to={"/signup"}>
 								<Button variant="contained">Sign Up</Button>
 							</Link>
-							<Button variant="contained" onClick={handleAddArray} disabled={ loading } >add array to firebase</Button>
+							<Button
+								variant="contained"
+								onClick={handleAddArray}
+								disabled={loading}
+							>
+								add array to firebase
+							</Button>
+
 						</div>
 					</div>
 					<div className="flex flex-1 backdrop-blur-md justify-center items-center">

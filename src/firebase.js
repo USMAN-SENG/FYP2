@@ -10,7 +10,13 @@ import {
 	signOut,
 } from "firebase/auth";
 //onAuthStateChanged is used to listen to login and logout
-import { getFirestore , collection, addDoc, doc, setDoc  } from "firebase/firestore";
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	doc,
+	setDoc,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -58,23 +64,23 @@ export function useAuth() {
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-const usersColRef = collection(db,'users');
+const usersColRef = collection(db, "users");
 
-let arrayTest= [];
+let arrayTest = [];
 let car = {
-  "color": "red",
-  "type": "cabrio",
-  "registration": new Date('2016-05-02'),
-  "capacity": 2
-}
+	color: "red",
+	type: "cabrio",
+	registration: new Date("2016-05-02"),
+	capacity: 2,
+};
 arrayTest.push(car);
 
 let objectWithArray = {
-	array: arrayTest
-}
+	array: arrayTest,
+};
 //can't send an array, have to be an object
-// we have to do a nested object 
+// we have to do a nested object
 
 export function addTestArray() {
-	return addDoc(usersColRef,objectWithArray);
+	return addDoc(usersColRef, objectWithArray); // addDoc will create random id
 }
