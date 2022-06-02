@@ -10,6 +10,7 @@ export function ButtonStep({
 	disableNextButton,
 	disableAddQuestionButton,
 }) {
+	// we can add onClick function to each button
 	return (
 		<Grid
 			container

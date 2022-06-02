@@ -2,8 +2,19 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { ButtonStep } from "./formComponents/ButtonStep";
 
-export function AddFAQ() {
+export function AddFAQ({
+	spacingBetweenButtons,
+	decreaseFormStep,
+	formStep,
+	increaseFormStep,
+}) {
+
+  let disablePreviousButton = false;
+	let disableNextButton = false;
+	let disableAddQuestionButton = false;
+
 	return (
 		<>
 			<Typography variant="h6" align="center">
@@ -21,6 +32,7 @@ export function AddFAQ() {
 					<TextField required  placeholder="Answer" variant="outlined" fullWidth multiline minRows={4} />
 				</Grid>
 			</Grid>
+      <ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} disableAddQuestionButton={disableAddQuestionButton}  />
 		</>
 	);
 }

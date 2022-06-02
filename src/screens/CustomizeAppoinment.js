@@ -12,7 +12,7 @@ export default function CustomizeAppoinment() {
 	const [formStep, setFormStep] = useState(1);
 
 	let spacingBetweenButtons = 45;
-	if (formStep === 2) spacingBetweenButtons = 12;
+	if (formStep === 2) spacingBetweenButtons = 11;
 	else spacingBetweenButtons = 45;
 
 	let disabledButtons = false;
@@ -40,10 +40,10 @@ export default function CustomizeAppoinment() {
 			<Grid item>
 				<Paper elevation={24} sx={{ minHeight: "70vh", minWidth: "100vh" }}>
 					<form>
-						{formStep === 1 && <ChooseWorkHours spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}/>}
+						{formStep === 1 && <ChooseWorkHours spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep}/>}
 
 						{formStep === 2 && (
-							 <AddFAQ />
+							 <AddFAQ spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep}/>
 						)}
 					</form>
 					{/* <ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}  /> */}
