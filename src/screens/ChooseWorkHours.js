@@ -364,7 +364,7 @@ export function ChooseWorkHours( {
 				handleEndPeriod={(event) => handleEndSelect(event, "sunday")}
 			/>
 			<br />
-			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} disableAddQuestionButton={disableAddQuestionButton}  />
+			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton}  />
 		</section>
 	);
 }

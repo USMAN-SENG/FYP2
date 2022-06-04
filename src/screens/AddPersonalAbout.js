@@ -65,7 +65,8 @@ export default function AddPersonalAbout({
 				increaseFormStep={increaseFormStep}
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
-				disableAddQuestionButton={disableAddQuestionButton}
+				
+        submitButton={'submit'}
 			/>
 		</>
 	);
