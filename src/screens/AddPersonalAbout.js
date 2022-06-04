@@ -4,30 +4,31 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
 
-export function AddFAQ({
+export default function AddPersonalAbout({
 	spacingBetweenButtons,
 	decreaseFormStep,
 	formStep,
 	increaseFormStep,
 }) {
-	let disablePreviousButton = false;
+
+  let disablePreviousButton = false;
 	let disableNextButton = false;
 	let disableAddQuestionButton = false;
 
 	return (
 		<>
 			<Typography variant="h6" align="center">
-				step 2
+				step 3
 			</Typography>
 
 			<Typography m={2} variant="h5" align="center">
-				Add FAQ
+				Write About Your Office/business
 			</Typography>
-			<Grid container direction="column" spacing={2} sx={{ p: 2 }}>
-				<Grid item>
+      <Grid container direction="column" spacing={2} sx={{ p: 2 }}>
+      <Grid item>
 					<TextField
 						
-						placeholder="Question"
+						placeholder="Name"
 						variant="outlined"
 						fullWidth
 						multiline
@@ -37,7 +38,17 @@ export function AddFAQ({
 				<Grid item>
 					<TextField
 						
-						placeholder="Answer"
+						placeholder="Address"
+						variant="outlined"
+						fullWidth
+						multiline
+						minRows={1}
+					/>
+				</Grid>
+				<Grid item>
+					<TextField
+						
+						placeholder="Description"
 						variant="outlined"
 						fullWidth
 						multiline
@@ -45,9 +56,9 @@ export function AddFAQ({
 					/>
 				</Grid>
 			</Grid>
-			<br />
-			<br />
-			<ButtonStep
+
+		
+      <ButtonStep
 				spacingBetweenButtons={spacingBetweenButtons}
 				decreaseFormStep={decreaseFormStep}
 				formStep={formStep}
@@ -59,5 +70,3 @@ export function AddFAQ({
 		</>
 	);
 }
-
-export default AddFAQ;

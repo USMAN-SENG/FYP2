@@ -1,6 +1,7 @@
 import { ButtonStep } from "./formComponents/ButtonStep";
 import { ChooseWorkHours } from "./ChooseWorkHours";
 import {AddFAQ} from "./AddFAQ";
+import AddPersonalAbout from "./AddPersonalAbout";
 
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
@@ -11,13 +12,14 @@ import Button from "@mui/material/Button";
 export default function CustomizeAppoinment() {
 	const [formStep, setFormStep] = useState(1);
 
-	let spacingBetweenButtons = 45;
-	if (formStep === 2) spacingBetweenButtons = 11;
-	else spacingBetweenButtons = 45;
+	let spacingBetweenButtons = 50;
+	if (formStep === 2) spacingBetweenButtons = 13;
+	else spacingBetweenButtons = 50;
 
 	let disabledButtons = false;
 
-
+  // we can make a function here to send to each step that will later send to the firestore 
+	// next button can save data and previous can delete data
 	function increaseFormStep() {
 		setFormStep(previousStep => previousStep + 1);
 		
@@ -45,6 +47,9 @@ export default function CustomizeAppoinment() {
 						{formStep === 2 && (
 							 <AddFAQ spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep}/>
 						)}
+
+						{formStep === 3 && (<AddPersonalAbout spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} />)}
+
 					</form>
 					{/* <ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}  /> */}
 				</Paper>

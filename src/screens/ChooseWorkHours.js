@@ -37,6 +37,9 @@ export function ChooseWorkHours( {
 	const [friday, setFriday] = useState(false);
 	const [saturday, setSaturday] = useState(false);
 	// period states
+
+//////////////////////////////////////////////////////////////////////
+	//NEED TO ADD BREAK TIME
 	const [sundayStartPeriod, setSundayStartPeriod] = useState("AM");
 	const [sundayEndPeriod, setSundayEndPeriod] = useState("AM");
 	const [mondayStartPeriod, setMondayStartPeriod] = useState("AM");
