@@ -7,7 +7,7 @@ export default function Header() {
         <div className='flex-initial w-2/4'>logo</div>
          
         <div className='flex-1 hover:underline'><Link to={"/"}>Home</Link></div>
-        <div className='flex-1 hover:underline'><Link to={"#"}> About us</Link></div>
+        <div className='flex-1 hover:underline'><Link to={"AboutScreen"}> About us</Link></div>
         <div className='flex-1 hover:underline'><Link to = {"/signup"}>Sign up</Link></div>
         <div className='flex-1 hover:underline'><Link to = {"/MakeAppointment"}>Booking</Link></div>
         <div className='flex-1 hover:underline'><Link to = {"/FaqScreen"}>FAQs</Link></div>

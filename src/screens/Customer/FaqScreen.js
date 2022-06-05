@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import FaqQuestion from '../../components/FaqQuestion'
 import { SmallFooter } from '../../components/Footer'
-import Header from '../../components/Header';
-export default class FaqScreen extends Component {
-  
-  componentDidMount(){
-    this.render()
-  }
+import Header from '../../components/Header'
+import ChatHome from '../../components/Chat/Index';
 
-  render() {
+ const FaqScreen=()=> {
+  
+
     const mystyle = {
         textAlign: 'center',
         marginTop: '20px',
@@ -19,7 +17,7 @@ export default class FaqScreen extends Component {
               <Header />
           </div>
           <div style={mystyle}>
-                <span className='text-black font-semibold text-3xl'>Frequently Asked Questions</span>
+                <span className='text-black font-semibold text-3xl  '>Frequently Asked Questions</span>
           </div>
           <div className='flex flex-col min-h-[80vh]'>
               
@@ -35,8 +33,11 @@ export default class FaqScreen extends Component {
                 }
               </div>
           </div>
+          <ChatHome/>
           <SmallFooter />
+          
       </div>
     )
   }
-}
+
+export default FaqScreen;

@@ -4,6 +4,7 @@ import React from 'react'
 
 export default function FaqQuestion(props) {
   return (
+    <>
     <Paper elevation={0} sx={{width:"70%", marginY:"0.5rem",padding:"0px"}} >
         <Accordion sx={{width:"100%",backgroundColor:"#DFDFDF",padding:"0px"}}>
             <AccordionSummary
@@ -24,5 +25,7 @@ export default function FaqQuestion(props) {
             </AccordionDetails>
       </Accordion>
     </Paper>
+ 
+    </>
   )
 }
