@@ -10,10 +10,9 @@ export default function AddPersonalAbout({
 	formStep,
 	increaseFormStep,
 }) {
-
-  let disablePreviousButton = false;
+	let disablePreviousButton = false;
 	let disableNextButton = false;
-	let disableAddQuestionButton = false;
+	 
 
 	return (
 		<>
@@ -24,10 +23,9 @@ export default function AddPersonalAbout({
 			<Typography m={2} variant="h5" align="center">
 				Write About Your Office/business
 			</Typography>
-      <Grid container direction="column" spacing={2} sx={{ p: 2 }}>
-      <Grid item>
+			<Grid container direction="column" spacing={2} p={2} >
+				<Grid item>
 					<TextField
-						
 						placeholder="Name"
 						variant="outlined"
 						fullWidth
@@ -37,7 +35,6 @@ export default function AddPersonalAbout({
 				</Grid>
 				<Grid item>
 					<TextField
-						
 						placeholder="Address"
 						variant="outlined"
 						fullWidth
@@ -47,7 +44,6 @@ export default function AddPersonalAbout({
 				</Grid>
 				<Grid item>
 					<TextField
-						
 						placeholder="Description"
 						variant="outlined"
 						fullWidth
@@ -57,16 +53,14 @@ export default function AddPersonalAbout({
 				</Grid>
 			</Grid>
 
-		
-      <ButtonStep
+			<ButtonStep
 				spacingBetweenButtons={spacingBetweenButtons}
 				decreaseFormStep={decreaseFormStep}
 				formStep={formStep}
 				increaseFormStep={increaseFormStep}
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
-				
-        submitButton={'submit'}
+				submitButton={"submit"}
 			/>
 		</>
 	);

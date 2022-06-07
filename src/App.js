@@ -4,7 +4,7 @@ import Homepage from "./screens/Homepage";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import CustomizeAppoinment from "./screens/CustomizeAppoinment";
-import MakeAppointment from "./screens/MakeAppointment";
+import AppointmentPage from "./appointmentWebsite/AppointmentPage";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 //import DateFnsUtils from "@date-io/date-fns";
 
@@ -19,7 +19,7 @@ function App() {
 						path="/CustomizeAppoinment"
 						element={<CustomizeAppoinment />}
 					/>
-					<Route path="/MakeAppointment" element={<MakeAppointment />} />
+					<Route path="/AppointmentPage" element={<AppointmentPage />} />
 				</Routes>
 			</BrowserRouter>
 	);

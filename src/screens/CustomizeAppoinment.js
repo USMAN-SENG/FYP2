@@ -16,7 +16,7 @@ export default function CustomizeAppoinment() {
 	if (formStep === 2) spacingBetweenButtons = 13;
 	else spacingBetweenButtons = 50;
 
-	let disabledButtons = false;
+	
 
   // we can make a function here to send to each step that will later send to the firestore 
 	// next button can save data and previous can delete data

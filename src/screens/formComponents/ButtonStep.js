@@ -7,7 +7,7 @@ export function ButtonStep({
 	formStep,
 	increaseFormStep,
 	disablePreviousButton,
-	disableNextButton = true,
+	disableNextButton ,
 	disableAddQuestionButton = true,
 	submitButton,
 }) {
@@ -18,9 +18,8 @@ export function ButtonStep({
 			spacing={spacingBetweenButtons}
 			justifyContent="center"
 			alignItems="center"
-			sx={{
-				pb: 1,
-			}}
+			pb={1}
+			
 		>
 			<Grid item>
 				<Button

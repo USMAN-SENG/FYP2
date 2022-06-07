@@ -55,6 +55,9 @@ const Homepage = (props) => {
 							>
 								add array to firebase
 							</Button>
+							<Button  variant="contained">
+                  <Link to={"/AppointmentPage"}> go to appointment website </Link>
+                </Button>
 
 						</div>
 					</div>

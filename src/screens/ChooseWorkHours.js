@@ -74,7 +74,7 @@ export function ChooseWorkHours( {
 
 	let disablePreviousButton = true;
 	let disableNextButton = false;
-	let disableAddQuestionButton = true;
+	 
 
 	//const [daysInclude, setDaysInclude] = useState([]);
 	let daysIncludeArray = [];
