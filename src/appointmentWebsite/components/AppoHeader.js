@@ -9,7 +9,7 @@ export default function AppoHeader() {
 	let websiteName = "website Name";
 	return (
 		<>
-			<AppBar>
+			<AppBar position="relative">
 				<Toolbar>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} 
            >

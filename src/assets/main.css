@@ -391,6 +391,9 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width: 1536px;
   }
 }
+.relative {
+  position: relative;
+}
 .m-5 {
   margin: 1.25rem;
 }
