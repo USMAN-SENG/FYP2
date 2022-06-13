@@ -6,8 +6,31 @@ import {AccountCircle,Email,Lock} from '@mui/icons-material';
 import EmailConfirmBanner from '../components/EmailConfirmBanner';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
-export default class SignUpScreen extends Component {
-  render() {
+import { useRef, useState } from "react";
+import { signup, login, logout, useAuth } from "../firebase";
+
+export default function  SignUpScreen()  {
+
+  const emailRef = useRef(); // get the email input
+  const passwordRef = useRef(); // get the password input
+
+  const [ loading, setLoading ] = useState(false); // disable button
+  const currentUser = useAuth(); // get the info of currentUser
+
+  async function handleSignup() {
+    //console.log(`${emailRef.current.value} + ${passwordRef.current.value}`); //manage to get the data from the text field
+
+   setLoading(true); // disable button
+    try {
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      alert("Error!"); // error when you use the same email to sign up again
+    }
+    setLoading(false); // enable button
+  }
+
+
+
     return (
       <div>
         <div>
@@ -20,41 +43,40 @@ export default class SignUpScreen extends Component {
                 <span className='font-bold text-4xl text-gray-100'>Signup</span>
                 <span className='text-sm '>For new Account</span>
                 <div className='mt-20'>
-                <Button variant="contained"><Link to={"/login"}> Login</Link></Button>
+                <Button sx={{ m: 3 }} variant="contained">
+                  <Link to={"/login"}> Login </Link>
+                </Button>
+                <Button  variant="contained">
+                  <Link to={"/CustomizeAppoinment"}> WorkHours </Link>
+                </Button>
                 <br/>
                 <span className='text-xs text-white'>If Already have Account</span>
                 </div>
               </div>
               <div className='flex flex-col justify-center items-center w-3/5 h-full'>
                 
-                <div className='flex flex-row'>
-                  <AccountCircle sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="First Name" variant="standard" sx={{width:"17rem"}} />
-                </div>
-                <div className='flex flex-row'>
-                  <AccountCircle sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="First Name" variant="standard" sx={{width:"17rem"}} />
-                </div>
+              
                 <div className='flex flex-row'>
                   <Email sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Email" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={emailRef} label="Email" variant="standard" sx={{width:"17rem"}} />
                 </div>
                 <div className='flex flex-row'>
                   <Lock sx={{ color: 'action.active', mr: 1, my: 2 }} />
-                  <TextField label="Password" variant="standard" sx={{width:"17rem"}} />
+                  <TextField inputRef={passwordRef} label="Password" variant="standard" sx={{width:"17rem"}} />
                 </div>
-                <div>
-                  <Button variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
+                <div> 
+                  <Button onClick={handleSignup} disabled={ loading } variant='outlined' sx={{":hover":{backgroundColor:"#0073e6",color:"#ffffff"}}}>Signup</Button>
                 </div>
               </div>
             </div>
           </Paper>
-          <div className='w-2/3 m-5'>
+          {/* note: add email confirmatiom later */}
+          {/* <div className='w-2/3 m-5'>
             <EmailConfirmBanner />
-          </div>
+          </div> */}
         </div>
         <SmallFooter />
       </div>
     )
-  }
+  
 }
