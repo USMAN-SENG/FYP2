@@ -8,12 +8,16 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import "react-calendar/dist/Calendar.css";
 import { Scheduler } from "@arshadrao/react-scheduler";
+import AppoFooter from "./components/AppoFooter";
+
 
 const hours = [
 	// { id: "9:0", hour: 9, minute: 0, endTime: "9:30" , date: '2022-6-11',madeBy:'a' },
 	// { id: "9:30", hour: 9, minute: 30, endTime: "10:0" },
 	// { id: "10:0", hour: 10, minute: 0, endTime: "10:30" },
 ];
+
+//we should load all 7 days and then use startHour  base on day chosen 
 
 let startHour = 8; // take it from day , each will be different. we should take base on the day chosen
 let endHour = 19; // can't be more than 24
@@ -206,6 +210,7 @@ const hoursComponent = hours.map((hour) => (
 					},
 				]}
 			/>
+			{/* <AppoFooter /> */}
 		</>
 	);
 }

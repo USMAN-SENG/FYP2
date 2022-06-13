@@ -255,6 +255,12 @@ export function ChooseWorkHours( {
 		}
 	};
 
+	if(sunday=== false && monday=== false && tuesday=== false && wednesday=== false && thursday=== false && friday=== false && saturday=== false){
+		disableNextButton= true;
+	}
+
+
+
 	return (
 		<section>
 			<Typography variant="h6" align="center">
@@ -264,6 +270,7 @@ export function ChooseWorkHours( {
 			<Typography m={2} variant="h5" align="center">
 				Add office working hours
 			</Typography>
+			
 
 			{/*note:  add one for break time  */}
 			<CheckboxDays

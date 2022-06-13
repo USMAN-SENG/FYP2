@@ -150,6 +150,8 @@ const EventObjInArr = [
 
 let objectWithArray2 = {
 	arrayTest: EventObjInArr,
+	officeNmae: 'visa unit', 
+	officeAddress: 'uia',
 };
 //can't send an array, have to be an object
 // we have to do a nested object

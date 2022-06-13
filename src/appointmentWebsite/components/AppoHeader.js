@@ -20,7 +20,7 @@ export default function AppoHeader() {
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Book </Link></Button>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Customer Service </Link></Button>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> About </Link></Button>
-            <Button color="inherit"><Link to={"/AppointmentPage"}> FAQ </Link></Button>
+            <Button color="inherit"><Link to={"/FAQpage"}> FAQ </Link></Button>
 					</Stack>
 				</Toolbar>
 			</AppBar>

@@ -14,6 +14,15 @@ export function AddFAQ({
 	let disableNextButton = false;
 	let disableAddQuestionButton = false;
 
+	let FAQ =[1];
+
+	
+
+	if(FAQ.length < 1){
+		disableNextButton = true;
+		disableAddQuestionButton = true;
+	}
+
 	return (
 		<>
 			<Typography variant="h6" align="center">
