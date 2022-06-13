@@ -19,7 +19,7 @@ export default function AppoHeader() {
 					<Stack direction="row" spacing={3} sx={{ flexGrow: 0 }}>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Book </Link></Button>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Customer Service </Link></Button>
-						<Button color="inherit"><Link to={"/AppointmentPage"}> About </Link></Button>
+						<Button color="inherit"><Link to={"/AppointmentAboutPage"}> About </Link></Button>
             <Button color="inherit"><Link to={"/FAQpage"}> FAQ </Link></Button>
 					</Stack>
 				</Toolbar>

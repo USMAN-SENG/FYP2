@@ -8,14 +8,40 @@ import Grid from "@mui/material/Grid";
 import AppoHeader from "./components/AppoHeader";
 import AppoFooter from "./components/AppoFooter";
 
+let FAQarray = [
+	{ faqID: 0, Q: "what is it about?", A: "it is a visa offic" },
+	{ faqID: 1, Q: "why is it about?", A: "it is a visa offic" },
+	{
+		faqID: 2,
+		Q: "where is it about?",
+		A: "it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic",
+	},
+	{ faqID: 3, Q: "who is it about?", A: "it is a visa offic" },
+	{
+		faqID: 4,
+		Q: "how is it about?",
+		A: "it is a visa offic it is a visa offic it is a visa offic",
+	},
+];
+
+let faqComponent = FAQarray.map((faq) => (
+	<Accordion elevation={24}>
+		<AccordionSummary
+			expandIcon={<ExpandMoreIcon />}
+			aria-controls="panel1a-content"
+			id={faq.id}
+		>
+			<Typography>{faq.Q}</Typography>
+		</AccordionSummary>
+		<AccordionDetails><Typography>{faq.A}</Typography></AccordionDetails>
+	</Accordion>
+));
 
 export default function FAQpage() {
 	return (
-		<div style={{
-			height:'100%',
-	 }}>
+		<div>
 			<AppoHeader />
-      <br />
+			<br />
 			<Grid
 				container
 				spacing={2}
@@ -24,12 +50,16 @@ export default function FAQpage() {
 				alignItems="center"
 				alignContent="center"
 				wrap="nowrap"
-        m={4}
+				p={8}
+				
 			>
-        <Grid item>
-        <Typography variant="h4" align="center">Frequently Asked Questions</Typography>
-        </Grid>
 				<Grid item>
+					<Typography variant="h4" align="center">
+						Frequently Asked Questions
+					</Typography>
+				</Grid>
+				<Grid item>
+				{faqComponent}
 					<Accordion elevation={24}>
 						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
@@ -46,7 +76,7 @@ export default function FAQpage() {
 							</Typography>
 						</AccordionDetails>
 					</Accordion>
-					<Accordion>
+					<Accordion elevation={24}>
 						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
 							aria-controls="panel2a-content"
@@ -62,7 +92,7 @@ export default function FAQpage() {
 							</Typography>
 						</AccordionDetails>
 					</Accordion>
-					<Accordion disabled>
+					<Accordion disabled elevation={24}>
 						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
 							aria-controls="panel3a-content"

@@ -6,6 +6,7 @@ import SignUpScreen from "./screens/SignUpScreen";
 import CustomizeAppoinment from "./screens/CustomizeAppoinment";
 import AppointmentPage from "./appointmentWebsite/AppointmentPage";
 import FAQpage from "./appointmentWebsite/FAQpage" ;
+import AppoAboutPage from "./appointmentWebsite/AppoAboutPage";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					/>
 					<Route path="/AppointmentPage" element={<AppointmentPage />} />
 					<Route path="/FAQpage" element={<FAQpage />} />
+					<Route path="/AppointmentAboutPage" element={<AppoAboutPage />} />
 				</Routes>
 			</BrowserRouter>
 	);

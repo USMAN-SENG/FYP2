@@ -5,9 +5,7 @@ import Stack from '@mui/material/Stack';
 
 export default function AppoFooter() {
 	return (
-		<Stack >
-     
-     
+		<>
      <Box bgcolor="text.secondary" color="white"   >
         
        <Typography  align="center">
@@ -15,7 +13,7 @@ export default function AppoFooter() {
        </Typography> 
      </Box>
    
-    </Stack>
+    </>
     
 	);
 }

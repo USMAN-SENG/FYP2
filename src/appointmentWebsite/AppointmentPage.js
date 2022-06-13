@@ -161,7 +161,7 @@ const hoursComponent = hours.map((hour) => (
 			{/* <div>helloe </div>
       <div>{name} </div>
       <div>{todayDate.toString()} </div> */}
-			<Grid container direction="row" m={2} spacing={2}>
+			<Grid container direction="row" p={5} spacing={2}>
 				<Grid item md={3}>
 					<Calendar
 						tileDisabled={disableDays}

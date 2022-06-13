@@ -40,7 +40,7 @@ export default function CustomizeAppoinment() {
 			sx={{ minHeight: "100vh" }}
 		>
 			<Grid item>
-				<Paper elevation={24} sx={{ minHeight: "70vh", minWidth: "100vh" }}>
+				<Paper elevation={24} sx={{ minHeight: "70vh", minWidth: "100vh",m:5 }}>
 					
 						{formStep === 1 && <ChooseWorkHours spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep}/>}
 
