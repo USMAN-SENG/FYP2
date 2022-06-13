@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { Link } from 'react-router-dom';
 
 export default function AppoHeader() {
 	let websiteName = "website Name";
@@ -16,10 +17,10 @@ export default function AppoHeader() {
 						{websiteName}
 					</Typography>
 					<Stack direction="row" spacing={3} sx={{ flexGrow: 0 }}>
-						<Button color="inherit">Book</Button>
-						<Button color="inherit">Customer Service</Button>
-						<Button color="inherit">About</Button>
-            <Button color="inherit">FAQ</Button>
+						<Button color="inherit"><Link to={"/AppointmentPage"}> Book </Link></Button>
+						<Button color="inherit"><Link to={"/AppointmentPage"}> Customer Service </Link></Button>
+						<Button color="inherit"><Link to={"/AppointmentPage"}> About </Link></Button>
+            <Button color="inherit"><Link to={"/AppointmentPage"}> FAQ </Link></Button>
 					</Stack>
 				</Toolbar>
 			</AppBar>

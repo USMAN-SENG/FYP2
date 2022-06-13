@@ -153,7 +153,7 @@ let objectWithArray2 = {
 };
 //can't send an array, have to be an object
 // we have to do a nested object
-// no need for nested object , when you create object with array inside it , it will only send the array 
+// no need for nested object , when you create object with array inside it , it will only send the array e.g arrayTest : [{} , {}]
 export function addTestArray() {
 	return addDoc(usersColRef, objectWithArray2); // addDoc will create random id
 }
