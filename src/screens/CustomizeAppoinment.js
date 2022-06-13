@@ -41,7 +41,7 @@ export default function CustomizeAppoinment() {
 		>
 			<Grid item>
 				<Paper elevation={24} sx={{ minHeight: "70vh", minWidth: "100vh" }}>
-					<form>
+					
 						{formStep === 1 && <ChooseWorkHours spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep}/>}
 
 						{formStep === 2 && (
@@ -50,7 +50,7 @@ export default function CustomizeAppoinment() {
 
 						{formStep === 3 && (<AddPersonalAbout spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} />)}
 
-					</form>
+					
 					{/* <ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep} disabledButtons={disabledButtons} formStep={formStep} increaseFormStep={increaseFormStep}  /> */}
 				</Paper>
 			</Grid>

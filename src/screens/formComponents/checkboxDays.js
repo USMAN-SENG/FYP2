@@ -19,11 +19,6 @@ export function CheckboxDays({
 	handleStartTime,
 	endTime,
 	handleEndTime,
-	startPeriod,
-	handleStartPeriod,
-	EndPeriod,
-	handleEndPeriod,
-
 }) {
 
 	return (
@@ -41,14 +36,14 @@ export function CheckboxDays({
 				/>
 			</Grid>
 
-			<HoursAndPeriod   time={startTime} handleTime={handleStartTime} period={startPeriod} handleSelect={handleStartPeriod}  />
+			<HoursAndPeriod   time={startTime} handleTime={handleStartTime}  />
 
 			<Grid item md={1}>
 				<p>To</p>
 			</Grid>
 			{/* find a way to start from the next hour  */}
 
-			<HoursAndPeriod   time={endTime} handleTime={handleEndTime} period={EndPeriod} handleSelect={handleEndPeriod}  />
+			<HoursAndPeriod   time={endTime} handleTime={handleEndTime} />
 			
 		</Grid>
 	);

@@ -12,7 +12,7 @@ import { CheckboxDays } from "./formComponents/checkboxDays";
 import { ButtonStep } from "./formComponents/ButtonStep";
 
 const MIN = 1;
-const MAX = 12;
+const MAX = 24;
 
 // const MIN_START_TIME = 1;
 // const MAX_START_TIME = 11;
@@ -40,20 +40,20 @@ export function ChooseWorkHours( {
 
 //////////////////////////////////////////////////////////////////////
 	//NEED TO ADD BREAK TIME
-	const [sundayStartPeriod, setSundayStartPeriod] = useState("AM");
-	const [sundayEndPeriod, setSundayEndPeriod] = useState("AM");
-	const [mondayStartPeriod, setMondayStartPeriod] = useState("AM");
-	const [mondayEndPeriod, setMondayEndPeriod] = useState("AM");
-	const [tuesdayStartPeriod, setTuesdayStartPeriod] = useState("AM");
-	const [tuesdayEndPeriod, setTuesdayEndPeriod] = useState("AM");
-	const [wednesdayStartPeriod, setWednesdayStartPeriod] = useState("AM");
-	const [wednesdayEndPeriod, setWednesdayEndPeriod] = useState("AM");
-	const [thursdayStartPeriod, setThursdayStartPeriod] = useState("AM");
-	const [thursdayEndPeriod, setThursdayEndPeriod] = useState("AM");
-	const [fridayStartPeriod, setFridayStartPeriod] = useState("AM");
-	const [fridayEndPeriod, setFridayEndPeriod] = useState("AM");
-	const [saturdayStartPeriod, setSaturdayStartPeriod] = useState("AM");
-	const [saturdayEndPeriod, setSaturdayEndPeriod] = useState("AM");
+	// const [sundayStartPeriod, setSundayStartPeriod] = useState("AM");
+	// const [sundayEndPeriod, setSundayEndPeriod] = useState("AM");
+	// const [mondayStartPeriod, setMondayStartPeriod] = useState("AM");
+	// const [mondayEndPeriod, setMondayEndPeriod] = useState("AM");
+	// const [tuesdayStartPeriod, setTuesdayStartPeriod] = useState("AM");
+	// const [tuesdayEndPeriod, setTuesdayEndPeriod] = useState("AM");
+	// const [wednesdayStartPeriod, setWednesdayStartPeriod] = useState("AM");
+	// const [wednesdayEndPeriod, setWednesdayEndPeriod] = useState("AM");
+	// const [thursdayStartPeriod, setThursdayStartPeriod] = useState("AM");
+	// const [thursdayEndPeriod, setThursdayEndPeriod] = useState("AM");
+	// const [fridayStartPeriod, setFridayStartPeriod] = useState("AM");
+	// const [fridayEndPeriod, setFridayEndPeriod] = useState("AM");
+	// const [saturdayStartPeriod, setSaturdayStartPeriod] = useState("AM");
+	// const [saturdayEndPeriod, setSaturdayEndPeriod] = useState("AM");
 	// time states
 	const [sundayStartTime, setSundayStartTime] = useState(7);
 	const [sundayEndTime, setSundayEndTime] = useState(sundayStartTime + 1);
@@ -144,57 +144,57 @@ export function ChooseWorkHours( {
 	// 	setMonday(!saturday);
 	// }
 
-	const handleStartSelect = (event, day) => {
-		let newStartSelectValue = event.target.value;
+	// const handleStartSelect = (event, day) => {
+	// 	let newStartSelectValue = event.target.value;
 
-		//console.log(day ,'start', newStartSelectValue);
+	// 	//console.log(day ,'start', newStartSelectValue);
 
-		if (day === "sunday") {
-			setSundayStartPeriod(newStartSelectValue);
-		} else if (day === "monday") {
-			setMondayStartPeriod(newStartSelectValue);
+	// 	if (day === "sunday") {
+	// 		setSundayStartPeriod(newStartSelectValue);
+	// 	} else if (day === "monday") {
+	// 		setMondayStartPeriod(newStartSelectValue);
 
-			//console.log(day , newTimeValue);
-		} else if (day === "tuesday") {
-			setTuesdayStartPeriod(newStartSelectValue);
+	// 		//console.log(day , newTimeValue);
+	// 	} else if (day === "tuesday") {
+	// 		setTuesdayStartPeriod(newStartSelectValue);
 
-			//console.log(day , newTimeValue);
-		} else if (day === "wednesday") {
-			setWednesdayStartPeriod(newStartSelectValue);
-		} else if (day === "thursday") {
-			setThursdayStartPeriod(newStartSelectValue);
-		} else if (day === "friday") {
-			setFridayStartPeriod(newStartSelectValue);
-		} else if (day === "saturday") {
-			setSaturdayStartPeriod(newStartSelectValue);
-		}
-	};
+	// 		//console.log(day , newTimeValue);
+	// 	} else if (day === "wednesday") {
+	// 		setWednesdayStartPeriod(newStartSelectValue);
+	// 	} else if (day === "thursday") {
+	// 		setThursdayStartPeriod(newStartSelectValue);
+	// 	} else if (day === "friday") {
+	// 		setFridayStartPeriod(newStartSelectValue);
+	// 	} else if (day === "saturday") {
+	// 		setSaturdayStartPeriod(newStartSelectValue);
+	// 	}
+	// };
 
-	const handleEndSelect = (event, day) => {
-		let newEndSelectValue = event.target.value;
+	// const handleEndSelect = (event, day) => {
+	// 	let newEndSelectValue = event.target.value;
 
-		//console.log(day, "end", newEndSelectValue);
+	// 	//console.log(day, "end", newEndSelectValue);
 
-		if (day === "sunday") {
-			setSundayEndPeriod(newEndSelectValue);
-		} else if (day === "monday") {
-			setMondayEndPeriod(newEndSelectValue);
+	// 	if (day === "sunday") {
+	// 		setSundayEndPeriod(newEndSelectValue);
+	// 	} else if (day === "monday") {
+	// 		setMondayEndPeriod(newEndSelectValue);
 
-			//console.log(day , newTimeValue);
-		} else if (day === "tuesday") {
-			setTuesdayEndPeriod(newEndSelectValue);
+	// 		//console.log(day , newTimeValue);
+	// 	} else if (day === "tuesday") {
+	// 		setTuesdayEndPeriod(newEndSelectValue);
 
-			//console.log(day , newTimeValue);
-		} else if (day === "wednesday") {
-			setWednesdayEndPeriod(newEndSelectValue);
-		} else if (day === "thursday") {
-			setThursdayEndPeriod(newEndSelectValue);
-		} else if (day === "friday") {
-			setFridayEndPeriod(newEndSelectValue);
-		} else if (day === "saturday") {
-			setSaturdayEndPeriod(newEndSelectValue);
-		}
-	};
+	// 		//console.log(day , newTimeValue);
+	// 	} else if (day === "wednesday") {
+	// 		setWednesdayEndPeriod(newEndSelectValue);
+	// 	} else if (day === "thursday") {
+	// 		setThursdayEndPeriod(newEndSelectValue);
+	// 	} else if (day === "friday") {
+	// 		setFridayEndPeriod(newEndSelectValue);
+	// 	} else if (day === "saturday") {
+	// 		setSaturdayEndPeriod(newEndSelectValue);
+	// 	}
+	// };
 
 	const handleStartTime = (event, day) => {
 		let newTimeValue = Number(event.target.value);
@@ -274,10 +274,10 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "monday")}
 				endTime={mondayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "monday")}
-				startPeriod={mondayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "monday")}
-				EndPeriod={mondayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "monday")}
+				// startPeriod={mondayStartPeriod}
+				// handleStartPeriod={(event) => handleStartSelect(event, "monday")}
+				// EndPeriod={mondayEndPeriod}
+				// handleEndPeriod={(event) => handleEndSelect(event, "monday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -288,10 +288,10 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "tuesday")}
 				endTime={tuesdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "tuesday")}
-				startPeriod={tuesdayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "tuesday")}
-				EndPeriod={tuesdayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "tuesday")}
+				// startPeriod={tuesdayStartPeriod}
+				// handleStartPeriod={(event) => handleStartSelect(event, "tuesday")}
+				// EndPeriod={tuesdayEndPeriod}
+				// handleEndPeriod={(event) => handleEndSelect(event, "tuesday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -302,10 +302,6 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "wednesday")}
 				endTime={wednesdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "wednesday")}
-				startPeriod={wednesdayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "wednesday")}
-				EndPeriod={wednesdayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "wednesday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -316,10 +312,6 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "thursday")}
 				endTime={thursdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "thursday")}
-				startPeriod={thursdayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "thursday")}
-				EndPeriod={thursdayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "thursday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -330,10 +322,6 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "friday")}
 				endTime={fridayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "friday")}
-				startPeriod={fridayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "friday")}
-				EndPeriod={fridayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "friday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -344,10 +332,6 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "saturday")}
 				endTime={saturdayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "saturday")}
-				startPeriod={saturdayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "saturday")}
-				EndPeriod={saturdayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "saturday")}
 			/>
 			<br />
 			<CheckboxDays
@@ -358,10 +342,7 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "sunday")}
 				endTime={sundayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "sunday")}
-				startPeriod={sundayStartPeriod}
-				handleStartPeriod={(event) => handleStartSelect(event, "sunday")}
-				EndPeriod={sundayEndPeriod}
-				handleEndPeriod={(event) => handleEndSelect(event, "sunday")}
+
 			/>
 			<br />
 			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton}  />
