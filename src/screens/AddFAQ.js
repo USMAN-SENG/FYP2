@@ -20,7 +20,6 @@ export function AddFAQ({
 
 	if(FAQ.length < 1){
 		disableNextButton = true;
-		disableAddQuestionButton = true;
 	}
 
 	return (
