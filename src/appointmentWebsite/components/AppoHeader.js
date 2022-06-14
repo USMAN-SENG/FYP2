@@ -7,20 +7,22 @@ import Stack from "@mui/material/Stack";
 import { Link } from 'react-router-dom';
 
 export default function AppoHeader() {
-	let websiteName = "website Name";
+	
+	const mystyle = {
+		maxWidth: 150,
+	  };
 	return (
 		<>
 			<AppBar position="relative">
 				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} 
-           >
-						{websiteName}
+					<Typography style={mystyle}><img src={require('./logo2.png')}  />
+           
 					</Typography>
 					<Stack direction="row" spacing={3} sx={{ flexGrow: 0 }}>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Book </Link></Button>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Customer Service </Link></Button>
 						<Button color="inherit"><Link to={"/AppointmentAboutPage"}> About </Link></Button>
-            <Button color="inherit"><Link to={"/FAQpage"}> FAQ </Link></Button>
+                        <Button color="inherit"><Link to={"/FAQpage"}> FAQ </Link></Button>
 					</Stack>
 				</Toolbar>
 			</AppBar>
