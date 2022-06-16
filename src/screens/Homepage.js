@@ -58,6 +58,9 @@ const Homepage = (props) => {
 							<Button  variant="contained">
                   <Link to={"/AppointmentPage"}> go to appointment website </Link>
                 </Button>
+								<Button  variant="contained">
+                  <Link to={"/Calendar"}> Calendar </Link>
+                </Button>
 
 						</div>
 					</div>
