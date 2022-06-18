@@ -1,0 +1,123 @@
+
+import { ChatLogIn } from "./components/ChatLogIn";
+import React from "react";
+import AppoHeader from "./components/AppoHeader";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { useRef, useState } from "react";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography>{children}</Typography>
+				</Box>
+			)}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`,
+	};
+}
+
+export default function CustomerServicePage() {
+	const [value, setValue] = useState(0);
+	const [loading, setLoading] = useState(false); // disable button
+  const [customerIsLogin, setCustomerIsLogin] = useState(false);
+
+
+	const singUpEmailRef = useRef(); // get the email input
+	const singUpPasswordRef = useRef(); // get the password input
+
+	const loginEmailRef = useRef(); // get the login email input
+	const loginPasswordRef = useRef(); // get the login password input
+
+	async function handleSignup() {
+		//console.log(`${singUpEmailRef.current.value} + ${singUpPasswordRef.current.value}`); //manage to get the data from the text field
+	}
+
+	async function handleLogin() {}
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+
+	return (
+		<div>
+			<AppoHeader />
+			<Grid
+				container
+				spacing={1}
+				direction="column"
+				justifyContent="center"
+				alignItems="center"
+				alignContent="center"
+				p={4}
+			>
+				<Grid item md={10}>
+					<Typography align="center" variant="h4">
+						{" "}
+						Chat Sign up / Login{" "}
+					</Typography>
+					<Box sx={{ width: "100%" }} m={2}>
+						<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+							<Tabs
+								value={value}
+								onChange={handleChange}
+								aria-label="basic tabs example"
+							>
+								<Tab label="Sign up" {...a11yProps(0)} />
+								<Tab label="Login" {...a11yProps(1)} />
+							</Tabs>
+						</Box>
+						<TabPanel value={value} index={0}>
+							<ChatLogIn
+								emailRef={singUpEmailRef}
+								passwordRef={singUpPasswordRef}
+								handleSubmit={handleSignup}
+								loading={loading}
+								buttonLabel="Sign up"
+							/>
+						</TabPanel>
+						<TabPanel value={value} index={1}>
+							<ChatLogIn
+								emailRef={loginEmailRef}
+								passwordRef={loginPasswordRef}
+								handleSubmit={handleLogin}
+								loading={loading}
+								buttonLabel="Login"
+							/>
+						</TabPanel>
+					</Box>
+				</Grid>
+			</Grid>
+		</div>
+	);
+}

@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import "./index.scss"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import DashApp from './dashboard/DashApp';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <DashApp />   */}
   </React.StrictMode>,
   document.getElementById('root')
 );

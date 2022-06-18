@@ -391,6 +391,9 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width: 1536px;
   }
 }
+.static {
+  position: static;
+}
 .relative {
   position: relative;
 }
@@ -443,6 +446,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .flex {
   display: flex;
+}
+.hidden {
+  display: none;
 }
 .h-14 {
   height: 3.5rem;

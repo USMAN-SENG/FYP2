@@ -103,7 +103,7 @@ export default function FAQpage() {
 					</Accordion>
 				</Grid>
 			</Grid>
-			{/* <AppoFooter /> */}
+			<AppoFooter />
 		</div>
 	);
 }
