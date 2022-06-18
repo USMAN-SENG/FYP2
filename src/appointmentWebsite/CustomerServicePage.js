@@ -1,4 +1,3 @@
-
 import { ChatLogIn } from "./components/ChatLogIn";
 import React from "react";
 import AppoHeader from "./components/AppoHeader";
@@ -13,6 +12,11 @@ import { useRef, useState } from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
+// Chat component
+import Chat, { Message } from "react-simple-chat";
+// Chat styles
+import "react-simple-chat/src/components/index.css";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -50,8 +54,8 @@ function a11yProps(index) {
 export default function CustomerServicePage() {
 	const [value, setValue] = useState(0);
 	const [loading, setLoading] = useState(false); // disable button
-  const [customerIsLogin, setCustomerIsLogin] = useState(false);
-
+	const [customerIsLogin, setCustomerIsLogin] = useState(false);
+  const [messages, setMessages] = useState([]);
 
 	const singUpEmailRef = useRef(); // get the email input
 	const singUpPasswordRef = useRef(); // get the password input
@@ -61,6 +65,7 @@ export default function CustomerServicePage() {
 
 	async function handleSignup() {
 		//console.log(`${singUpEmailRef.current.value} + ${singUpPasswordRef.current.value}`); //manage to get the data from the text field
+		setCustomerIsLogin(!customerIsLogin);
 	}
 
 	async function handleLogin() {}
@@ -69,55 +74,77 @@ export default function CustomerServicePage() {
 		setValue(newValue);
 	};
 
+  //console.log(messages );
+
 	return (
 		<div>
 			<AppoHeader />
-			<Grid
-				container
-				spacing={1}
-				direction="column"
-				justifyContent="center"
-				alignItems="center"
-				alignContent="center"
-				p={4}
-			>
-				<Grid item md={10}>
-					<Typography align="center" variant="h4">
-						{" "}
-						Chat Sign up / Login{" "}
-					</Typography>
-					<Box sx={{ width: "100%" }} m={2}>
-						<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-							<Tabs
-								value={value}
-								onChange={handleChange}
-								aria-label="basic tabs example"
-							>
-								<Tab label="Sign up" {...a11yProps(0)} />
-								<Tab label="Login" {...a11yProps(1)} />
-							</Tabs>
+			{customerIsLogin ? (
+				<>
+					<Grid container p={4}>
+						<Grid item md={2}></Grid>
+						<Grid item>
+							<Typography align="center" variant="h4">
+								Send Your Questions <br />
+                We Will Reply Once We Are Available 
+							</Typography>
+						</Grid>
+					</Grid>
+          <Chat
+						title="Customer Service"
+						user={{ id: 1 }}
+						messages={messages}
+						onSend={(message) => setMessages([...messages, message])}
+						 
+					/>
+				</>
+			) : (
+				<Grid
+					container
+					spacing={1}
+					direction="column"
+					justifyContent="center"
+					alignItems="center"
+					alignContent="center"
+					p={4}
+				>
+					<Grid item md={10}>
+						<Typography align="center" variant="h4">
+							Chat Sign up / Login
+						</Typography>
+						<Box sx={{ width: "100%" }} m={2}>
+							<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+								<Tabs
+									value={value}
+									onChange={handleChange}
+									aria-label="basic tabs example"
+								>
+									<Tab label="Sign up" {...a11yProps(0)} />
+									<Tab label="Login" {...a11yProps(1)} />
+								</Tabs>
+							</Box>
+							<TabPanel value={value} index={0}>
+								<ChatLogIn
+									emailRef={singUpEmailRef}
+									passwordRef={singUpPasswordRef}
+									handleSubmit={handleSignup}
+									loading={loading}
+									buttonLabel="Sign up"
+								/>
+							</TabPanel>
+							<TabPanel value={value} index={1}>
+								<ChatLogIn
+									emailRef={loginEmailRef}
+									passwordRef={loginPasswordRef}
+									handleSubmit={handleLogin}
+									loading={loading}
+									buttonLabel="Login"
+								/>
+							</TabPanel>
 						</Box>
-						<TabPanel value={value} index={0}>
-							<ChatLogIn
-								emailRef={singUpEmailRef}
-								passwordRef={singUpPasswordRef}
-								handleSubmit={handleSignup}
-								loading={loading}
-								buttonLabel="Sign up"
-							/>
-						</TabPanel>
-						<TabPanel value={value} index={1}>
-							<ChatLogIn
-								emailRef={loginEmailRef}
-								passwordRef={loginPasswordRef}
-								handleSubmit={handleLogin}
-								loading={loading}
-								buttonLabel="Login"
-							/>
-						</TabPanel>
-					</Box>
+					</Grid>
 				</Grid>
-			</Grid>
+			)}
 		</div>
 	);
 }
