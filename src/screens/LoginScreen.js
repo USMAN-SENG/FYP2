@@ -6,11 +6,14 @@ import {Email,Lock} from '@mui/icons-material';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from "react";
-import { login,useAuth } from "../firebase";
+import { login, logout, useAuth} from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 
 export default function LoginScreen () {
   
+  let navigate = useNavigate();
+
   const loginEmailRef = useRef(); // get the email input
   const loginPasswordRef = useRef(); // get the password input
 
@@ -23,11 +26,21 @@ export default function LoginScreen () {
     try {
       await login(loginEmailRef.current.value, loginPasswordRef.current.value);
       console.log('succeful log in');
+      navigate(`/CustomizeAppoinment`);
+      
     } catch {
       alert("Error!");
     }
     setLoading(false);
   }
+
+  if(currentUser){
+    console.log(currentUser); 
+  console.log("user email "+currentUser.email); 
+  }else{
+    console.log("login page user log out " ); 
+  }
+  
 
     return (
       <div>
@@ -42,6 +55,9 @@ export default function LoginScreen () {
                 <span className='text-sm '>If Already have account</span>
                 <div className='mt-20'>
                 <Button variant="contained"><Link to = {"/signup"}>SignUp</Link></Button>
+                <Button  variant="contained" onClick={() => logout()}>
+                  log out
+                </Button>
                 <br/>
                 <span className='text-xs text-white'>For new Account</span>
                 </div>

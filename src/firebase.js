@@ -160,4 +160,18 @@ export function addTestArray() {
   //console.log(usersColRef);
 	return addDoc(usersColRef, objectWithArray2); // addDoc will create random id
 }
+//////////////////////////////////////
+// data from work hours
+let unIncludeDays = [];
+let mondayH={startHour:0, endHour:0};
+let tuesdayH={startHour:0, endHour:0};
+let wednesdayH={startHour:0, endHour:0};
+let thursdayH={startHour:0, endHour:0};
+let fridayH={startHour:0, endHour:0};
+let saturdayH={startHour:0, endHour:0};
+let sundayH={startHour:0, endHour:0};
 
+export function sendDataFromWorkHours(ownerEmail){
+  const ownersDocRef = doc(db, 'owners',ownerEmail);
+  
+}

@@ -8,8 +8,11 @@ import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from "react";
 import { signup, login, logout, useAuth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function  SignUpScreen()  {
+
+  let navigate = useNavigate();
 
   const emailRef = useRef(); // get the email input
   const passwordRef = useRef(); // get the password input
@@ -17,12 +20,21 @@ export default function  SignUpScreen()  {
   const [ loading, setLoading ] = useState(false); // disable button
   const currentUser = useAuth(); // get the info of currentUser
 
+  if(currentUser){
+    console.log(currentUser); 
+  console.log("user email "+currentUser.email); 
+  }else{
+    console.log("sign up user log out " ); 
+  }
+  
+
   async function handleSignup() {
     //console.log(`${emailRef.current.value} + ${passwordRef.current.value}`); //manage to get the data from the text field
 
    setLoading(true); // disable button
     try {
       await signup(emailRef.current.value, passwordRef.current.value);
+      navigate(`/CustomizeAppoinment`);
     } catch {
       alert("Error!"); // error when you use the same email to sign up again
     }
@@ -48,6 +60,9 @@ export default function  SignUpScreen()  {
                 </Button>
                 <Button  variant="contained">
                   <Link to={"/CustomizeAppoinment"}> WorkHours </Link>
+                </Button>
+                <Button  variant="contained" onClick={() => logout()}>
+                  log out
                 </Button>
                 <br/>
                 <span className='text-xs text-white'>If Already have Account</span>

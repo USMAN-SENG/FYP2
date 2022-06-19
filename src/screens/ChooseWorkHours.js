@@ -77,14 +77,80 @@ export function ChooseWorkHours( {
 	 
 
 	//const [daysInclude, setDaysInclude] = useState([]);
-	let daysIncludeArray = [];
+	// create variables outside the function 
+	// use the function when next button is clicked
+	// make sure to initilize all variables to null at the beginning of the function
+	// we can make a function in CustomizeAppoinmetn and send it here inside to get the data 
+	let notIncludeDays = [];
+	let mondayHours={startHour:0, endHour:0};
+	let tuesdayHours={startHour:0, endHour:0};
+	let wednesdayHours={startHour:0, endHour:0};
+	let thursdayHours={startHour:0, endHour:0};
+	let fridayHours={startHour:0, endHour:0};
+	let saturdayHours={startHour:0, endHour:0};
+	let sundayHours={startHour:0, endHour:0};
+	
+	function sendWorkHoursToDatabase() {
 
-	function addToListOfDays() {
-		//console.log(sunday);
-		// if (sunday === true) daysIncludeArray.push(0);
-		// if (monday === true) daysIncludeArray.push(1);
-		//console.log(daysIncludeArray)
-		//alert(daysIncludeArray);
+		if (sunday === true){
+			sundayHours.startHour = sundayStartTime ;
+			sundayHours.endHour = sundayEndTime ;
+		}  
+		if (monday === true){
+			mondayHours.startHour = mondayStartTime ;
+			mondayHours.endHour = mondayEndTime ;
+		}
+		if (tuesday === true){
+			tuesdayHours.startHour = tuesdayStartTime ;
+			tuesdayHours.endHour = tuesdayEndTime ;
+		} 
+		if (wednesday === true){
+			wednesdayHours.startHour = wednesdayStartTime ;
+			wednesdayHours.endHour = wednesdayEndTime ;
+		} 
+		if (thursday === true){
+			thursdayHours.startHour = thursdayStartTime ;
+			thursdayHours.endHour = thursdayEndTime ;
+		} 
+		if (friday === true){
+			fridayHours.startHour = fridayStartTime ;
+			fridayHours.endHour = fridayEndTime ;			
+		} 
+    if (saturday === true){
+			saturdayHours.startHour = saturdayStartTime ;
+			saturdayHours.endHour = saturdayEndTime ;
+		}
+		if (sunday === false){
+			notIncludeDays.push(0);
+		}
+		if (monday === false){
+			notIncludeDays.push(1);
+		}
+		if (tuesday === false){
+			notIncludeDays.push(2);
+		}
+		if (wednesday === false){
+			notIncludeDays.push(3);
+		} 
+		if (thursday === false){
+			notIncludeDays.push(4);
+		}
+		if (friday === false){
+			notIncludeDays.push(5);
+		}
+		if (saturday === false){
+			notIncludeDays.push(6);
+		}
+
+		console.log(notIncludeDays);
+		console.log(sundayHours);
+		console.log(mondayHours);
+		console.log(tuesdayHours);
+		console.log(wednesdayHours);
+		console.log(thursdayHours);
+		console.log(fridayHours);
+		console.log(saturdayHours);
+
 	}
 
 	function changeDayStates(day) {
@@ -92,26 +158,26 @@ export function ChooseWorkHours( {
 
 		if (day === "sunday") {
 			setSunday(!sunday);
-			console.log(sunday);
+			
 		} else if (day === "monday") {
 			setMonday(!monday);
-			console.log(monday);
-			//addToListOfDays();
+			
+			
 		} else if (day === "tuesday") {
 			setTuesday(!tuesday);
-			console.log(tuesday);
+			
 		} else if (day === "wednesday") {
 			setWednesday(!wednesday);
-			console.log(wednesday);
+			
 		} else if (day === "thursday") {
 			setThursday(!thursday);
-			console.log(thursday);
+			
 		} else if (day === "friday") {
 			setFriday(!friday);
-			console.log(friday);
+			
 		} else if (day === "saturday") {
 			setSaturday(!saturday);
-			console.log(saturday);
+			
 		}
 	}
 
@@ -215,7 +281,6 @@ export function ChooseWorkHours( {
 		} else if (day === "tuesday") {
 			setTuesdayStartTime(newTimeValue);
 
-			//console.log(day , newTimeValue);
 		} else if (day === "wednesday") {
 			setWednesdayStartTime(newTimeValue);
 		} else if (day === "thursday") {
@@ -352,7 +417,7 @@ export function ChooseWorkHours( {
 
 			/>
 			<br />
-			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton}  />
+			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} buttonAction={sendWorkHoursToDatabase} />
 		</section>
 	);
 }

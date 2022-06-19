@@ -126,7 +126,7 @@ const hoursComponent = hours.map((hour) => (
 
 	// notIncludeDay comes from the database
 	let notIncludeDay = {
-		dayArray: [0, 6, 5],
+		dayArray: [0,1, 6, 5],
 	};
 	const disabledDates = [];
 	if (notIncludeDay.dayArray.length) {
