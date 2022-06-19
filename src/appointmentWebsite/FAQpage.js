@@ -7,7 +7,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid";
 import AppoHeader from "./components/AppoHeader";
 import AppoFooter from "./components/AppoFooter";
-
 let FAQarray = [
 	{ faqID: 0, Q: "what is it about?", A: "it is a visa offic" },
 	{ faqID: 1, Q: "why is it about?", A: "it is a visa offic" },
@@ -56,7 +55,7 @@ export default function FAQpage() {
 				<Grid item>
 					<Typography variant="h4" align="center">
 						Frequently Asked Questions
-					</Typography>
+					</Typography> 
 				</Grid>
 				<Grid item>
 				{faqComponent}
@@ -103,7 +102,7 @@ export default function FAQpage() {
 					</Accordion>
 				</Grid>
 			</Grid>
-			{/* <AppoFooter /> */}
+			<AppoFooter />
 		</div>
 	);
 }

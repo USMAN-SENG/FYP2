@@ -8,15 +8,14 @@ import { Link } from 'react-router-dom';
 
 export default function AppoHeader() {
 	
-	const mystyle = {
-		maxWidth: 150,
-	  };
+	let websiteName = "website Name";
 	return (
 		<>
 			<AppBar position="relative">
 				<Toolbar>
-					<Typography style={mystyle}><img src={require('./logo2.png')}  />
-           
+					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} 
+           >
+						{websiteName}
 					</Typography>
 					<Stack direction="row" spacing={3} sx={{ flexGrow: 0 }}>
 						<Button color="inherit"><Link to={"/AppointmentPage"}> Book </Link></Button>
