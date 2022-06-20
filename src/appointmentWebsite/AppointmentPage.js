@@ -1,6 +1,6 @@
 import React from "react";
 import AppoHeader from "./components/AppoHeader";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -10,7 +10,8 @@ import "react-calendar/dist/Calendar.css";
 import { Scheduler } from "@arshadrao/react-scheduler";
 import AppoFooter from "./components/AppoFooter";
 import { useParams } from "react-router-dom";
-
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const hours = [
 	// { id: "9:0", hour: 9, minute: 0, endTime: "9:30" , date: '2022-6-11',madeBy:'a' },
@@ -18,7 +19,7 @@ const hours = [
 	// { id: "10:0", hour: 10, minute: 0, endTime: "10:30" },
 ];
 
-//we should load all 7 days and then use startHour  base on day chosen 
+//we should load all 7 days and then use startHour  base on day chosen
 
 let startHour = 8; // take it from day , each will be different. we should take base on the day chosen
 let endHour = 19; // can't be more than 24
@@ -55,10 +56,10 @@ for (startHour; startHour < endHour; startHour++) {
 
 // we take time from firebase that already booked in certain date, and keep litening to it every time a new write to the database
 const hoursAlreadyIncluded = [
-	{ id: "9:0", hour: 9, minute: 0 , endTime: "9:30" },
-	{ id: "9:30", hour: 9, minute: 30 , endTime: "10:0" },
-	{ id: "11:0", hour: 10, minute: 0 , endTime: "11:30" },
-	{ id: "11:30", hour: 10, minute: 0 , endTime: "12:0" },
+	{ id: "9:0", hour: 9, minute: 0, endTime: "9:30" },
+	{ id: "9:30", hour: 9, minute: 30, endTime: "10:0" },
+	{ id: "11:0", hour: 10, minute: 0, endTime: "11:30" },
+	{ id: "11:30", hour: 10, minute: 0, endTime: "12:0" },
 ];
 
 hoursAlreadyIncluded.forEach((timeIncluded) => {
@@ -69,67 +70,77 @@ hoursAlreadyIncluded.forEach((timeIncluded) => {
 	if (indexOfTimeThatAlreadyBooked >= 0) {
 		hours.splice(indexOfTimeThatAlreadyBooked, 1);
 	}
-
 });
 
-
-
 export default function AppointmentPage() {
+	let { ownerEmail } = useParams();
 
-	let {ownerEmail} = useParams();  
+	//console.log(ownerEmail);
 
-	console.log(ownerEmail);
- 
+	useEffect(() => {
+		const displayData = async () => {
+			const docRef = doc(db, "owners", ownerEmail);
+			const docSnap = await getDoc(docRef);
+			// const data = docSnap.data();
+			// return data;
+			if (docSnap.exists()) {
+				console.log("Document data:", docSnap.data());
+				console.log("FAQ :", docSnap.data().FAQ);
+				console.log("officeAddress :", docSnap.data().officeAddress);
+			}
+		};
+
+		displayData();
+	}, []);
+
 	const [date, setDate] = useState(new Date());
 	// 2022-6-11
-	 const [onlyDate,setOnlyDate]= useState(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
+	const [onlyDate, setOnlyDate] = useState(
+		date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+	);
 
-	const[hourChose,setHourChose]=useState();
-
+	const [hourChose, setHourChose] = useState();
 
 	function handleDate(date) {
 		setDate(date);
-		setOnlyDate(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()); 
+		setOnlyDate(
+			date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+		);
 	}
 
+	function displayHours(hourID) {
+		console.log(hours);
+		setHourChose(hourID);
+		console.log(hourChose);
+	}
 
+	const hoursComponent = hours.map((hour) => (
+		<Grid item md={2}>
+			<Button
+				id={hour.id}
+				variant="contained"
+				color="inherit"
+				onClick={() => displayHours(hour.id)}
+			>
+				{hour.hour} : {hour.minute}
+			</Button>
+		</Grid>
+	));
 
-function displayHours(hourID) {
-	console.log(hours);
-	setHourChose(hourID);
-	console.log(hourChose);
-}
-
-const hoursComponent = hours.map((hour) => (
-	<Grid item md={2}>
-		<Button
-			id={hour.id}
-			variant="contained"
-			color="inherit"
-			onClick={()=>displayHours(hour.id)}
-		>
-			{hour.hour} : {hour.minute}
-		</Button>
-	</Grid>
-));
-
-
-	let onlyDay = date.getDay() ; // this will give 0-6 sun - sat . we going to use this to find out how the day and go to database to that specific day and get startHour and endHour
-	let dayString ;
-	if (onlyDay === 0){
+	let onlyDay = date.getDay(); // this will give 0-6 sun - sat . we going to use this to find out how the day and go to database to that specific day and get startHour and endHour
+	let dayString;
+	if (onlyDay === 0) {
 		// here we should get startHour and endHour from sunday
-		dayString = 'sunday'; 
-	} else if(onlyDay === 1){
-		dayString = 'monday'; 
-	} else if(onlyDay === 2){
-		dayString = 'tuesday';  
+		dayString = "sunday";
+	} else if (onlyDay === 1) {
+		dayString = "monday";
+	} else if (onlyDay === 2) {
+		dayString = "tuesday";
 	}
-
-  
 
 	// notIncludeDay comes from the database
 	let notIncludeDay = {
-		dayArray: [0,1, 6, 5],
+		dayArray: [0, 1, 6, 5],
 	};
 	const disabledDates = [];
 	if (notIncludeDay.dayArray.length) {
@@ -155,11 +166,9 @@ const hoursComponent = hours.map((hour) => (
 		); // sun , saturday
 	}
 
-
-
 	return (
 		<>
-			<AppoHeader ownerEmail={ownerEmail}/>
+			<AppoHeader ownerEmail={ownerEmail} />
 
 			{/* <div>helloe </div>
       <div>{name} </div>
@@ -191,13 +200,15 @@ const hoursComponent = hours.map((hour) => (
 						</Grid>
 						<Grid item md={4}></Grid>
 						<Grid item>
-							<Button variant="contained" color="primary">submit</Button>
+							<Button variant="contained" color="primary">
+								submit
+							</Button>
 						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>
 
-			<Scheduler
+			{/* <Scheduler
 				view="month"
 				events={[
 					{
@@ -213,7 +224,7 @@ const hoursComponent = hours.map((hour) => (
 						end: new Date("2022/6/11 17:30"),
 					},
 				]}
-			/>
+			/> */}
 			{/* <AppoFooter /> */}
 		</>
 	);

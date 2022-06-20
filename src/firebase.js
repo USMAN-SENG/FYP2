@@ -63,7 +63,7 @@ export function useAuth() {
 }
 
 // Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 const usersColRef = collection(db, "users");
 
