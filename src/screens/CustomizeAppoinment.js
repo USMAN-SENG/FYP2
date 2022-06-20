@@ -2,6 +2,7 @@ import { ButtonStep } from "./formComponents/ButtonStep";
 import { ChooseWorkHours } from "./ChooseWorkHours";
 import { AddFAQ } from "./AddFAQ";
 import AddPersonalAbout from "./AddPersonalAbout";
+import Transition from "./Transition";
 
 //import { useParams } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
@@ -15,9 +16,8 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
 export default function CustomizeAppoinment() {
-
 	const currentUser = useAuth(); // get the info of currentUser
-	
+
 	const [formStep, setFormStep] = useState(1);
 
 	let spacingBetweenButtons = 50;
@@ -83,18 +83,30 @@ export default function CustomizeAppoinment() {
 									ownerEmail={currentUser.email}
 								/>
 							)}
+							{formStep === 4 && (
+								<Transition
+									spacingBetweenButtons={spacingBetweenButtons}
+									decreaseFormStep={decreaseFormStep}
+									formStep={formStep}
+									increaseFormStep={increaseFormStep}
+									ownerEmail={currentUser.email}
+								/>
+							)}
 						</Paper>
 					</Grid>
 				</Grid>
 			) : (
-				<> 
-					<Stack justifyContent="center" alignItems="center" sx={{ width: '200vh', height: '100vh' }} >		
+				<>
+					<Stack
+						justifyContent="center"
+						alignItems="center"
+						sx={{ width: "200vh", height: "100vh" }}
+					>
 						<Box sx={{ display: "flex" }}>
 							<CircularProgress />
 							{/* <Navigate to="/login"/> */}
 						</Box>
 					</Stack>
-					
 				</>
 			)}
 		</>

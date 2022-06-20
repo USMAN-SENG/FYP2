@@ -72,10 +72,11 @@ export default function AddPersonalAbout({
 				spacingBetweenButtons={spacingBetweenButtons}
 				decreaseFormStep={decreaseFormStep}
 				formStep={formStep}
-				increaseFormStep={sendPersonalInfoToDatabase}
+				increaseFormStep={increaseFormStep}
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
 				submitButton={"submit"}
+				nextButtonAction={sendPersonalInfoToDatabase}
 			/>
 		</>
 	);
