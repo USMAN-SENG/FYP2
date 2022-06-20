@@ -90,7 +90,7 @@ export function ChooseWorkHours( {
 	let saturdayHours={startHour:0, endHour:0};
 	let sundayHours={startHour:0, endHour:0};
 	
-	function sendWorkHoursToDatabase() {
+	async function sendWorkHoursToDatabase() {
 
 		if (sunday === true){
 			sundayHours.startHour = sundayStartTime ;
@@ -417,7 +417,7 @@ export function ChooseWorkHours( {
 
 			/>
 			<br />
-			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} buttonAction={sendWorkHoursToDatabase} />
+			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} nextButtonAction={sendWorkHoursToDatabase} />
 		</section>
 	);
 }

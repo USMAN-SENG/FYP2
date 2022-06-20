@@ -10,7 +10,8 @@ export function ButtonStep({
 	disableNextButton ,
 	disableAddQuestionButton = true,
 	submitButton,
-	buttonAction= null,
+	nextButtonAction= null,
+	addFaqButtonAction= null,
 }) {
 	// we can add onClick function to each button
 	return (
@@ -34,7 +35,10 @@ export function ButtonStep({
 
 			{formStep === 2 && (
 				<Grid item>
-					<Button variant="outlined" disabled={disableAddQuestionButton}>
+					<Button variant="outlined" disabled={disableAddQuestionButton} onClick={()=>{
+						if(addFaqButtonAction != null)
+						addFaqButtonAction();
+					}}>
 						Add More Question
 					</Button>
 				</Grid>
@@ -44,8 +48,8 @@ export function ButtonStep({
 					variant="outlined"
 					onClick={()=>{
 						increaseFormStep();
-						if(buttonAction != null)
-						buttonAction();
+						if(nextButtonAction != null)
+						nextButtonAction();
 					}}
 					disabled={disableNextButton}
 				>
