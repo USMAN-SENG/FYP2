@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
 import { useRef, useState } from "react";
+import {sendDataFromPersonalAbout} from "../firebase"
 
 export default function AddPersonalAbout({
 	spacingBetweenButtons,
@@ -16,15 +17,26 @@ export default function AddPersonalAbout({
 	let disablePreviousButton = false;
 	let disableNextButton = false;
 	
-	const nameRef = useRef(); // get the question input
-  const addressRef = useRef(); // get the answer input
-	const descriptionRef = useRef(); // get the answer input
+	// const nameRef = useRef(); // get the name input
+  // const addressRef = useRef(); // get the address input
+	// const descriptionRef = useRef(); // get the description input
+
+	const [name, setName] = useState('');
+	const [address, setAddress] = useState('');
+	const [description, setDescription] = useState('');
 
 	async function sendPersonalInfoToDatabase(){
 
-		console.log(nameRef.current.value + " " + addressRef.current.value + " " + descriptionRef.current.value );
+		try {
+      await sendDataFromPersonalAbout(ownerEmail , name, address, description);   
+    } catch(e) {
+      console.log(e); // error  
+    }
+		// console.log(nameRef.current.value + " " + addressRef.current.value + " " + descriptionRef.current.value );
 
 	} 
+
+	 if(name === "" || address === "" || description === "") disableNextButton = true;
 
 	return (
 		<>
@@ -43,7 +55,9 @@ export default function AddPersonalAbout({
 						fullWidth
 						multiline
 						minRows={1}
-						inputRef={nameRef}
+						// inputRef={nameRef}
+						value={name}
+						onChange={(e) => setName(e.target.value)}
 					/>
 				</Grid>
 				<Grid item>
@@ -53,7 +67,9 @@ export default function AddPersonalAbout({
 						fullWidth
 						multiline
 						minRows={1}
-						inputRef={addressRef}
+						// inputRef={addressRef}
+						value={address}
+						onChange={(e) => setAddress(e.target.value)}
 					/>
 				</Grid>
 				<Grid item>
@@ -63,7 +79,9 @@ export default function AddPersonalAbout({
 						fullWidth
 						multiline
 						minRows={4}
-						inputRef={descriptionRef}
+						// inputRef={descriptionRef}
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
 					/>
 				</Grid>
 			</Grid>
@@ -75,7 +93,6 @@ export default function AddPersonalAbout({
 				increaseFormStep={increaseFormStep}
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
-				submitButton={"submit"}
 				nextButtonAction={sendPersonalInfoToDatabase}
 			/>
 		</>

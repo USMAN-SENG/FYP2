@@ -16,6 +16,7 @@ import {
 	addDoc,
 	doc,
 	setDoc,
+  updateDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -160,21 +161,12 @@ export function addTestArray() {
   //console.log(usersColRef);
 	return addDoc(usersColRef, objectWithArray2); // addDoc will create random id
 }
-//////////////////////////////////////
-// data from work hours
-// let unIncludeDays = [];
-// let mondayH={startHour:0, endHour:0};
-// let tuesdayH={startHour:0, endHour:0};
-// let wednesdayH={startHour:0, endHour:0};
-// let thursdayH={startHour:0, endHour:0};
-// let fridayH={startHour:0, endHour:0};
-// let saturdayH={startHour:0, endHour:0};
-// let sundayH={startHour:0, endHour:0};
+///////////////////////////// send customize data for the owner
 
  export async function sendDataFromWorkHours(ownerEmail, mon, tue, wed, thu, fri, sat, sun,notInclude ){
   const ownersDocRef = doc(db, 'owners',ownerEmail);
 
-  let customizeAppointmentData ={
+  let customizeWorkHoursData ={
     email:ownerEmail ,
     mondayHours: mon, 
     tuesdayHours: tue,
@@ -186,5 +178,30 @@ export function addTestArray() {
     notIncludeDays: notInclude
   }
 
-  await setDoc(ownersDocRef, customizeAppointmentData);
+  await setDoc(ownersDocRef, customizeWorkHoursData);
+}
+
+//------
+export async function sendDataFromFAQ(ownerEmail, FAQarray){
+  const ownersDocRef = doc(db, 'owners',ownerEmail);
+
+  let customizeFAQData ={
+    FAQ:FAQarray
+  }
+
+  await updateDoc(ownersDocRef, customizeFAQData);
+}
+
+//------
+
+export async function sendDataFromPersonalAbout(ownerEmail, name, address, description){
+  const ownersDocRef = doc(db, 'owners',ownerEmail);
+
+  let customizePersonalData ={
+    officeName:name,
+    officeAddress:address,
+    officeDescription:description,
+  }
+
+  await updateDoc(ownersDocRef, customizePersonalData);
 }

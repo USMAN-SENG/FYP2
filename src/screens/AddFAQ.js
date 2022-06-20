@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
 import { useRef, useState } from "react";
+import {sendDataFromFAQ} from "../firebase"
 
 export function AddFAQ({
 	spacingBetweenButtons,
@@ -18,10 +19,10 @@ export function AddFAQ({
 	let disableNextButton = false;
 	let disableAddQuestionButton = false;
 
-	const questionRef = useRef(); // get the question input
-  const answerRef = useRef(); // get the answer input
-	const [questionInput, setQuestionInput] = useState('0');
-	const [answerInput, setAnswerInput] = useState('1');
+	// const questionRef = useRef(); // get the question input
+  // const answerRef = useRef(); // get the answer input
+	const [questionInput, setQuestionInput] = useState('');
+	const [answerInput, setAnswerInput] = useState('');
 	const [FAQ, setFAQ] = useState([]);
 
 	
@@ -47,6 +48,11 @@ export function AddFAQ({
 
 	async function sendFaqToDatabase(){
 
+		try {
+      await sendDataFromFAQ(ownerEmail , FAQ)   
+    } catch(e) {
+      console.log(e); // error  
+    }
 	} 
 
 	if(FAQ.length < 1){
@@ -100,6 +106,7 @@ export function AddFAQ({
 				disableNextButton={disableNextButton}
 				disableAddQuestionButton={disableAddQuestionButton}
 				addFaqButtonAction={addToFaqArray}
+				nextButtonAction={sendFaqToDatabase}
 			/>
 		</>
 	);

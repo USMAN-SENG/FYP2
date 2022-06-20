@@ -127,7 +127,7 @@ export function ChooseWorkHours( {
 		try {
       await  sendDataFromWorkHours(ownerEmail, mondayHours, tuesdayHours , wednesdayHours , thursdayHours , fridayHours, saturdayHours, sundayHours, notIncludeDays);
     } catch(e) {
-      alert(e); // error  
+      console.log(e); // error  
     }
 
 		// console.log(notIncludeDays);

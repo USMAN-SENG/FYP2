@@ -9,7 +9,6 @@ export function ButtonStep({
 	disablePreviousButton,
 	disableNextButton ,
 	disableAddQuestionButton = true,
-	submitButton,
 	nextButtonAction= null,
 	addFaqButtonAction= null,
 }) {
@@ -53,7 +52,7 @@ export function ButtonStep({
 					}}
 					disabled={disableNextButton}
 				>
-					{submitButton || 'Next'}
+					Next
 				</Button>
 			</Grid>
 		</Grid>

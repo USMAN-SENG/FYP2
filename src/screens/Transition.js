@@ -31,7 +31,7 @@ export default function Transition({
 					<Link to={"/Dashboard/Calendar"}>Go To The dashboard</Link>
 				</Button>
 			</Stack>
-      <ButtonStep
+      {/* <ButtonStep
 				spacingBetweenButtons={spacingBetweenButtons}
 				decreaseFormStep={decreaseFormStep}
 				formStep={formStep}
@@ -39,7 +39,7 @@ export default function Transition({
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
 				submitButton={"submit"}
-			/>
+			/> */}
 		</div>
 	);
 }
