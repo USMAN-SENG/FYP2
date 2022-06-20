@@ -162,16 +162,29 @@ export function addTestArray() {
 }
 //////////////////////////////////////
 // data from work hours
-let unIncludeDays = [];
-let mondayH={startHour:0, endHour:0};
-let tuesdayH={startHour:0, endHour:0};
-let wednesdayH={startHour:0, endHour:0};
-let thursdayH={startHour:0, endHour:0};
-let fridayH={startHour:0, endHour:0};
-let saturdayH={startHour:0, endHour:0};
-let sundayH={startHour:0, endHour:0};
+// let unIncludeDays = [];
+// let mondayH={startHour:0, endHour:0};
+// let tuesdayH={startHour:0, endHour:0};
+// let wednesdayH={startHour:0, endHour:0};
+// let thursdayH={startHour:0, endHour:0};
+// let fridayH={startHour:0, endHour:0};
+// let saturdayH={startHour:0, endHour:0};
+// let sundayH={startHour:0, endHour:0};
 
-export function sendDataFromWorkHours(ownerEmail){
+ export async function sendDataFromWorkHours(ownerEmail, mon, tue, wed, thu, fri, sat, sun,notInclude ){
   const ownersDocRef = doc(db, 'owners',ownerEmail);
-  
+
+  let customizeAppointmentData ={
+    email:ownerEmail ,
+    mondayHours: mon, 
+    tuesdayHours: tue,
+    wednesdayHours: wed,
+    thursdayHours: thu,
+    fridayHours: fri,
+    saturdayHours: sat,
+    sundayHours: sun,
+    notIncludeDays: notInclude
+  }
+
+  await setDoc(ownersDocRef, customizeAppointmentData);
 }

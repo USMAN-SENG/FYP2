@@ -25,7 +25,7 @@ export default function Transition({
       <br />
 			<Stack justifyContent="center" alignItems="center" spacing={3} p={3}>
 				<Button variant="outlined" size="large">
-					<Link to={"/AppointmentPage"}>Go To The website</Link>
+					<Link to={`/AppointmentPage/${ownerEmail}`}>Go To The website</Link>
 				</Button>
 				<Button variant="outlined" size="large">
 					<Link to={"/Dashboard/Calendar"}>Go To The dashboard</Link>

@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid";
 import AppoHeader from "./components/AppoHeader";
 import AppoFooter from "./components/AppoFooter";
+import { useParams } from "react-router-dom";
 
 let FAQarray = [
 	{ faqID: 0, Q: "what is it about?", A: "it is a visa offic" },
@@ -38,9 +39,13 @@ let faqComponent = FAQarray.map((faq) => (
 ));
 
 export default function FAQpage() {
+
+	let {ownerEmail} = useParams();  
+
+
 	return (
 		<div>
-			<AppoHeader />
+			<AppoHeader ownerEmail={ownerEmail}/>
 			<br />
 			<Grid
 				container

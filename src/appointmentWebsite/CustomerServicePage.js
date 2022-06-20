@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useParams } from "react-router-dom";
 
 // Chat component
 import Chat, { Message } from "react-simple-chat";
@@ -52,6 +53,9 @@ function a11yProps(index) {
 }
 
 export default function CustomerServicePage() {
+
+	let {ownerEmail} = useParams();  
+
 	const [value, setValue] = useState(0);
 	const [loading, setLoading] = useState(false); // disable button
 	const [customerIsLogin, setCustomerIsLogin] = useState(false);
@@ -78,7 +82,7 @@ export default function CustomerServicePage() {
 
 	return (
 		<div>
-			<AppoHeader />
+			<AppoHeader ownerEmail={ownerEmail}/>
 			{customerIsLogin ? (
 				<>
 					<Grid container p={4}>

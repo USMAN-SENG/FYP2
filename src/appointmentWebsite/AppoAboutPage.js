@@ -4,15 +4,19 @@ import Typography from "@mui/material/Typography";
 import AppoHeader from "./components/AppoHeader";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
+import { useParams } from "react-router-dom";
 
 let officeAddress = "iium KL";
 let officeDescription =
 	"it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic";
 
 export default function AppoAboutPage() {
+
+	let {ownerEmail} = useParams();  
+
 	return (
 		<div>
-			<AppoHeader />
+			<AppoHeader ownerEmail={ownerEmail}/>
 			<Grid
 				container
 				justifyContent="center"

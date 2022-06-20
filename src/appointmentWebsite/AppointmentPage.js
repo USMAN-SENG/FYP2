@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import "react-calendar/dist/Calendar.css";
 import { Scheduler } from "@arshadrao/react-scheduler";
 import AppoFooter from "./components/AppoFooter";
+import { useParams } from "react-router-dom";
 
 
 const hours = [
@@ -74,8 +75,11 @@ hoursAlreadyIncluded.forEach((timeIncluded) => {
 
 
 export default function AppointmentPage() {
-	const [todayDate, setTodayDate] = useState(new Date());
-	const [name, setname] = useState("ahmad");
+
+	let {ownerEmail} = useParams();  
+
+	console.log(ownerEmail);
+ 
 	const [date, setDate] = useState(new Date());
 	// 2022-6-11
 	 const [onlyDate,setOnlyDate]= useState(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
@@ -109,7 +113,6 @@ const hoursComponent = hours.map((hour) => (
 	</Grid>
 ));
 
-//	let onlyDate = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() ;
 
 	let onlyDay = date.getDay() ; // this will give 0-6 sun - sat . we going to use this to find out how the day and go to database to that specific day and get startHour and endHour
 	let dayString ;
@@ -152,11 +155,11 @@ const hoursComponent = hours.map((hour) => (
 		); // sun , saturday
 	}
 
-	let hourstest = "10:0";
+
 
 	return (
 		<>
-			<AppoHeader />
+			<AppoHeader ownerEmail={ownerEmail}/>
 
 			{/* <div>helloe </div>
       <div>{name} </div>
@@ -167,6 +170,7 @@ const hoursComponent = hours.map((hour) => (
 						tileDisabled={disableDays}
 						onChange={handleDate}
 						value={date}
+						minDate={new Date()}
 					/>
 					{onlyDate} {dayString} {hourChose}
 				</Grid>

@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { CheckboxDays } from "./formComponents/checkboxDays";
 import { ButtonStep } from "./formComponents/ButtonStep";
+import {sendDataFromWorkHours} from "../firebase"
 
 const MIN = 1;
 const MAX = 24;
@@ -27,8 +28,7 @@ export function ChooseWorkHours( {
 	increaseFormStep,
 	ownerEmail,
 }) {
-	//const [period, setPeriod] = useState("AM");
-	//const [time, setTime] = useState(7);
+
 	//days states
 	const [sunday, setSunday] = useState(false);
 	const [monday, setMonday] = useState(false);
@@ -37,24 +37,7 @@ export function ChooseWorkHours( {
 	const [thursday, setThursday] = useState(false);
 	const [friday, setFriday] = useState(false);
 	const [saturday, setSaturday] = useState(false);
-	// period states
 
-//////////////////////////////////////////////////////////////////////
-	//NEED TO ADD BREAK TIME
-	// const [sundayStartPeriod, setSundayStartPeriod] = useState("AM");
-	// const [sundayEndPeriod, setSundayEndPeriod] = useState("AM");
-	// const [mondayStartPeriod, setMondayStartPeriod] = useState("AM");
-	// const [mondayEndPeriod, setMondayEndPeriod] = useState("AM");
-	// const [tuesdayStartPeriod, setTuesdayStartPeriod] = useState("AM");
-	// const [tuesdayEndPeriod, setTuesdayEndPeriod] = useState("AM");
-	// const [wednesdayStartPeriod, setWednesdayStartPeriod] = useState("AM");
-	// const [wednesdayEndPeriod, setWednesdayEndPeriod] = useState("AM");
-	// const [thursdayStartPeriod, setThursdayStartPeriod] = useState("AM");
-	// const [thursdayEndPeriod, setThursdayEndPeriod] = useState("AM");
-	// const [fridayStartPeriod, setFridayStartPeriod] = useState("AM");
-	// const [fridayEndPeriod, setFridayEndPeriod] = useState("AM");
-	// const [saturdayStartPeriod, setSaturdayStartPeriod] = useState("AM");
-	// const [saturdayEndPeriod, setSaturdayEndPeriod] = useState("AM");
 	// time states
 	const [sundayStartTime, setSundayStartTime] = useState(9);
 	const [sundayEndTime, setSundayEndTime] = useState(17);
@@ -141,15 +124,20 @@ export function ChooseWorkHours( {
 			notIncludeDays.push(6);
 		}
 
-		console.log(notIncludeDays);
-		console.log(sundayHours);
-		console.log(mondayHours);
-		console.log(tuesdayHours);
-		console.log(wednesdayHours);
-		console.log(thursdayHours);
-		console.log(fridayHours);
-		console.log(saturdayHours);
+		try {
+      await  sendDataFromWorkHours(ownerEmail, mondayHours, tuesdayHours , wednesdayHours , thursdayHours , fridayHours, saturdayHours, sundayHours, notIncludeDays);
+    } catch(e) {
+      alert(e); // error  
+    }
 
+		// console.log(notIncludeDays);
+		// console.log(sundayHours);
+		// console.log(mondayHours);
+		// console.log(tuesdayHours);
+		// console.log(wednesdayHours);
+		// console.log(thursdayHours);
+		// console.log(fridayHours);
+		// console.log(saturdayHours);
 	}
 
 	function changeDayStates(day) {
@@ -180,87 +168,7 @@ export function ChooseWorkHours( {
 		}
 	}
 
-	// function changeSundayState() {
-
-	// }
-
-	// function changeMondayState() {
-	// 	setMonday(!monday);
-	// 	addToListOfDays();
-	// }
-
-	// function changeTuesdayState() {
-	// 	setMonday(!tuesday);
-	// }
-
-	// function changeWednesdayState() {
-	// 	setMonday(!wednesday);
-	// }
-
-	// function changeThursdayState() {
-	// 	setMonday(!thursday);
-	// }
-
-	// function changeFridayState() {
-	// 	setMonday(!friday);
-	// }
-
-	// function changeSaturdayState() {
-	// 	setMonday(!saturday);
-	// }
-
-	// const handleStartSelect = (event, day) => {
-	// 	let newStartSelectValue = event.target.value;
-
-	// 	//console.log(day ,'start', newStartSelectValue);
-
-	// 	if (day === "sunday") {
-	// 		setSundayStartPeriod(newStartSelectValue);
-	// 	} else if (day === "monday") {
-	// 		setMondayStartPeriod(newStartSelectValue);
-
-	// 		//console.log(day , newTimeValue);
-	// 	} else if (day === "tuesday") {
-	// 		setTuesdayStartPeriod(newStartSelectValue);
-
-	// 		//console.log(day , newTimeValue);
-	// 	} else if (day === "wednesday") {
-	// 		setWednesdayStartPeriod(newStartSelectValue);
-	// 	} else if (day === "thursday") {
-	// 		setThursdayStartPeriod(newStartSelectValue);
-	// 	} else if (day === "friday") {
-	// 		setFridayStartPeriod(newStartSelectValue);
-	// 	} else if (day === "saturday") {
-	// 		setSaturdayStartPeriod(newStartSelectValue);
-	// 	}
-	// };
-
-	// const handleEndSelect = (event, day) => {
-	// 	let newEndSelectValue = event.target.value;
-
-	// 	//console.log(day, "end", newEndSelectValue);
-
-	// 	if (day === "sunday") {
-	// 		setSundayEndPeriod(newEndSelectValue);
-	// 	} else if (day === "monday") {
-	// 		setMondayEndPeriod(newEndSelectValue);
-
-	// 		//console.log(day , newTimeValue);
-	// 	} else if (day === "tuesday") {
-	// 		setTuesdayEndPeriod(newEndSelectValue);
-
-	// 		//console.log(day , newTimeValue);
-	// 	} else if (day === "wednesday") {
-	// 		setWednesdayEndPeriod(newEndSelectValue);
-	// 	} else if (day === "thursday") {
-	// 		setThursdayEndPeriod(newEndSelectValue);
-	// 	} else if (day === "friday") {
-	// 		setFridayEndPeriod(newEndSelectValue);
-	// 	} else if (day === "saturday") {
-	// 		setSaturdayEndPeriod(newEndSelectValue);
-	// 	}
-	// };
-
+	
 	const handleStartTime = (event, day) => {
 		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);

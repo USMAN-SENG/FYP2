@@ -23,10 +23,10 @@ function App() {
 				<Route path="/login" element={<LoginScreen />} />
 				<Route path="/CustomizeAppoinment" element={<CustomizeAppoinment />} />
 
-				<Route path="/AppointmentPage" element={<AppointmentPage />} />
-				<Route path="/FAQpage" element={<FAQpage />} />
-				<Route path="/AppointmentAboutPage" element={<AppoAboutPage />} />
-				<Route path="/CustomerServicePage" element={<CustomerServicePage />} />
+				<Route path="/AppointmentPage/:ownerEmail" element={<AppointmentPage />} />
+				<Route path="/FAQpage/:ownerEmail" element={<FAQpage />} />
+				<Route path="/AppointmentAboutPage/:ownerEmail" element={<AppoAboutPage />} />
+				<Route path="/CustomerServicePage/:ownerEmail" element={<CustomerServicePage />} />
 
 				<Route path="/Dashboard/Calendar" element={<Calendar />} />
 				<Route path="/Dashboard/EditFAQ" element={<EditFAQ />} />
