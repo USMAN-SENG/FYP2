@@ -10,6 +10,7 @@ export function AddFAQ({
 	decreaseFormStep,
 	formStep,
 	increaseFormStep,
+	ownerEmail,
 }) {
 	//let FAQ =[];
 

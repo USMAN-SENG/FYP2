@@ -60,6 +60,7 @@ export default function CustomizeAppoinment() {
 									decreaseFormStep={decreaseFormStep}
 									formStep={formStep}
 									increaseFormStep={increaseFormStep}
+									ownerEmail={currentUser.email}
 								/>
 							)}
 
@@ -69,6 +70,7 @@ export default function CustomizeAppoinment() {
 									decreaseFormStep={decreaseFormStep}
 									formStep={formStep}
 									increaseFormStep={increaseFormStep}
+									ownerEmail={currentUser.email}
 								/>
 							)}
 
@@ -78,6 +80,7 @@ export default function CustomizeAppoinment() {
 									decreaseFormStep={decreaseFormStep}
 									formStep={formStep}
 									increaseFormStep={increaseFormStep}
+									ownerEmail={currentUser.email}
 								/>
 							)}
 						</Paper>

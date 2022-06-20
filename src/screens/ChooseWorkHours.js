@@ -25,6 +25,7 @@ export function ChooseWorkHours( {
 	decreaseFormStep,
 	formStep,
 	increaseFormStep,
+	ownerEmail,
 }) {
 	//const [period, setPeriod] = useState("AM");
 	//const [time, setTime] = useState(7);
@@ -55,22 +56,20 @@ export function ChooseWorkHours( {
 	// const [saturdayStartPeriod, setSaturdayStartPeriod] = useState("AM");
 	// const [saturdayEndPeriod, setSaturdayEndPeriod] = useState("AM");
 	// time states
-	const [sundayStartTime, setSundayStartTime] = useState(7);
-	const [sundayEndTime, setSundayEndTime] = useState(sundayStartTime + 1);
-	const [mondayStartTime, setMondayStartTime] = useState(7);
-	const [mondayEndTime, setMondayEndTime] = useState(mondayStartTime + 1);
-	const [tuesdayStartTime, setTuesdayStartTime] = useState(7);
-	const [tuesdayEndTime, setTuesdayEndTime] = useState(tuesdayStartTime + 1);
-	const [wednesdayStartTime, setWednesdayStartTime] = useState(7);
-	const [wednesdayEndTime, setWednesdayEndTime] = useState(
-		wednesdayStartTime + 1
-	);
-	const [thursdayStartTime, setThursdayStartTime] = useState(7);
-	const [thursdayEndTime, setThursdayEndTime] = useState(thursdayStartTime + 1);
-	const [fridayStartTime, setFridayStartTime] = useState(7);
-	const [fridayEndTime, setFridayEndTime] = useState(fridayStartTime + 1);
-	const [saturdayStartTime, setSaturdayStartTime] = useState(7);
-	const [saturdayEndTime, setSaturdayEndTime] = useState(saturdayStartTime + 1);
+	const [sundayStartTime, setSundayStartTime] = useState(9);
+	const [sundayEndTime, setSundayEndTime] = useState(17);
+	const [mondayStartTime, setMondayStartTime] = useState(9);
+	const [mondayEndTime, setMondayEndTime] = useState(17);
+	const [tuesdayStartTime, setTuesdayStartTime] = useState(9);
+	const [tuesdayEndTime, setTuesdayEndTime] = useState(17);
+	const [wednesdayStartTime, setWednesdayStartTime] = useState(9);
+	const [wednesdayEndTime, setWednesdayEndTime] = useState(17);
+	const [thursdayStartTime, setThursdayStartTime] = useState(9);
+	const [thursdayEndTime, setThursdayEndTime] = useState(17);
+	const [fridayStartTime, setFridayStartTime] = useState(9);
+	const [fridayEndTime, setFridayEndTime] = useState(17);
+	const [saturdayStartTime, setSaturdayStartTime] = useState(9);
+	const [saturdayEndTime, setSaturdayEndTime] = useState(17);
 
 	let disablePreviousButton = true;
 	let disableNextButton = false;

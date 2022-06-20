@@ -3,16 +3,28 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
+import { useRef, useState } from "react";
 
 export default function AddPersonalAbout({
 	spacingBetweenButtons,
 	decreaseFormStep,
 	formStep,
 	increaseFormStep,
+	ownerEmail,
 }) {
+
 	let disablePreviousButton = false;
 	let disableNextButton = false;
-	 
+	
+	const nameRef = useRef(); // get the question input
+  const addressRef = useRef(); // get the answer input
+	const descriptionRef = useRef(); // get the answer input
+
+	async function sendPersonalInfoToDatabase(){
+
+		console.log(nameRef.current.value + " " + addressRef.current.value + " " + descriptionRef.current.value );
+
+	} 
 
 	return (
 		<>
@@ -26,29 +38,32 @@ export default function AddPersonalAbout({
 			<Grid container direction="column" spacing={2} p={2} >
 				<Grid item>
 					<TextField
-						placeholder="Name"
+						label="Name"
 						variant="outlined"
 						fullWidth
 						multiline
 						minRows={1}
+						inputRef={nameRef}
 					/>
 				</Grid>
 				<Grid item>
 					<TextField
-						placeholder="Address"
+						label="Address"
 						variant="outlined"
 						fullWidth
 						multiline
 						minRows={1}
+						inputRef={addressRef}
 					/>
 				</Grid>
 				<Grid item>
 					<TextField
-						placeholder="Description"
+						label="Description"
 						variant="outlined"
 						fullWidth
 						multiline
 						minRows={4}
+						inputRef={descriptionRef}
 					/>
 				</Grid>
 			</Grid>
@@ -57,7 +72,7 @@ export default function AddPersonalAbout({
 				spacingBetweenButtons={spacingBetweenButtons}
 				decreaseFormStep={decreaseFormStep}
 				formStep={formStep}
-				increaseFormStep={increaseFormStep}
+				increaseFormStep={sendPersonalInfoToDatabase}
 				disablePreviousButton={disablePreviousButton}
 				disableNextButton={disableNextButton}
 				submitButton={"submit"}
