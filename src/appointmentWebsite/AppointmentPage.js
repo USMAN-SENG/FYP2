@@ -73,9 +73,12 @@ hoursAlreadyIncluded.forEach((timeIncluded) => {
 });
 
 export default function AppointmentPage() {
+
 	let { ownerEmail } = useParams();
 
 	//console.log(ownerEmail);
+	//let notIncludeDays=[];
+	const [notIncludeDays, setNotIncludeDays] = useState([]);
 
 	useEffect(() => {
 		const displayData = async () => {
@@ -87,11 +90,48 @@ export default function AppointmentPage() {
 				console.log("Document data:", docSnap.data());
 				console.log("FAQ :", docSnap.data().FAQ);
 				console.log("officeAddress :", docSnap.data().officeAddress);
+				setNotIncludeDays(docSnap.data().notIncludeDays)
+			}else {
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
 			}
 		};
 
 		displayData();
-	}, []);
+	}, [ownerEmail]);
+
+	console.log("notIncludeDays state:" + notIncludeDays);
+
+	////////////////////// disable days
+		// notIncludeDay comes from the database disabledDays
+		// let notIncludeDay = {
+		// 	dayArray: [0, 1, 6, 5],
+		// };
+		const disabledDays = [];
+		if (notIncludeDays.length) { // if there is disabled day
+			for (let i = 0; i < 7; i++) { // we need to fill all 7 element
+				if (i > notIncludeDays.length)
+					disabledDays.push(disabledDays[0]);
+				else disabledDays.push(notIncludeDays[i]);
+			}
+		}
+	
+		// sun= 0 , mon = 1 , ...
+		function disableDays({ activeStartDate, date, view }) {
+			// we take date of each not include day and repeate it
+			// we do a for loop to all not include day and then repeat the last value
+			return (
+				date.getDay() === disabledDays[0] ||
+				date.getDay() === disabledDays[1] ||
+				date.getDay() === disabledDays[2] ||
+				date.getDay() === disabledDays[3] ||
+				date.getDay() === disabledDays[4] ||
+				date.getDay() === disabledDays[5] ||
+				date.getDay() === disabledDays[6]
+			); // sun , saturday
+		}
+
+		////////
 
 	const [date, setDate] = useState(new Date());
 	// 2022-6-11
@@ -138,33 +178,6 @@ export default function AppointmentPage() {
 		dayString = "tuesday";
 	}
 
-	// notIncludeDay comes from the database
-	let notIncludeDay = {
-		dayArray: [0, 1, 6, 5],
-	};
-	const disabledDates = [];
-	if (notIncludeDay.dayArray.length) {
-		for (let i = 0; i < 7; i++) {
-			if (i > notIncludeDay.dayArray.length)
-				disabledDates.push(disabledDates[0]);
-			else disabledDates.push(notIncludeDay.dayArray[i]);
-		}
-	}
-
-	// sun= 0 , mon = 1 , ...
-	function disableDays({ activeStartDate, date, view }) {
-		// we take date of each not include day and repeate it
-		// we do a for loop to all not include day and then repeat the last value
-		return (
-			date.getDay() === disabledDates[0] ||
-			date.getDay() === disabledDates[1] ||
-			date.getDay() === disabledDates[2] ||
-			date.getDay() === disabledDates[3] ||
-			date.getDay() === disabledDates[4] ||
-			date.getDay() === disabledDates[5] ||
-			date.getDay() === disabledDates[6]
-		); // sun , saturday
-	}
 
 	return (
 		<>
