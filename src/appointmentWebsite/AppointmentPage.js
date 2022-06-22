@@ -154,7 +154,7 @@ export default function AppointmentPage() {
 		console.log(hourChose);
 	}
 
-	const hoursComponent = hours.map((hour) => (
+	const hoursComponent = availableHours.map((hour) => (
 		<Grid item md={2}>
 			<Button
 				id={hour.id}
