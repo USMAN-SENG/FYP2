@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {sendDataFromFAQ} from "../firebase"
 
 export function AddFAQ({
@@ -35,6 +35,7 @@ export function AddFAQ({
 		} ]);
 
 		// why didn't work, array kept resetting , maybe because button is in another file
+		// because let FAQ =[]; inside the function
 		// FAQ.push(...FAQ ,{  
 		// 	faqID: FAQ.length , 
 		// 	Q: questionInput, 

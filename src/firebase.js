@@ -17,6 +17,7 @@ import {
 	doc,
 	setDoc,
   updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -204,4 +205,28 @@ export async function sendDataFromPersonalAbout(ownerEmail, name, address, descr
   }
 
   await updateDoc(ownersDocRef, customizePersonalData);
+}
+
+///////////////////////////// send appointments
+
+export async function createAppointmentArrayFromAppoPage(ownerEmail, onlyDate, appointmentArray){
+  const dateDocRef = doc(db, 'owners',ownerEmail ,"Appointments",onlyDate);
+
+  let appointments ={
+    BookedAppointments:appointmentArray,
+  }
+
+  await setDoc(dateDocRef, appointments); 
+  
+}
+
+export async function addAppointmentToArrayFromAppoPage(ownerEmail, onlyDate, appointmentObject){
+  const dateDocRef = doc(db, 'owners',ownerEmail ,"Appointments",onlyDate);
+
+  let appointments ={
+    BookedAppointments:arrayUnion(appointmentObject) 
+  }
+
+  await updateDoc(dateDocRef, appointments); 
+  
 }

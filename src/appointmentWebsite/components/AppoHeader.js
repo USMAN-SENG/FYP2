@@ -6,13 +6,13 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Link } from 'react-router-dom';
 
-export default function AppoHeader({ownerEmail}) {
-	let websiteName = "website Name";
+export default function AppoHeader({ownerEmail , websiteName}) {
+	//let websiteName = "website Name";
 	return (
 		<>
 			<AppBar position="relative">
 				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} 
+					<Typography variant="h5" component="div" sx={{ flexGrow: 1 }} 
            >
 						{websiteName}
 					</Typography>
