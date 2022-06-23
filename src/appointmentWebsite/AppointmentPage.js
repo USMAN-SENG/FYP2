@@ -11,7 +11,11 @@ import { Scheduler } from "@arshadrao/react-scheduler";
 import AppoFooter from "./components/AppoFooter";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db , createAppointmentArrayFromAppoPage,addAppointmentToArrayFromAppoPage } from "../firebase";
+import {
+	db,
+	createAppointmentArrayFromAppoPage,
+	addAppointmentToArrayFromAppoPage,
+} from "../firebase";
 
 // const hours = [
 // 	// { id: "9:0", hour: 9, minute: 0, endTime: "9:30" , date: '2022-6-11',madeBy:'a' },
@@ -84,13 +88,14 @@ let startHour = 0;
 let endHour = 0;
 let onlyDayNumber;
 let websiteName;
-let appointment = [];
+//let appointment = [];
+let onlyDate ;
 
 export default function AppointmentPage() {
 	let { ownerEmail } = useParams();
 
 	const [loading, setLoading] = useState(false);
-
+	
 	//console.log(ownerEmail);
 	//let notIncludeDays=[];
 	const [notIncludeDays, setNotIncludeDays] = useState([]);
@@ -121,18 +126,27 @@ export default function AppointmentPage() {
 	///////////
 	const [dateState, setDateState] = useState(new Date());
 	// 2022-6-11
-	const [onlyDate, setOnlyDate] = useState(
-		dateState.getFullYear() +
-			"-" +
-			(dateState.getMonth() + 1) +
-			"-" +
-			dateState.getDate()
-	);
+	onlyDate = dateState.getFullYear() +"-" +(dateState.getMonth() + 1) +"-" +dateState.getDate();
+	// const [onlyDate, setOnlyDate] = useState(
+	// 	dateState.getFullYear() +
+	// 		"-" +
+	// 		(dateState.getMonth() + 1) +
+	// 		"-" +
+	// 		dateState.getDate()
+	// );
 
 	onlyDayNumber = dateState.getDay();
 	//const [onlyDay, setOnlyDay] = useState(dateState.getDay());
 	//let onlyDay = date.getDay(); // this will give 0-6 sun - sat . we going to use this to find out how the day and go to database to that specific day and get startHour and endHour
 	const [dayString, setDayString] = useState("");
+
+	const [startTime, setStartTime] = useState("");
+	const [endTime, setEndTime] = useState("");
+
+	function displayHours(startTime, endTime) {
+		setStartTime(startTime);
+		setEndTime(endTime);
+	}
 
 	useEffect(() => {
 		setLoading(false);
@@ -161,13 +175,16 @@ export default function AppointmentPage() {
 	}, [onlyDayNumber]);
 
 	function handleDate(date) {
+		setStartTime('');
+		setEndTime('');
 		setDateState(date);
-		setOnlyDate(
-			date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-		);
+		onlyDate = date.getFullYear() +"-" +(date.getMonth() + 1) +"-" +date.getDate();
+		// setOnlyDate(
+		// 	date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+		// );
 
 		onlyDayNumber = date.getDay();
-		console.log("onlyDayNumber is in handledate" + onlyDayNumber);
+		console.log("onlyDate  in handledate--->" + onlyDate);
 		// setOnlyDay(date.getDay());
 		// console.log("day is in handledate" + onlyDay);
 		//setOnlyDay(date.getDay());
@@ -300,7 +317,7 @@ export default function AppointmentPage() {
 	//put inside useEffect
 
 	const changeStartEndHour = () => {
-		console.log("changeStartEndHour//////////:");
+		console.log("inside changeStartEndHour//////////:");
 		if (onlyDayNumber === 0) {
 			// here we should get startHour and endHour from sunday
 			startHour = sundayHours.startHour;
@@ -341,13 +358,13 @@ export default function AppointmentPage() {
 			// setStartHour(saturdayHours.startHour);
 			// setEndHour(saturdayHours.endHour);
 		}
-		console.log("onlyDayNumber in changeStartEndHour " + onlyDayNumber);
+		//console.log("onlyDayNumber in changeStartEndHour " + onlyDayNumber);
 		//console.log("day in changeStartEndHour " + onlyDay);
-		console.log(
-			"start hour wednesdayHours.startHour" + wednesdayHours.startHour
-		);
-		console.log("start hour mondayHours.startHour" + mondayHours.startHour);
-		console.log("start hour after if statements" + startHour);
+		// console.log(
+		// 	"start hour wednesdayHours.startHour" + wednesdayHours.startHour
+		// );
+		// console.log("start hour mondayHours.startHour" + mondayHours.startHour);
+		// console.log("start hour after if statements" + startHour);
 		//console.log("start hour state after if statements" + startHourState);
 		addToAvailableHours();
 
@@ -430,43 +447,46 @@ export default function AppointmentPage() {
 			//console.log("availableHours after: " + availableHours[i].id);
 			//i++;
 		}
-		createHourComponent();
+		deleteBookedAppointments();
+		
 		setLoading(true);
 	};
 
-	//put inside useEffect
+	async function deleteBookedAppointments() {
+		console.log("inside deleteBookedAppointments ");
 
-	// useLayoutEffect(() => {
-	// 	setLoading(false);
+		setLoading(false);
+		console.log("inside deleteBookedAppointments onlyDate"+onlyDate);
+		const docRef = doc(db, "owners", ownerEmail, "Appointments", onlyDate);
+		const docSnap = await getDoc(docRef);
+		try {
+			if (docSnap.exists()) {
+				let BookedAppointments = [];
 
-	// 	addToAvailableHours();
+				BookedAppointments = docSnap.data().BookedAppointments;
 
-	// 	//console.log("availableHours array from addToAvailableHours:" + availableHours);
-	// }, [startHour, endHour,onlyDay]);
+				console.log(BookedAppointments);
 
-	//console.log("availableHours array outside addToAvailableHours:" + availableHours);
-	////////////////////
-
-	// const [date, setDate] = useState(new Date());
-	// // 2022-6-11
-	// const [onlyDate, setOnlyDate] = useState(
-	// 	date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-	// );
-
-	const [startTime, setStartTime] = useState("");
-	const [endTime, setEndTime] = useState("");
-
-	// function handleDate(date) {
-	// 	setDate(date);
-	// 	setOnlyDate(
-	// 		date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-	// 	);
-	// }
-
-	function displayHours(startTime, endTime) {
-		setStartTime(startTime);
-		setEndTime(endTime);
+				BookedAppointments.forEach((appointments) => {
+					let indexOfTimeThatAlreadyBooked = -1;
+					indexOfTimeThatAlreadyBooked = availableHours.findIndex(
+						(hour) => hour.startTime === appointments.startTime
+					);
+					if (indexOfTimeThatAlreadyBooked >= 0) {
+						availableHours.splice(indexOfTimeThatAlreadyBooked, 1);
+					}
+				});
+				console.log("availableHours after deleting ");
+				console.log(availableHours);
+			}
+		} catch (e) {
+			console.log(e); // error
+		}
+		setLoading(true);
+		createHourComponent();
 	}
+
+
 
 	const createHourComponent = () => {
 		console.log("inside createHourComponent function:");
@@ -494,29 +514,32 @@ export default function AppointmentPage() {
 
 	async function sendAppointmentToDatabase() {
 		// check if document exist or not
-		console.log("onlyDate " + onlyDate);
-		console.log("startTime chosen " + startTime);
-		console.log("endTime chosen " + endTime);
-		console.log("whymMakingAppoinymrnt " + whyMakingAppointment);
 		setLoading(false);
 
 		const docRef = doc(db, "owners", ownerEmail, "Appointments", onlyDate);
 		const docSnap = await getDoc(docRef);
 		try {
 			if (docSnap.exists()) {
-
 				let appointmentObject = {
 					startTime: startTime,
 					endTime: endTime,
 					date: onlyDate,
 					title: whyMakingAppointment,
-					appointmentStart:`${onlyDate} ${startTime}`,
-					appointmentEnd:`${onlyDate} ${endTime}`,
-				}
+					appointmentStart: `${onlyDate} ${startTime}`,
+					appointmentEnd: `${onlyDate} ${endTime}`,
+				};
 				// add to array
-				await addAppointmentToArrayFromAppoPage(ownerEmail, onlyDate, appointmentObject);
-				alert("array object is added");
-
+				await addAppointmentToArrayFromAppoPage(
+					ownerEmail,
+					onlyDate,
+					appointmentObject
+				);
+				alert(
+					"You Successfully Booked an Appointment on " +
+						onlyDate +
+						" At " +
+						startTime
+				);
 			} else {
 				let appointmentArray = [
 					{
@@ -524,20 +547,29 @@ export default function AppointmentPage() {
 						endTime: endTime,
 						date: onlyDate,
 						title: whyMakingAppointment,
-						appointmentStart:`${onlyDate} ${startTime}`,
-						appointmentEnd:`${onlyDate} ${endTime}`,
+						appointmentStart: `${onlyDate} ${startTime}`,
+						appointmentEnd: `${onlyDate} ${endTime}`,
 					},
 				];
 				// create array and doc
-				await createAppointmentArrayFromAppoPage(ownerEmail, onlyDate, appointmentArray);
-				alert("array is created");
-
+				await createAppointmentArrayFromAppoPage(
+					ownerEmail,
+					onlyDate,
+					appointmentArray
+				);
+				alert(
+					"You Successfully Booked an Appointment on " +
+						onlyDate +
+						" At " +
+						startTime
+				);
 			}
-			// await sendDataFromPersonalAbout(ownerEmail , name, address, description);
 		} catch (e) {
 			console.log(e); // error
 		}
+		setWhyMakingAppointment('');
 		setLoading(true);
+		deleteBookedAppointments();
 	}
 
 	let disableButton = false;
@@ -574,7 +606,9 @@ export default function AppointmentPage() {
 						<Grid item md={3}>
 							<Calendar
 								tileDisabled={disableDays}
-								onChange={handleDate}
+								onChange={(date) => {
+									handleDate(date);
+								}}
 								value={dateState}
 								minDate={new Date()}
 								onClickDay={(date) => {
@@ -582,7 +616,7 @@ export default function AppointmentPage() {
 									changeStartEndHour();
 								}}
 							/>
-							{onlyDate} {dayString} {startTime} {endTime} {onlyDayNumber}
+							{onlyDate} {dayString} {startTime} 
 						</Grid>
 
 						<Grid item md={9}>
