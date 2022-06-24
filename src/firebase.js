@@ -232,7 +232,7 @@ export async function addAppointmentToArrayFromAppoPage(ownerEmail, onlyDate, ap
 }
 
 
-///////////////////////////// customer signup/ login
+///////////////////////////// customer signup
 
 export async function signUpForCustomerService(ownerEmail, singUpEmail, singUpPassword){
   const customerDocRef = doc(db, 'owners',ownerEmail ,"Customers",singUpEmail);
@@ -244,4 +244,9 @@ export async function signUpForCustomerService(ownerEmail, singUpEmail, singUpPa
 
   await setDoc(customerDocRef, customerInfo); 
   
+  // const msgDocRef = doc(db, 'owners',ownerEmail ,"Customers",singUpEmail,"Msg",'1');
+  // await setDoc(msgDocRef, {first:1});
 }
+
+
+///////////////////////////// chatting

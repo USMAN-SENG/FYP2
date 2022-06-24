@@ -3,8 +3,10 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 export function ChatLogIn({
-	emailRef,
-	passwordRef,
+	emailValue,
+	handleEmailChange,
+	passwordValue,
+	handlePasswordChange,
 	handleSubmit,
 	loading,
 	buttonLabel,
@@ -17,7 +19,9 @@ export function ChatLogIn({
 				fullWidth
 				multiline
 				minRows={1}
-				inputRef={emailRef}
+				
+				value={emailValue}
+				onChange={(e) => handleEmailChange(e.target.value)}
 			/>
 			<TextField
 				label="Password"
@@ -25,7 +29,9 @@ export function ChatLogIn({
 				fullWidth
 				multiline
 				minRows={1}
-				inputRef={passwordRef}
+				
+				value={passwordValue}
+				onChange={(e) => handlePasswordChange(e.target.value)}
 			/>
 			<Button variant="outlined" onClick={handleSubmit} disabled={loading}>
 				{buttonLabel}

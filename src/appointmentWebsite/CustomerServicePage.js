@@ -13,10 +13,17 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
 import {
-	db,signUpForCustomerService
-} from "../firebase";
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	orderBy,
+	limit,
+	collection,
+	addDoc,
+} from "firebase/firestore";
+import { db, signUpForCustomerService } from "../firebase";
 
 // Chat component
 import Chat, { Message } from "react-simple-chat";
@@ -57,55 +64,100 @@ function a11yProps(index) {
 }
 
 export default function CustomerServicePage() {
-
-	let {ownerEmail} = useParams();  
+	let { ownerEmail } = useParams();
 
 	const [value, setValue] = useState(0);
 	const [loading, setLoading] = useState(false); // disable button
 	const [customerIsLogin, setCustomerIsLogin] = useState(false);
-  const [messages, setMessages] = useState([]);
+	const [messages, setMessages] = useState([]);
+	const [cusEmail, setCusEmail] = useState('');
+	const [cusPass, setCusPass] = useState('');
 
-	const singUpEmailRef = useRef(); // get the email input
-	const singUpPasswordRef = useRef(); // get the password input
+	// const singUpEmailRef = useRef(); // get the email input
+	// const singUpPasswordRef = useRef(); // get the password input
 
-	const loginEmailRef = useRef(); // get the login email input
-	const loginPasswordRef = useRef(); // get the login password input
+	// const loginEmailRef = useRef(); // get the login email input
+	// const loginPasswordRef = useRef(); // get the login password input
 
-	
+	function handleEmailChange(value) {
+		setCusEmail(value);
+	 }
+	function handlePasswordChange(value) {
+		setCusPass(value);
+	 }
+
 	async function handleSignup() {
-
-		const docRef = doc(db, "owners", ownerEmail, "Customers", singUpEmailRef.current.value);
+		const docRef = doc(
+			db,
+			"owners",
+			ownerEmail,
+			"Customers",
+			cusEmail
+		);
 		const docSnap = await getDoc(docRef);
 		try {
-			 if (docSnap.exists()) {
-
+			if (docSnap.exists()) {
 				alert("Account Already Registered");
-
 			} else {
-				await signUpForCustomerService(ownerEmail, singUpEmailRef.current.value, singUpPasswordRef.current.value);
+				await signUpForCustomerService(
+					ownerEmail,
+					cusEmail,
+					cusPass
+				);
 				setCustomerIsLogin(true);
+				
+				
 			}
 		} catch (e) {
 			console.log(e); // error
 		}
 		//console.log(`${singUpEmailRef.current.value} + ${singUpPasswordRef.current.value}`); //manage to get the data from the text field
-		
 	}
 
 	async function handleLogin() {
-		const docRef = doc(db, "owners", ownerEmail, "Customers", loginEmailRef.current.value);
+		const docRef = doc(
+			db,
+			"owners",
+			ownerEmail,
+			"Customers",
+			cusEmail
+		);
 		const docSnap = await getDoc(docRef);
 		try {
-			 if (docSnap.exists()) {
-
-				if (loginEmailRef.current.value === docSnap.data().email && loginPasswordRef.current.value === docSnap.data().password )
-				{setCustomerIsLogin(true);}
-				else {alert("Password Is Incorrect");}
-
+			if (docSnap.exists()) {
+				if (
+					cusEmail === docSnap.data().email &&
+					cusPass === docSnap.data().password
+				) {
+					setCustomerIsLogin(true);
+				} else {
+					alert("Password Is Incorrect");
+				}
 			} else {
-
 				alert("Account Does Not Exist");
 			}
+		} catch (e) {
+			console.log(e); // error
+		}
+	}
+
+	async function sendMsgToDatabase(textObject) {
+		console.log('inside sendMsgToDatabase'); 
+		console.log('textObject is'); 
+		console.log(textObject); 
+		const msgColRef = collection(
+			db,
+			"owners",
+			ownerEmail,
+			"Customers",
+			cusEmail,
+			"Msg"
+		);
+		console.log('msgColRef is '); 
+		console.log(msgColRef); 
+		//const docSnap = await getDocs(colRef);
+		try {
+			await addDoc(msgColRef, textObject);
 		} catch (e) {
 			console.log(e); // error
 		}
@@ -115,12 +167,12 @@ export default function CustomerServicePage() {
 		setValue(newValue);
 	};
 
-  //console.log(messages );
+	console.log(messages);
 
 	return (
 		<div>
 			{/* pass website name */}
-			<AppoHeader ownerEmail={ownerEmail}/> 
+			<AppoHeader ownerEmail={ownerEmail} />
 			{customerIsLogin ? (
 				<>
 					<Grid container p={4}>
@@ -128,16 +180,20 @@ export default function CustomerServicePage() {
 						<Grid item>
 							<Typography align="center" variant="h4">
 								Send Your Questions <br />
-                We Will Reply Once We Are Available 
+								We Will Reply Once We Are Available
 							</Typography>
 						</Grid>
 					</Grid>
-          <Chat
+					<Chat
 						title="Customer Service"
 						user={{ id: 1 }}
 						messages={messages}
-						onSend={(message) => setMessages([...messages, message])}
-						 
+						onSend={(message) => {
+							console.log('inside onsend');
+							console.log(message);
+							sendMsgToDatabase(message);
+							setMessages([...messages, message]);
+						}}
 					/>
 				</>
 			) : (
@@ -167,8 +223,10 @@ export default function CustomerServicePage() {
 							</Box>
 							<TabPanel value={value} index={0}>
 								<ChatLogIn
-									emailRef={singUpEmailRef}
-									passwordRef={singUpPasswordRef}
+									emailValue={cusEmail}
+									passwordValue={cusPass}
+									handleEmailChange={handleEmailChange}
+									handlePasswordChange={handlePasswordChange}
 									handleSubmit={handleSignup}
 									loading={loading}
 									buttonLabel="Sign up"
@@ -176,8 +234,10 @@ export default function CustomerServicePage() {
 							</TabPanel>
 							<TabPanel value={value} index={1}>
 								<ChatLogIn
-									emailRef={loginEmailRef}
-									passwordRef={loginPasswordRef}
+									emailValue={cusEmail}
+									passwordValue={cusPass}
+									handleEmailChange={handleEmailChange}
+									handlePasswordChange={handlePasswordChange}
 									handleSubmit={handleLogin}
 									loading={loading}
 									buttonLabel="Login"
