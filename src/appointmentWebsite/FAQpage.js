@@ -10,19 +10,15 @@ import AppoFooter from "./components/AppoFooter";
 import { useParams } from "react-router-dom";
 
 let FAQarray = [
-	{ faqID: 0, Q: "what is it about?", A: "it is a visa offic" },
-	{ faqID: 1, Q: "why is it about?", A: "it is a visa offic" },
+	{ faqID: 0, Q: "How do I apply for an admission and when is the closing date?", A: "To apply for an admission, please register for an online application account via http://eadmission.iium.edu.my/index.php/student/eas_login" },
+
+	{ faqID: 1, Q: "What is the recommendation letter?", A: "Recommendation letter can be provided by someone who knows you personally and academically; however, this is optional" },
 	{
 		faqID: 2,
-		Q: "where is it about?",
-		A: "it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic",
+		Q: "What are the major and minor programmes?",
+		A: "Info on major or minor are provided by the Kulliyyah that you wish to apply for. So browse our website for the relevant Kulliyyah and contact them directly"
 	},
-	{ faqID: 3, Q: "who is it about?", A: "it is a visa offic" },
-	{
-		faqID: 4,
-		Q: "how is it about?",
-		A: "it is a visa offic it is a visa offic it is a visa offic",
-	},
+	 
 ];
 
 let faqComponent = FAQarray.map((faq) => (
@@ -65,7 +61,7 @@ export default function FAQpage() {
 				</Grid>
 				<Grid item>
 				{faqComponent}
-					<Accordion elevation={24}>
+					{/* <Accordion elevation={24}>
 						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
 							aria-controls="panel1a-content"
@@ -105,10 +101,10 @@ export default function FAQpage() {
 						>
 							<Typography>Disabled Accordion</Typography>
 						</AccordionSummary>
-					</Accordion>
+					</Accordion> */}
 				</Grid>
 			</Grid>
-			<AppoFooter />
+		
 		</div>
 	);
 }

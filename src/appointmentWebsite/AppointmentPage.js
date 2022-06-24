@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import "react-calendar/dist/Calendar.css";
 import { Scheduler } from "@arshadrao/react-scheduler";
 import AppoFooter from "./components/AppoFooter";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import {
 	db,
@@ -93,7 +93,7 @@ let onlyDate ;
 
 export default function AppointmentPage() {
 	let { ownerEmail } = useParams();
-
+	let navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
 	
 	//console.log(ownerEmail);
@@ -205,14 +205,17 @@ export default function AppointmentPage() {
 		const displayData = async () => {
 			const docRef = doc(db, "owners", ownerEmail);
 			const docSnap = await getDoc(docRef);
-			// const data = docSnap.data();
-			// return data;
+
 			if (docSnap.exists()) {
-				// console.log("Document data:", docSnap.data());
-				// console.log("FAQ :", docSnap.data().FAQ);
+				
+				if (docSnap.data().officeAddress) {
+					 // do nothing
+				} else {
+					// we should navigate to the home page
+					navigate('/');
+				}
 				console.log("officeAddress :", docSnap.data().officeAddress);
-				// console.log("mondayHours :", docSnap.data().mondayHours.startHour);
-				// console.log("notIncludeDays array :", docSnap.data().notIncludeDays);
+
 				//console.log("test something that don't exist :", docSnap.data().office); //undefined , we can use this sign up or log in to direct them
 				websiteName = docSnap.data().officeName;
 				setNotIncludeDays(docSnap.data().notIncludeDays);
@@ -239,7 +242,7 @@ export default function AppointmentPage() {
 				// 	startHour:docSnap.data().wednesdayHours.startHour,
 				// 	endHour:docSnap.data().wednesdayHours.endHour
 				//  });
-				console.log("start hour: wednesdayHours" + wednesdayHours.startHour);
+				//console.log("start hour: wednesdayHours" + wednesdayHours.startHour);
 				//  setThursdayHours({
 				// 	startHour:docSnap.data().thursdayHours.startHour,
 				// 	endHour:docSnap.data().thursdayHours.endHour
@@ -255,23 +258,13 @@ export default function AppointmentPage() {
 
 				changeStartEndHour();
 
-				// let someObject={
-				// 	email: "some email",
-				// 	firstName: " some fname",
-				// 	lastName: "some lname",
-				// }
-
-				// setTuesdayHours(someObject);
-
-				// if (docSnap.data().officeAddress) {
-				// 	return; // we should navigate to the sign up page
-				// } else {
-				// 	// we should navigate to the sign up page
-				// }
 			} else {
+				
 				// doc.data() will be undefined in this case
 				// we should navigate to the sign up page
-				console.log("No such document!");
+				navigate('/');
+			
+				
 			}
 			setLoading(true);
 		};
@@ -317,6 +310,7 @@ export default function AppointmentPage() {
 	//put inside useEffect
 
 	const changeStartEndHour = () => {
+		setLoading(true);
 		console.log("inside changeStartEndHour//////////:");
 		if (onlyDayNumber === 0) {
 			// here we should get startHour and endHour from sunday

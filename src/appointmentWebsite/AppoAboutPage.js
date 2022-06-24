@@ -6,9 +6,8 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 
-let officeAddress = "iium KL";
-let officeDescription =
-	"it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic it is a visa offic";
+let officeAddress = "IIUM";
+let officeDescription = "If you need to extend your student pass then you must make an application for renewal to EMGS via your institution. Please ensure you apply with sufficient time for processing. It is highly recommended that you submit your application at least 6 weeks before the Student Pass expiry date. You may be required to submit supporting documentation or an explanation letter if the 	extension period you request exceeds the duration of the course you are studying.";
 
 export default function AppoAboutPage() {
 

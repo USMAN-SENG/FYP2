@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Link } from 'react-router-dom';
 
-export default function AppoHeader({ownerEmail , websiteName}) {
+export default function AppoHeader({ownerEmail , websiteName='VISA UNIT'}) {
 	//let websiteName = "website Name";
 	return (
 		<>

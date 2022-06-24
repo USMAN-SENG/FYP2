@@ -33,11 +33,11 @@ const Homepage = (props) => {
 				<div className="flex flex-row bg-home-main-bg w-full h-96">
 					<div className="flex flex-1 flex-col backdrop-blur-md justify-center px-10">
 						<div>
-							<p className="text-4xl font-bold text-center text-gray-700">
+							<p className="text-4xl font-bold text-center text-black">
 								Create Your Appointment system Hassle free...
 							</p>
 							<br />
-							<p className="text-gray-600 text-center">
+							<p className="text-black text-center">
 								To build an appointment system that allows the owner of the
 								<br />
 								office to schedule appointments, customer service section where
@@ -48,7 +48,7 @@ const Homepage = (props) => {
 							<Link to={"/signup"}>
 								<Button variant="contained">Sign Up</Button>
 							</Link>
-							<Button
+							{/* <Button
 								variant="contained"
 								onClick={handleAddArray}
 								disabled={loading}
@@ -60,7 +60,7 @@ const Homepage = (props) => {
                 </Button>
 								<Button  variant="contained">
                   <Link to={"/Calendar"}> Calendar </Link>
-                </Button>
+                </Button> */}
 
 						</div>
 					</div>

@@ -13,6 +13,10 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import {
+	db,signUpForCustomerService
+} from "../firebase";
 
 // Chat component
 import Chat, { Message } from "react-simple-chat";
@@ -67,12 +71,45 @@ export default function CustomerServicePage() {
 	const loginEmailRef = useRef(); // get the login email input
 	const loginPasswordRef = useRef(); // get the login password input
 
+	
 	async function handleSignup() {
+
+		const docRef = doc(db, "owners", ownerEmail, "Customers", singUpEmailRef.current.value);
+		const docSnap = await getDoc(docRef);
+		try {
+			 if (docSnap.exists()) {
+
+				alert("Account Already Registered");
+
+			} else {
+				await signUpForCustomerService(ownerEmail, singUpEmailRef.current.value, singUpPasswordRef.current.value);
+				setCustomerIsLogin(true);
+			}
+		} catch (e) {
+			console.log(e); // error
+		}
 		//console.log(`${singUpEmailRef.current.value} + ${singUpPasswordRef.current.value}`); //manage to get the data from the text field
-		setCustomerIsLogin(!customerIsLogin);
+		
 	}
 
-	async function handleLogin() {}
+	async function handleLogin() {
+		const docRef = doc(db, "owners", ownerEmail, "Customers", loginEmailRef.current.value);
+		const docSnap = await getDoc(docRef);
+		try {
+			 if (docSnap.exists()) {
+
+				if (loginEmailRef.current.value === docSnap.data().email && loginPasswordRef.current.value === docSnap.data().password )
+				{setCustomerIsLogin(true);}
+				else {alert("Password Is Incorrect");}
+
+			} else {
+
+				alert("Account Does Not Exist");
+			}
+		} catch (e) {
+			console.log(e); // error
+		}
+	}
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -82,7 +119,8 @@ export default function CustomerServicePage() {
 
 	return (
 		<div>
-			<AppoHeader ownerEmail={ownerEmail}/>
+			{/* pass website name */}
+			<AppoHeader ownerEmail={ownerEmail}/> 
 			{customerIsLogin ? (
 				<>
 					<Grid container p={4}>

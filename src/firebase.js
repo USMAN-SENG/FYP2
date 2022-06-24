@@ -230,3 +230,18 @@ export async function addAppointmentToArrayFromAppoPage(ownerEmail, onlyDate, ap
   await updateDoc(dateDocRef, appointments); 
   
 }
+
+
+///////////////////////////// customer signup/ login
+
+export async function signUpForCustomerService(ownerEmail, singUpEmail, singUpPassword){
+  const customerDocRef = doc(db, 'owners',ownerEmail ,"Customers",singUpEmail);
+
+  let customerInfo ={
+    email:singUpEmail,
+    password:singUpPassword
+  }
+
+  await setDoc(customerDocRef, customerInfo); 
+  
+}
