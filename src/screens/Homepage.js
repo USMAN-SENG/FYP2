@@ -1,11 +1,12 @@
 import { Button, Paper } from "@mui/material";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { FullFooter } from "../components/Footer";
 import CountUp from "react-countup";
 import { addTestArray } from "../firebase";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import Grid from "@mui/material/Grid";
 // const fs = require("fs");
 
 const Homepage = (props) => {
@@ -20,8 +21,6 @@ const Homepage = (props) => {
 		}
 		setLoading(false); // enable button
 	}
-
-	
 
 	return (
 		<div>
@@ -45,23 +44,16 @@ const Homepage = (props) => {
 							</p>
 						</div>
 						<div className="my-5 py-5">
-							<Link to={"/signup"}>
-								<Button variant="contained">Sign Up</Button>
-							</Link>
-							{/* <Button
-								variant="contained"
-								onClick={handleAddArray}
-								disabled={loading}
-							>
-								add array to firebase
-							</Button>
-							<Button  variant="contained">
-                  <Link to={"/AppointmentPage"}> go to appointment website </Link>
-                </Button>
-								<Button  variant="contained">
-                  <Link to={"/Calendar"}> Calendar </Link>
-                </Button> */}
-
+							<Grid container>
+								<Grid item md={4}></Grid>
+								<Grid item md={4}>
+									<Link to={"/signup"}>
+										<Button variant="contained" size="large">
+											Sign Up
+										</Button>
+									</Link>
+								</Grid>
+							</Grid>
 						</div>
 					</div>
 					<div className="flex flex-1 backdrop-blur-md justify-center items-center">

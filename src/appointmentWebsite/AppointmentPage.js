@@ -1,14 +1,14 @@
 import React from "react";
 import AppoHeader from "./components/AppoHeader";
-import { useRef, useState, useEffect, useLayoutEffect } from "react";
+import {  useState, useEffect, useLayoutEffect } from "react";
 import Calendar from "react-calendar";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
+
 import "react-calendar/dist/Calendar.css";
-import { Scheduler } from "@arshadrao/react-scheduler";
-import AppoFooter from "./components/AppoFooter";
+
+
 import { useParams,useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import {
@@ -562,6 +562,8 @@ export default function AppointmentPage() {
 			console.log(e); // error
 		}
 		setWhyMakingAppointment('');
+		setStartTime('');
+		setEndTime('');
 		setLoading(true);
 		deleteBookedAppointments();
 	}
@@ -666,7 +668,7 @@ export default function AppointmentPage() {
 				</>
 			) : (
 				<>
-					<p>loading</p>{" "}
+					<p>loading...</p>{" "}
 				</>
 			)}
 		</>

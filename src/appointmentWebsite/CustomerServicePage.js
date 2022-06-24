@@ -2,21 +2,17 @@ import { ChatLogIn } from "./components/ChatLogIn";
 import React from "react";
 import AppoHeader from "./components/AppoHeader";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useRef, useState, useEffect, useLayoutEffect } from "react";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { useParams } from "react-router-dom";
+import {  useState, useLayoutEffect } from "react";
+
+import { useParams,useNavigate } from "react-router-dom";
 import {
 	doc,
 	getDoc,
-	getDocs,
 	query,
 	orderBy,
 	limit,
@@ -64,19 +60,52 @@ function a11yProps(index) {
 	};
 }
 
-//let textMsgs = [];
+let websiteName;
 
 export default function CustomerServicePage() {
 	let { ownerEmail } = useParams();
+	let navigate = useNavigate();
 
 	const [value, setValue] = useState(0);
-	const [loading, setLoading] = useState(false); // disable button
+	const [loading, setLoading] = useState(false); 
 	const [customerIsLogin, setCustomerIsLogin] = useState(false);
 	const [messages, setMessages] = useState([]);
 	const [cusEmail, setCusEmail] = useState("");
 	const [cusPass, setCusPass] = useState("");
 
  
+	useLayoutEffect(() => {
+		setLoading(false);
+		const displayData = async () => {
+			const docRef = doc(db, "owners", ownerEmail);
+			const docSnap = await getDoc(docRef);
+
+			if (docSnap.exists()) {
+				
+				if (docSnap.data().officeAddress) {
+					 // do nothing
+				} else {
+					// we should navigate to the home page
+					navigate('/');
+				}
+
+				websiteName = docSnap.data().officeName;
+				//console.log("officeAddress :", docSnap.data().officeAddress);
+
+				//console.log("test something that don't exist :", docSnap.data().office); //undefined , we can use this sign up or log in to direct them
+				//websiteName = docSnap.data().officeName;
+
+				//sundayHours = docSnap.data().sundayHours;
+
+			} else {				
+				navigate('/');
+		
+			}
+			setLoading(true);
+		};
+
+		displayData();
+	}, [ownerEmail]);
 
 
 	async function listenToMsg() {
@@ -92,9 +121,9 @@ export default function CustomerServicePage() {
 			);
 
 			const q = query(msgColRef, orderBy("createdAt"), limit(30));
-			
-			
-			//
+
+			// onSnapshot will work even if no one call the function
+			// it will start from on onSnapshot , not from the function 
 			const unsubscribe = await onSnapshot(q, (querySnapshot) => { 
 				console.log("inside onSnapshot");
 				const copyOfTextMsgs = [];
@@ -122,9 +151,7 @@ export default function CustomerServicePage() {
 			console.log(e); // error
 		}
 	}
-	// useEffect(()=>{
 
-	// },[])
 
 	function handleEmailChange(value) {
 		setCusEmail(value);
@@ -194,12 +221,14 @@ export default function CustomerServicePage() {
 		setValue(newValue);
 	};
 
-
+	let disableButton = false;
+	if (cusEmail === "" || cusPass === "" )
+		disableButton = true;
 
 	return (
 		<div>
-			{/* pass website name */}
-			<AppoHeader ownerEmail={ownerEmail} />
+			{loading?(<>
+				<AppoHeader ownerEmail={ownerEmail} websiteName={websiteName} />
 			{customerIsLogin ? (
 				<>
 					<Grid container p={4}>
@@ -254,7 +283,7 @@ export default function CustomerServicePage() {
 									handleEmailChange={handleEmailChange}
 									handlePasswordChange={handlePasswordChange}
 									handleSubmit={handleSignup}
-									loading={loading}
+									loading={disableButton}
 									buttonLabel="Sign up"
 								/>
 							</TabPanel>
@@ -265,7 +294,7 @@ export default function CustomerServicePage() {
 									handleEmailChange={handleEmailChange}
 									handlePasswordChange={handlePasswordChange}
 									handleSubmit={handleLogin}
-									loading={loading}
+									loading={disableButton}
 									buttonLabel="Login"
 								/>
 							</TabPanel>
@@ -273,6 +302,8 @@ export default function CustomerServicePage() {
 					</Grid>
 				</Grid>
 			)}
+			</>):(<><p>loading...</p></>)} 
+			
 		</div>
 	);
 }
