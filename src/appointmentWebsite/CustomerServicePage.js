@@ -8,7 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -22,6 +22,7 @@ import {
 	limit,
 	collection,
 	addDoc,
+	onSnapshot,
 } from "firebase/firestore";
 import { db, signUpForCustomerService } from "../firebase";
 
@@ -63,6 +64,8 @@ function a11yProps(index) {
 	};
 }
 
+//let textMsgs = [];
+
 export default function CustomerServicePage() {
 	let { ownerEmail } = useParams();
 
@@ -70,43 +73,76 @@ export default function CustomerServicePage() {
 	const [loading, setLoading] = useState(false); // disable button
 	const [customerIsLogin, setCustomerIsLogin] = useState(false);
 	const [messages, setMessages] = useState([]);
-	const [cusEmail, setCusEmail] = useState('');
-	const [cusPass, setCusPass] = useState('');
+	const [cusEmail, setCusEmail] = useState("");
+	const [cusPass, setCusPass] = useState("");
 
-	// const singUpEmailRef = useRef(); // get the email input
-	// const singUpPasswordRef = useRef(); // get the password input
+ 
 
-	// const loginEmailRef = useRef(); // get the login email input
-	// const loginPasswordRef = useRef(); // get the login password input
+
+	async function listenToMsg() {
+		console.log("inside listenToMsg ");
+		try {
+			const msgColRef = collection(
+				db,
+				"owners",
+				ownerEmail,
+				"Customers",
+				cusEmail,
+				"Msg"
+			);
+
+			const q = query(msgColRef, orderBy("createdAt"), limit(30));
+			
+			
+			//
+			const unsubscribe = await onSnapshot(q, (querySnapshot) => { 
+				console.log("inside onSnapshot");
+				const copyOfTextMsgs = [];
+				querySnapshot.forEach((doc) => {
+					console.log("inside querySnapshot.forEach");
+					console.log(doc.data());
+					copyOfTextMsgs.push(doc.data());
+					console.log('copyOfTextMsgs is');
+					console.log(copyOfTextMsgs);
+				});
+				//textMsgs= copyOfTextMsgs ;
+				console.log("outside querySnapshot.forEach");
+				console.log('copyOfTextMsgs is');
+			  console.log(copyOfTextMsgs);
+			
+			// console.log('textMsgs is');
+			// console.log(textMsgs);
+			 setMessages(...messages, copyOfTextMsgs);
+			// console.log('messages is');
+			// console.log(messages);
+			});
+			
+			
+		} catch (e) {
+			console.log(e); // error
+		}
+	}
+	// useEffect(()=>{
+
+	// },[])
 
 	function handleEmailChange(value) {
 		setCusEmail(value);
-	 }
+	}
 	function handlePasswordChange(value) {
 		setCusPass(value);
-	 }
+	}
 
 	async function handleSignup() {
-		const docRef = doc(
-			db,
-			"owners",
-			ownerEmail,
-			"Customers",
-			cusEmail
-		);
+		const docRef = doc(db, "owners", ownerEmail, "Customers", cusEmail);
 		const docSnap = await getDoc(docRef);
 		try {
 			if (docSnap.exists()) {
 				alert("Account Already Registered");
 			} else {
-				await signUpForCustomerService(
-					ownerEmail,
-					cusEmail,
-					cusPass
-				);
+				await signUpForCustomerService(ownerEmail, cusEmail, cusPass);
 				setCustomerIsLogin(true);
-				
-				
+				listenToMsg();
 			}
 		} catch (e) {
 			console.log(e); // error
@@ -115,13 +151,7 @@ export default function CustomerServicePage() {
 	}
 
 	async function handleLogin() {
-		const docRef = doc(
-			db,
-			"owners",
-			ownerEmail,
-			"Customers",
-			cusEmail
-		);
+		const docRef = doc(db, "owners", ownerEmail, "Customers", cusEmail);
 		const docSnap = await getDoc(docRef);
 		try {
 			if (docSnap.exists()) {
@@ -130,6 +160,7 @@ export default function CustomerServicePage() {
 					cusPass === docSnap.data().password
 				) {
 					setCustomerIsLogin(true);
+					listenToMsg();
 				} else {
 					alert("Password Is Incorrect");
 				}
@@ -142,9 +173,7 @@ export default function CustomerServicePage() {
 	}
 
 	async function sendMsgToDatabase(textObject) {
-		console.log('inside sendMsgToDatabase'); 
-		console.log('textObject is'); 
-		console.log(textObject); 
+
 		const msgColRef = collection(
 			db,
 			"owners",
@@ -153,9 +182,7 @@ export default function CustomerServicePage() {
 			cusEmail,
 			"Msg"
 		);
-		console.log('msgColRef is '); 
-		console.log(msgColRef); 
-		//const docSnap = await getDocs(colRef);
+
 		try {
 			await addDoc(msgColRef, textObject);
 		} catch (e) {
@@ -167,7 +194,7 @@ export default function CustomerServicePage() {
 		setValue(newValue);
 	};
 
-	console.log(messages);
+
 
 	return (
 		<div>
@@ -189,10 +216,9 @@ export default function CustomerServicePage() {
 						user={{ id: 1 }}
 						messages={messages}
 						onSend={(message) => {
-							console.log('inside onsend');
-							console.log(message);
+
 							sendMsgToDatabase(message);
-							setMessages([...messages, message]);
+							// setMessages([...messages, message]);
 						}}
 					/>
 				</>
