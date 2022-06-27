@@ -50,9 +50,9 @@ export default function DashHeader() {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-							News
+							Menue
 						</Typography>
-						<Button color="inherit">Login</Button>
+						<Button color="inherit">Login</Button> { 'put log out here '}
 					</Toolbar>
 				</AppBar>
 			</Box>

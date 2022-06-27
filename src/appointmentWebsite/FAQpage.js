@@ -12,13 +12,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 let FAQarray = [
-	// { faqID: 0, Q: "How do I apply for an admission and when is the closing date?", A: "To apply for an admission, please register for an online application account via http://eadmission.iium.edu.my/index.php/student/eas_login" },
-	// { faqID: 1, Q: "What is the recommendation letter?", A: "Recommendation letter can be provided by someone who knows you personally and academically; however, this is optional" },
-	// {
-	// 	faqID: 2,
-	// 	Q: "What are the major and minor programmes?",
-	// 	A: "Info on major or minor are provided by the Kulliyyah that you wish to apply for. So browse our website for the relevant Kulliyyah and contact them directly"
-	// },
+
 ];
 
 let faqComponent;
@@ -66,7 +60,7 @@ export default function FAQpage() {
 				<AccordionSummary
 					expandIcon={<ExpandMoreIcon />}
 					aria-controls="panel1a-content"
-					id={faq.id}
+					id={faq.Q}
 				>
 					<Typography>{faq.Q}</Typography>
 				</AccordionSummary>

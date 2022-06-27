@@ -58,9 +58,9 @@ export default function  SignUpScreen()  {
                 <Button sx={{ m: 3 }} variant="contained">
                   <Link to={"/login"}> Login </Link>
                 </Button>
-                <Button  variant="contained">
+                {/* <Button  variant="contained">
                   <Link to={"/CustomizeAppoinment"}> WorkHours </Link>
-                </Button>
+                </Button> */}
                 <Button  variant="contained" onClick={() => logout()}>
                   log out
                 </Button>

@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "date-fns": "^2.28.0",
     "firebase": "^9.6.10",
     "node-sass": "^7.0.1",
     "postcss-cli": "^9.1.0",
@@ -20,6 +21,8 @@
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "react-simple-chat": "^1.1.4",
+    "scheduler-calendar": "^4.0.0",
+    "scheduler-react": "^2.0.20",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -6,18 +6,19 @@ import Transition from "./Transition";
 
 //import { useParams } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
-import { logout, useAuth } from "../firebase";
-import { useState, useEffect } from "react";
+import {  useAuth } from "../firebase";
+import { useState,  useLayoutEffect  } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function CustomizeAppoinment() {
 	const currentUser = useAuth(); // get the info of currentUser
-
+	let navigate = useNavigate();
 	const [formStep, setFormStep] = useState(1);
 
 	let spacingBetweenButtons = 50;
@@ -34,9 +35,23 @@ export default function CustomizeAppoinment() {
 		if (formStep > 1) setFormStep((previousStep) => previousStep - 1);
 	}
 
-	// for (let i = 0; i <1; i++) {
-	// 	return <CircularProgress /> ;
-	// }
+	useLayoutEffect(() => {
+		 
+		const displayData = async () => {
+			const docRef = doc(db, "owners", currentUser.email);
+			const docSnap = await getDoc(docRef);
+
+			if (docSnap.exists()) {
+				if (docSnap.data().officeAddress) {
+					// means already exists
+					navigate("/Dashboard/Calendar");
+				} 
+			}  
+			 
+		};
+
+		displayData();
+	}, [currentUser]);
 
 	//  0 = sunday , 1 = monday ...
 	return (

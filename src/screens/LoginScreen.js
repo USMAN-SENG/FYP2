@@ -55,9 +55,9 @@ export default function LoginScreen () {
                 <span className='text-sm '>If Already have account</span>
                 <div className='mt-20'>
                 <Button variant="contained"><Link to = {"/signup"}>SignUp</Link></Button>
-                <Button  variant="contained" onClick={() => logout()}>
+                {/* <Button  variant="contained" onClick={() => logout()}>
                   log out
-                </Button>
+                </Button> */}
                 <br/>
                 <span className='text-xs text-white'>For new Account</span>
                 </div>

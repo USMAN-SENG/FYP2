@@ -11,7 +11,7 @@ import "react-simple-chat/src/components/index.css";
 export default function EditFAQ() {
 	const [messages, setMessages] = useState([]);
 
-	console.log(messages);
+	
 
 	return (
 		<div>
@@ -25,13 +25,7 @@ export default function EditFAQ() {
 				p={4}
 			>
 				<Grid item>
-					<Chat
-						title="Jane Doe"
-						user={{ id: 1 }}
-						messages={messages}
-						onSend={(message) => setMessages([...messages, message])}
-						 
-					/>
+					
 				</Grid>
 				<Grid item></Grid>
 			</Grid>

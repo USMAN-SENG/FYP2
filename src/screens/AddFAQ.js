@@ -29,7 +29,6 @@ export function AddFAQ({
 	function addToFaqArray() {
 
 		setFAQ([...FAQ , {
-			faqID: FAQ.length , 
 			Q: questionInput, 
 			A: answerInput 
 		} ]);
