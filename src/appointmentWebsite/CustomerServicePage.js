@@ -130,7 +130,7 @@ export default function CustomerServicePage() {
 				querySnapshot.forEach((doc) => {
 					console.log("inside querySnapshot.forEach");
 					console.log(doc.data());
-					copyOfTextMsgs.push(doc.data());
+					copyOfTextMsgs.push(doc.data()); // all date in one document
 					console.log('copyOfTextMsgs is');
 					console.log(copyOfTextMsgs);
 				});

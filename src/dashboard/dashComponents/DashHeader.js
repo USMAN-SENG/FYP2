@@ -10,12 +10,14 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EditIcon from "@mui/icons-material/Edit";
+import MessageIcon from '@mui/icons-material/Message';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
+
 
 export default function DashHeader() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -26,6 +28,11 @@ export default function DashHeader() {
 			text: "Calendar",
 			icon: <CalendarMonthIcon color="secondary" />,
 			path: "/Dashboard/Calendar",
+		},
+		{
+			text: "Chat",
+			icon: <MessageIcon color="secondary" />,
+			path: "/Dashboard/Msg",
 		},
 		{
 			text: "Edit FAQ",

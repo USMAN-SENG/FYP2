@@ -668,7 +668,7 @@ export default function AppointmentPage() {
 				</>
 			) : (
 				<>
-					<p>loading...</p>{" "}
+					<p>loading...</p>
 				</>
 			)}
 		</>

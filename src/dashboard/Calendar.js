@@ -24,7 +24,8 @@ import { useNavigate } from "react-router-dom";
 
 // ctrl + alt + r
 let events = [];
-let eventComponent;
+export let stopListenToLiveUpdate;
+
 export default function Calendar() {
 	const currentUser = useAuth(); // get the info of currentUser
 	let navigate = useNavigate();
@@ -92,7 +93,7 @@ export default function Calendar() {
 						start: new Date(event.appointmentStart),
 						end: new Date(event.appointmentEnd),
 					});
-					// setEventState([...eventState, {
+					// setEventState([...eventState, { // it didn't work because set will reRender
 					// 		event_id: index,
 					// 		title: event.title,
 					// 		start: new Date(event.appointmentStart),
@@ -107,6 +108,7 @@ export default function Calendar() {
 				console.log(reloadState);
 				//createAppointmentComponent();
 			});
+			// stopListenToLiveUpdate = unsubscribe();  // how to make all page use it ??
 		} catch (e) {
 			console.log(e); // error
 		}

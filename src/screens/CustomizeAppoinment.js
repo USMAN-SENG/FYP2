@@ -6,8 +6,8 @@ import Transition from "./Transition";
 
 //import { useParams } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
-import {  useAuth } from "../firebase";
-import { useState,  useLayoutEffect  } from "react";
+import { useAuth } from "../firebase";
+import { useState, useLayoutEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -20,6 +20,7 @@ export default function CustomizeAppoinment() {
 	const currentUser = useAuth(); // get the info of currentUser
 	let navigate = useNavigate();
 	const [formStep, setFormStep] = useState(1);
+	const [loading, setLoading] = useState(false);
 
 	let spacingBetweenButtons = 50;
 	if (formStep === 2) spacingBetweenButtons = 13;
@@ -36,8 +37,8 @@ export default function CustomizeAppoinment() {
 	}
 
 	useLayoutEffect(() => {
-		 
 		const displayData = async () => {
+			setLoading(false);
 			const docRef = doc(db, "owners", currentUser.email);
 			const docSnap = await getDoc(docRef);
 
@@ -45,9 +46,10 @@ export default function CustomizeAppoinment() {
 				if (docSnap.data().officeAddress) {
 					// means already exists
 					navigate("/Dashboard/Calendar");
-				} 
-			}  
-			 
+				}
+			}
+
+			setLoading(true);
 		};
 
 		displayData();
@@ -57,59 +59,69 @@ export default function CustomizeAppoinment() {
 	return (
 		<>
 			{currentUser ? (
-				<Grid
-					container
-					direction="column"
-					justifyContent="center"
-					alignItems="center"
-					sx={{ minHeight: "100vh" }}
-				>
-					<Grid item>
-						<Paper
-							elevation={24}
-							sx={{ minHeight: "70vh", minWidth: "100vh", m: 5 }}
-						>
-							{formStep === 1 && (
-								<ChooseWorkHours
-									spacingBetweenButtons={spacingBetweenButtons}
-									decreaseFormStep={decreaseFormStep}
-									formStep={formStep}
-									increaseFormStep={increaseFormStep}
-									ownerEmail={currentUser.email}
-								/>
-							)}
+				<>
+					{loading ? (
+						<>
+							<Grid
+								container
+								direction="column"
+								justifyContent="center"
+								alignItems="center"
+								sx={{ minHeight: "100vh" }}
+							>
+								<Grid item>
+									<Paper
+										elevation={24}
+										sx={{ minHeight: "70vh", minWidth: "100vh", m: 5 }}
+									>
+										{formStep === 1 && (
+											<ChooseWorkHours
+												spacingBetweenButtons={spacingBetweenButtons}
+												decreaseFormStep={decreaseFormStep}
+												formStep={formStep}
+												increaseFormStep={increaseFormStep}
+												ownerEmail={currentUser.email}
+											/>
+										)}
 
-							{formStep === 2 && (
-								<AddFAQ
-									spacingBetweenButtons={spacingBetweenButtons}
-									decreaseFormStep={decreaseFormStep}
-									formStep={formStep}
-									increaseFormStep={increaseFormStep}
-									ownerEmail={currentUser.email}
-								/>
-							)}
+										{formStep === 2 && (
+											<AddFAQ
+												spacingBetweenButtons={spacingBetweenButtons}
+												decreaseFormStep={decreaseFormStep}
+												formStep={formStep}
+												increaseFormStep={increaseFormStep}
+												ownerEmail={currentUser.email}
+											/>
+										)}
 
-							{formStep === 3 && (
-								<AddPersonalAbout
-									spacingBetweenButtons={spacingBetweenButtons}
-									decreaseFormStep={decreaseFormStep}
-									formStep={formStep}
-									increaseFormStep={increaseFormStep}
-									ownerEmail={currentUser.email}
-								/>
-							)}
-							{formStep === 4 && (
-								<Transition
-									spacingBetweenButtons={spacingBetweenButtons}
-									decreaseFormStep={decreaseFormStep}
-									formStep={formStep}
-									increaseFormStep={increaseFormStep}
-									ownerEmail={currentUser.email}
-								/>
-							)}
-						</Paper>
-					</Grid>
-				</Grid>
+										{formStep === 3 && (
+											<AddPersonalAbout
+												spacingBetweenButtons={spacingBetweenButtons}
+												decreaseFormStep={decreaseFormStep}
+												formStep={formStep}
+												increaseFormStep={increaseFormStep}
+												ownerEmail={currentUser.email}
+											/>
+										)}
+										{formStep === 4 && (
+											<Transition
+												spacingBetweenButtons={spacingBetweenButtons}
+												decreaseFormStep={decreaseFormStep}
+												formStep={formStep}
+												increaseFormStep={increaseFormStep}
+												ownerEmail={currentUser.email}
+											/>
+										)}
+									</Paper>
+								</Grid>
+							</Grid>
+						</>
+					) : (
+						<>
+							<p>loading...</p>
+						</>
+					)}
+				</>
 			) : (
 				<>
 					<Stack

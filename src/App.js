@@ -13,6 +13,7 @@ import CustomerServicePage from "./appointmentWebsite/CustomerServicePage";
 
 import Calendar from "./dashboard/Calendar";
 import EditFAQ from "./dashboard/EditFAQ";
+import Msg from "./dashboard/Msg";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 
 				<Route path="/Dashboard/Calendar" element={<Calendar />} />
 				<Route path="/Dashboard/EditFAQ" element={<EditFAQ />} />
+				<Route path="/Dashboard/Msg" element={<Msg />} />
 
 			</Routes>
 		</BrowserRouter>
