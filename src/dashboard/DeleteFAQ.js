@@ -10,21 +10,20 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useState, useLayoutEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db, useAuth,sendDataFromFAQ } from "../firebase";
+import { db, sendDataFromFAQ } from "../firebase";
 
 let FAQarray = [];
 
 let faqComponent;
 
-export default function DeleteFAQ() {
-	const currentUser = useAuth(); // get the info of currentUser
-
+export default function DeleteFAQ( {ownerEmail}) {
+ 
 	let navigate = useNavigate();
 
 	const [loading, setLoading] = useState(false);
 
 	const displayData = async () => {
-		const docRef = doc(db, "owners", currentUser.email);
+		const docRef = doc(db, "owners", ownerEmail);
 		const docSnap = await getDoc(docRef);
 
 		if (docSnap.exists()) {
@@ -47,7 +46,7 @@ export default function DeleteFAQ() {
 		setLoading(false);
 
 		displayData();
-	}, [currentUser]);
+	}, [ownerEmail]);
 
 	const createFaqComponent = () => {
 		setLoading(false);
@@ -93,7 +92,7 @@ export default function DeleteFAQ() {
   async function sendFaqToDatabase(){
 
 		try {
-      await sendDataFromFAQ(currentUser.email , FAQarray)   
+      await sendDataFromFAQ(ownerEmail , FAQarray)   
     } catch(e) {
       console.log(e); // error  
     }

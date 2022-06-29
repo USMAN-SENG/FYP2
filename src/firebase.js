@@ -193,6 +193,17 @@ export async function sendDataFromFAQ(ownerEmail, FAQarray){
   await updateDoc(ownersDocRef, customizeFAQData);
 }
 
+
+export async function addNewFAQ(ownerEmail, FAQobject){
+  const ownersDocRef = doc(db, 'owners',ownerEmail);
+
+  let addNewFAQData ={
+    FAQ:arrayUnion(FAQobject) 
+  }
+
+  await updateDoc(ownersDocRef, addNewFAQData); 
+}
+
 //------
 
 export async function sendDataFromPersonalAbout(ownerEmail, name, address, description){

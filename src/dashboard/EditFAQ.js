@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useState, useLayoutEffect } from "react";
 import DeleteFAQ from "./DeleteFAQ";
+import AddNewFAQ from "./AddNewFAQ";
 
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -65,6 +66,27 @@ export default function EditFAQ() {
 		setValue(newValue);
 	};
 
+	useLayoutEffect(() => {
+		const displayData = async () => {
+			const docRef = doc(db, "owners", currentUser.email);
+			const docSnap = await getDoc(docRef);
+
+			if (docSnap.exists()) {
+				if (docSnap.data().officeAddress) {
+					// do nothing
+				} else {
+					// we should navigate to the sign up
+					navigate("/signup");
+				}
+
+			} else {
+				navigate("/signup");
+			}
+		};
+
+		displayData();
+	}, [currentUser]);
+
 	return (
 		<div>
 			{currentUser ? (
@@ -93,10 +115,10 @@ export default function EditFAQ() {
 									</Tabs>
 								</Box>
 								<TabPanel value={value} index={0}>
-									<DeleteFAQ/>
+									<DeleteFAQ ownerEmail={currentUser.email}/>
 								</TabPanel>
 								<TabPanel value={value} index={1}>
-									<p>Add FAQ</p>
+									<AddNewFAQ ownerEmail={currentUser.email}/>
 								</TabPanel>
 								<TabPanel value={value} index={2}>
 									<p>change work hours</p>
