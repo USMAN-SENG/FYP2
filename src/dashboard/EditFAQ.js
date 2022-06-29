@@ -9,17 +9,12 @@ import Box from "@mui/material/Box";
 import { useState, useLayoutEffect } from "react";
 import DeleteFAQ from "./DeleteFAQ";
 import AddNewFAQ from "./AddNewFAQ";
+import UpdateWorkHours from "./UpdateWorkHours";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	doc,
 	getDoc,
-	query,
-	orderBy,
-	limit,
-	collection,
-	addDoc,
-	onSnapshot,
 } from "firebase/firestore";
 import { db, useAuth } from "../firebase";
 
@@ -121,7 +116,7 @@ export default function EditFAQ() {
 									<AddNewFAQ ownerEmail={currentUser.email}/>
 								</TabPanel>
 								<TabPanel value={value} index={2}>
-									<p>change work hours</p>
+									<UpdateWorkHours ownerEmail={currentUser.email}/>
 								</TabPanel>
 								<TabPanel value={value} index={3}>
 									<p>change info</p>

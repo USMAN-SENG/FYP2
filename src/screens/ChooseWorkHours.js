@@ -1,16 +1,11 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import NativeSelect from "@mui/material/NativeSelect";
-import Input from "@mui/material/Input";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { CheckboxDays } from "./formComponents/checkboxDays";
 import { ButtonStep } from "./formComponents/ButtonStep";
-import {sendDataFromWorkHours} from "../firebase"
+import { sendDataFromWorkHours } from "../firebase";
 
 const MIN = 1;
 const MAX = 24;
@@ -21,14 +16,16 @@ const MAX = 24;
 // const MIN_END_TIME = 2;
 // const MAX_END_TIME = 12;
 
-export function ChooseWorkHours( {
+export function ChooseWorkHours({
 	spacingBetweenButtons,
 	decreaseFormStep,
 	formStep,
 	increaseFormStep,
 	ownerEmail,
+	showButtonStep = true,
+	updateTheDoc = false,
+	showOriginalTitle = true,
 }) {
-
 	//days states
 	const [sunday, setSunday] = useState(false);
 	const [monday, setMonday] = useState(false);
@@ -56,79 +53,88 @@ export function ChooseWorkHours( {
 
 	let disablePreviousButton = true;
 	let disableNextButton = false;
-	 
 
 	//const [daysInclude, setDaysInclude] = useState([]);
-	// create variables outside the function 
+	// create variables outside the function
 	// use the function when next button is clicked
 	// make sure to initilize all variables to null at the beginning of the function
-	// we can make a function in CustomizeAppoinmetn and send it here inside to get the data 
+	// we can make a function in CustomizeAppoinmetn and send it here inside to get the data
 	let notIncludeDays = [];
-	let mondayHours={startHour:0, endHour:0};
-	let tuesdayHours={startHour:0, endHour:0};
-	let wednesdayHours={startHour:0, endHour:0};
-	let thursdayHours={startHour:0, endHour:0};
-	let fridayHours={startHour:0, endHour:0};
-	let saturdayHours={startHour:0, endHour:0};
-	let sundayHours={startHour:0, endHour:0};
-	
-	async function sendWorkHoursToDatabase() {
+	let mondayHours = { startHour: 0, endHour: 0 };
+	let tuesdayHours = { startHour: 0, endHour: 0 };
+	let wednesdayHours = { startHour: 0, endHour: 0 };
+	let thursdayHours = { startHour: 0, endHour: 0 };
+	let fridayHours = { startHour: 0, endHour: 0 };
+	let saturdayHours = { startHour: 0, endHour: 0 };
+	let sundayHours = { startHour: 0, endHour: 0 };
 
-		if (sunday === true){
-			sundayHours.startHour = sundayStartTime ;
-			sundayHours.endHour = sundayEndTime ;
-		}  
-		if (monday === true){
-			mondayHours.startHour = mondayStartTime ;
-			mondayHours.endHour = mondayEndTime ;
+	async function sendWorkHoursToDatabase() {
+		if (sunday === true) {
+			sundayHours.startHour = sundayStartTime;
+			sundayHours.endHour = sundayEndTime;
 		}
-		if (tuesday === true){
-			tuesdayHours.startHour = tuesdayStartTime ;
-			tuesdayHours.endHour = tuesdayEndTime ;
-		} 
-		if (wednesday === true){
-			wednesdayHours.startHour = wednesdayStartTime ;
-			wednesdayHours.endHour = wednesdayEndTime ;
-		} 
-		if (thursday === true){
-			thursdayHours.startHour = thursdayStartTime ;
-			thursdayHours.endHour = thursdayEndTime ;
-		} 
-		if (friday === true){
-			fridayHours.startHour = fridayStartTime ;
-			fridayHours.endHour = fridayEndTime ;			
-		} 
-    if (saturday === true){
-			saturdayHours.startHour = saturdayStartTime ;
-			saturdayHours.endHour = saturdayEndTime ;
+		if (monday === true) {
+			mondayHours.startHour = mondayStartTime;
+			mondayHours.endHour = mondayEndTime;
 		}
-		if (sunday === false){
+		if (tuesday === true) {
+			tuesdayHours.startHour = tuesdayStartTime;
+			tuesdayHours.endHour = tuesdayEndTime;
+		}
+		if (wednesday === true) {
+			wednesdayHours.startHour = wednesdayStartTime;
+			wednesdayHours.endHour = wednesdayEndTime;
+		}
+		if (thursday === true) {
+			thursdayHours.startHour = thursdayStartTime;
+			thursdayHours.endHour = thursdayEndTime;
+		}
+		if (friday === true) {
+			fridayHours.startHour = fridayStartTime;
+			fridayHours.endHour = fridayEndTime;
+		}
+		if (saturday === true) {
+			saturdayHours.startHour = saturdayStartTime;
+			saturdayHours.endHour = saturdayEndTime;
+		}
+		if (sunday === false) {
 			notIncludeDays.push(0);
 		}
-		if (monday === false){
+		if (monday === false) {
 			notIncludeDays.push(1);
 		}
-		if (tuesday === false){
+		if (tuesday === false) {
 			notIncludeDays.push(2);
 		}
-		if (wednesday === false){
+		if (wednesday === false) {
 			notIncludeDays.push(3);
-		} 
-		if (thursday === false){
+		}
+		if (thursday === false) {
 			notIncludeDays.push(4);
 		}
-		if (friday === false){
+		if (friday === false) {
 			notIncludeDays.push(5);
 		}
-		if (saturday === false){
+		if (saturday === false) {
 			notIncludeDays.push(6);
 		}
 
 		try {
-      await  sendDataFromWorkHours(ownerEmail, mondayHours, tuesdayHours , wednesdayHours , thursdayHours , fridayHours, saturdayHours, sundayHours, notIncludeDays);
-    } catch(e) {
-      console.log(e); // error  
-    }
+			await sendDataFromWorkHours(
+				ownerEmail,
+				mondayHours,
+				tuesdayHours,
+				wednesdayHours,
+				thursdayHours,
+				fridayHours,
+				saturdayHours,
+				sundayHours,
+				notIncludeDays,
+				updateTheDoc
+			);
+		} catch (e) {
+			console.log(e); // error
+		}
 
 		// console.log(notIncludeDays);
 		// console.log(sundayHours);
@@ -145,30 +151,21 @@ export function ChooseWorkHours( {
 
 		if (day === "sunday") {
 			setSunday(!sunday);
-			
 		} else if (day === "monday") {
 			setMonday(!monday);
-			
-			
 		} else if (day === "tuesday") {
 			setTuesday(!tuesday);
-			
 		} else if (day === "wednesday") {
 			setWednesday(!wednesday);
-			
 		} else if (day === "thursday") {
 			setThursday(!thursday);
-			
 		} else if (day === "friday") {
 			setFriday(!friday);
-			
 		} else if (day === "saturday") {
 			setSaturday(!saturday);
-			
 		}
 	}
 
-	
 	const handleStartTime = (event, day) => {
 		let newTimeValue = Number(event.target.value);
 		parseInt(newTimeValue);
@@ -187,7 +184,6 @@ export function ChooseWorkHours( {
 			//console.log(day , newTimeValue);
 		} else if (day === "tuesday") {
 			setTuesdayStartTime(newTimeValue);
-
 		} else if (day === "wednesday") {
 			setWednesdayStartTime(newTimeValue);
 		} else if (day === "thursday") {
@@ -227,22 +223,40 @@ export function ChooseWorkHours( {
 		}
 	};
 
-	if(sunday=== false && monday=== false && tuesday=== false && wednesday=== false && thursday=== false && friday=== false && saturday=== false){
-		disableNextButton= true;
+	if (
+		sunday === false &&
+		monday === false &&
+		tuesday === false &&
+		wednesday === false &&
+		thursday === false &&
+		friday === false &&
+		saturday === false
+	) {
+		disableNextButton = true;
 	}
-
-
 
 	return (
 		<section>
-			<Typography variant="h6" align="center">
-				step 1
-			</Typography>
+			<>
+				{showOriginalTitle ? (
+					<>
+						<Typography variant="h6" align="center">
+							step 1
+						</Typography>
 
-			<Typography m={2} variant="h5" align="center">
-				Add office working hours
-			</Typography>
-			
+						<Typography m={2} variant="h5" align="center">
+							Add office working hours
+						</Typography>
+					</>
+				) : (
+					<>
+						<Typography variant="h5" align="center">
+							Update Work Hours
+						</Typography>
+						<br />
+					</>
+				)}
+			</>
 
 			{/*note:  add one for break time  */}
 			<CheckboxDays
@@ -321,10 +335,43 @@ export function ChooseWorkHours( {
 				handleStartTime={(event) => handleStartTime(event, "sunday")}
 				endTime={sundayEndTime}
 				handleEndTime={(event) => handleEndTime(event, "sunday")}
-
 			/>
 			<br />
-			<ButtonStep   spacingBetweenButtons={spacingBetweenButtons} decreaseFormStep={decreaseFormStep}  formStep={formStep} increaseFormStep={increaseFormStep} disablePreviousButton={disablePreviousButton} disableNextButton={disableNextButton} nextButtonAction={sendWorkHoursToDatabase} />
+			<>
+				{showButtonStep ? (
+					<>
+						<ButtonStep
+							spacingBetweenButtons={spacingBetweenButtons}
+							decreaseFormStep={decreaseFormStep}
+							formStep={formStep}
+							increaseFormStep={increaseFormStep}
+							disablePreviousButton={disablePreviousButton}
+							disableNextButton={disableNextButton}
+							nextButtonAction={sendWorkHoursToDatabase}
+						/>
+					</>
+				) : (
+					<>
+						<Stack
+							direction="row"
+							justifyContent="center"
+							alignItems="center"
+							spacing={2}
+						>
+							<Button
+								variant="outlined"
+								color="primary"
+								disabled={disableNextButton}
+								onClick={() => {
+									sendWorkHoursToDatabase();
+								}}
+							>
+								Submit
+							</Button>
+						</Stack>
+					</>
+				)}
+			</>
 		</section>
 	);
 }

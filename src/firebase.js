@@ -164,7 +164,7 @@ export function addTestArray() {
 }
 ///////////////////////////// send customize data for the owner
 
- export async function sendDataFromWorkHours(ownerEmail, mon, tue, wed, thu, fri, sat, sun,notInclude ){
+ export async function sendDataFromWorkHours(ownerEmail, mon, tue, wed, thu, fri, sat, sun,notInclude,updateTheDoc ){
   const ownersDocRef = doc(db, 'owners',ownerEmail);
 
   let customizeWorkHoursData ={
@@ -179,7 +179,14 @@ export function addTestArray() {
     notIncludeDays: notInclude
   }
 
-  await setDoc(ownersDocRef, customizeWorkHoursData);
+  if(updateTheDoc) {
+    await updateDoc(ownersDocRef, customizeWorkHoursData);
+    alert("Work Hours updated successfully" ); 
+  }else{
+    await setDoc(ownersDocRef, customizeWorkHoursData);
+  }
+
+  
 }
 
 //------

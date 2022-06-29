@@ -588,7 +588,7 @@ export default function AppointmentPage() {
 	// } else if (onlyDay === 2) {
 	// 	dayString = "tuesday";
 	// }
-	// {loading?(<></>):(<></>)}  for loading screen
+	// <>{loading?(<></>):(<></>)}</>  for loading screen
 
 	// useEffect(()=>{},[])
 	// useLayoutEffect
