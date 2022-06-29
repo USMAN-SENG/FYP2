@@ -16,10 +16,11 @@ import ListItem from "@mui/material/ListItem";
 // import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link  } from "react-router-dom";
 
 
-export default function DashHeader() {
+
+export default function DashHeader({ ownerEmail, logout }) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	let navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export default function DashHeader() {
 			path: "/Dashboard/Msg",
 		},
 		{
-			text: "Edit FAQ",
+			text: "Edit",
 			icon: <EditIcon color="secondary" />,
 			path: "/Dashboard/EditFAQ",
 		},
@@ -59,7 +60,16 @@ export default function DashHeader() {
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 							Menue
 						</Typography>
-						<Button color="inherit">Login</Button> { 'put log out here '}
+
+						<Link to={`/AppointmentPage/${ownerEmail}`}>
+						<Button sx={{  p: 1,m:1 , bgcolor:"#1A5276"}}   variant="contained" size="large" >Visit Website</Button>
+						</Link>
+						
+
+						<Button sx={{ bgcolor:"#CB4335"}} variant="contained" size="large" onClick={() => {
+						logout();
+						navigate(`/`);
+					}}>LogOut</Button>
 					</Toolbar>
 				</AppBar>
 			</Box>

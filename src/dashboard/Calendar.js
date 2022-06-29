@@ -18,7 +18,7 @@ import {
 	addDoc,
 	onSnapshot,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db ,logout } from "../firebase";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -120,7 +120,7 @@ export default function Calendar() {
 		<div>
 			{currentUser ? (
 				<>
-					<DashHeader />
+					<DashHeader ownerEmail={currentUser.email} logout={logout}/>
 					{events ? (
 						<>
 							<Grid container p={6} direction="row">

@@ -61,9 +61,9 @@ export default function  SignUpScreen()  {
                 {/* <Button  variant="contained">
                   <Link to={"/CustomizeAppoinment"}> WorkHours </Link>
                 </Button> */}
-                <Button  variant="contained" onClick={() => logout()}>
+                {/* <Button  variant="contained" onClick={() => logout()}>
                   log out
-                </Button>
+                </Button> */}
                 <br/>
                 <span className='text-xs text-white'>If Already have Account</span>
                 </div>

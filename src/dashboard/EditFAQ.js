@@ -10,13 +10,14 @@ import { useState, useLayoutEffect } from "react";
 import DeleteFAQ from "./DeleteFAQ";
 import AddNewFAQ from "./AddNewFAQ";
 import UpdateWorkHours from "./UpdateWorkHours";
+import UpdateInfo from "./UpdateInfo";
 
 import { useNavigate } from "react-router-dom";
 import {
 	doc,
 	getDoc,
 } from "firebase/firestore";
-import { db, useAuth } from "../firebase";
+import { db, useAuth,logout } from "../firebase";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -86,7 +87,7 @@ export default function EditFAQ() {
 		<div>
 			{currentUser ? (
 				<>
-					<DashHeader />
+					<DashHeader ownerEmail={currentUser.email} logout={logout}/>
 					<Grid
 						container
 						justifyContent="center"
@@ -119,7 +120,7 @@ export default function EditFAQ() {
 									<UpdateWorkHours ownerEmail={currentUser.email}/>
 								</TabPanel>
 								<TabPanel value={value} index={3}>
-									<p>change info</p>
+									<UpdateInfo ownerEmail={currentUser.email}/>
 								</TabPanel>
 							</Box>
 						</Grid>

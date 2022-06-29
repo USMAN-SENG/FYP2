@@ -23,7 +23,7 @@ import {
 	addDoc,
 	onSnapshot,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db,logout } from "../firebase";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // Chat component
@@ -199,7 +199,7 @@ export default function Msg() {
 		<div>
 			{currentUser ? (
 				<>
-					<DashHeader />
+					<DashHeader ownerEmail={currentUser.email} logout={logout}/>
 					<br />
 					<>
 						{cusEmail ? (
