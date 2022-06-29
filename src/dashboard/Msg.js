@@ -256,7 +256,6 @@ export default function Msg() {
 														
 														{customers[displayIndex].map((cus) => (
 															<Button
-																
 																variant="outlined"
 																color="primary"
 																size="large"
@@ -291,24 +290,6 @@ export default function Msg() {
 						)}
 					</>
 
-					{/* <>
-						{cusEmail ? (
-							<>
-								<Chat
-									title={cusEmail}
-									user={{ id: 2 }}
-									messages={messages}
-									//minimized={minimizedChat}
-									onSend={(message) => {
-										sendMsgToDatabase(message);
-										// setMessages([...messages, message]);
-									}}
-								/>
-							</>
-						) : (
-							<></>
-						)}
-					</> */}
 				</>
 			) : (
 				<>

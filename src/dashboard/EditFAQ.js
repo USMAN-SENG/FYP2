@@ -1,34 +1,119 @@
 import React from "react";
 import DashHeader from "./dashComponents/DashHeader";
-import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { useState, useLayoutEffect } from "react";
+import DeleteFAQ from "./DeleteFAQ";
 
-// Chat component
-import Chat, { Message } from "react-simple-chat";
-// Chat styles
-import "react-simple-chat/src/components/index.css";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+	doc,
+	getDoc,
+	query,
+	orderBy,
+	limit,
+	collection,
+	addDoc,
+	onSnapshot,
+} from "firebase/firestore";
+import { db, useAuth } from "../firebase";
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography>{children}</Typography>
+				</Box>
+			)}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`,
+	};
+}
 
 export default function EditFAQ() {
-	const [messages, setMessages] = useState([]);
+	const currentUser = useAuth(); // get the info of currentUser
+	let navigate = useNavigate();
 
-	
+	const [value, setValue] = useState(0);
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
 
 	return (
 		<div>
-			<DashHeader />
-			<Grid
-				container
-				justifyContent="center"
-				alignItems="center"
-				alignContent="center"
-				direction="row"
-				p={4}
-			>
-				<Grid item>
-					
-				</Grid>
-				<Grid item></Grid>
-			</Grid>
+			{currentUser ? (
+				<>
+					<DashHeader />
+					<Grid
+						container
+						justifyContent="center"
+						alignItems="center"
+						alignContent="center"
+						direction="row"
+						p={1}
+					>
+						<Grid item>
+							<Box sx={{ width: "100%" }} m={2}>
+								<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+									<Tabs
+										value={value}
+										onChange={handleChange}
+										aria-label="basic tabs example"
+									>
+										<Tab label="Delete FAQ" {...a11yProps(0)} />
+										<Tab label="Add FAQ" {...a11yProps(1)} />
+										<Tab label="change work hours" {...a11yProps(2)} />
+										<Tab label="change info" {...a11yProps(3)} />
+									</Tabs>
+								</Box>
+								<TabPanel value={value} index={0}>
+									<DeleteFAQ/>
+								</TabPanel>
+								<TabPanel value={value} index={1}>
+									<p>Add FAQ</p>
+								</TabPanel>
+								<TabPanel value={value} index={2}>
+									<p>change work hours</p>
+								</TabPanel>
+								<TabPanel value={value} index={3}>
+									<p>change info</p>
+								</TabPanel>
+							</Box>
+						</Grid>
+						<Grid item></Grid>
+					</Grid>
+				</>
+			) : (
+				<>
+					<p>loading...</p>
+				</>
+			)}
 		</div>
 	);
 }
