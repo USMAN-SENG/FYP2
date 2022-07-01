@@ -24,6 +24,10 @@ export default function DashHeader({ ownerEmail, logout }) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	let navigate = useNavigate();
 
+	function redirectToHomePage(){
+		navigate(`/`);
+	}
+
 	const menuItems = [
 		{
 			text: "Calendar",
@@ -68,7 +72,8 @@ export default function DashHeader({ ownerEmail, logout }) {
 
 						<Button sx={{ bgcolor:"#CB4335"}} variant="contained" size="large" onClick={() => {
 						logout();
-						navigate(`/`);
+						setTimeout(redirectToHomePage, 5000);
+						
 					}}>LogOut</Button>
 					</Toolbar>
 				</AppBar>

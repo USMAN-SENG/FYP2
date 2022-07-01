@@ -35,8 +35,8 @@ export default function  SignUpScreen()  {
     try {
       await signup(emailRef.current.value, passwordRef.current.value);
       navigate(`/CustomizeAppoinment`);
-    } catch {
-      alert("Error!"); // error when you use the same email to sign up again
+    } catch(e) {
+      alert("Error!"+e); // error when you use the same email to sign up again
     }
     setLoading(false); // enable button
   }

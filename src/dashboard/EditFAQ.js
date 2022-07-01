@@ -71,8 +71,8 @@ export default function EditFAQ() {
 				if (docSnap.data().officeAddress) {
 					// do nothing
 				} else {
-					// we should navigate to the sign up
-					navigate("/signup");
+					// we should navigate to the CustomizeAppoinment
+					navigate("/CustomizeAppoinment");
 				}
 
 			} else {

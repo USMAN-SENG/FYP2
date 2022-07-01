@@ -28,8 +28,8 @@ export default function LoginScreen () {
       console.log('succeful log in');
       navigate(`/CustomizeAppoinment`);
       
-    } catch {
-      alert("Error!");
+    } catch(e) {
+      alert("Error!" + e);
     }
     setLoading(false);
   }

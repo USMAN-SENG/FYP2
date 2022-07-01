@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ButtonStep } from "./formComponents/ButtonStep";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {sendDataFromPersonalAbout} from "../firebase"
 
 export default function AddPersonalAbout({

@@ -4,18 +4,11 @@ import DashHeader from "./dashComponents/DashHeader";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import { useAuth } from "../firebase";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import { Scheduler } from "@arshadrao/react-scheduler";
 import {
 	doc,
 	getDoc,
-	query,
-	orderBy,
-	limit,
 	collection,
-	addDoc,
 	onSnapshot,
 } from "firebase/firestore";
 import { db ,logout } from "../firebase";
@@ -41,8 +34,8 @@ export default function Calendar() {
 				if (docSnap.data().officeAddress) {
 					// do nothing
 				} else {
-					// we should navigate to the sign up
-					navigate("/signup");
+					// we should navigate to the CustomizeAppoinment
+					navigate("/CustomizeAppoinment");
 				}
 
 				listenToAppointments();

@@ -4,23 +4,19 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { FullFooter } from "../components/Footer";
 import CountUp from "react-countup";
-import { addTestArray } from "../firebase";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Grid from "@mui/material/Grid";
 // const fs = require("fs");
 
 const Homepage = (props) => {
 	const [loading, setLoading] = useState(false);
+	const [reloadState, setReloadState] = useState(0);
 
-	async function handleAddArray() {
-		setLoading(true); // disable button
-		try {
-			await addTestArray();
-		} catch {
-			alert("Error!"); // error when you use the same email to sign up again
-		}
-		setLoading(false); // enable button
-	}
+	useEffect(() => {
+		setReloadState((preVale) => preVale + 1);
+	}, [ ]);
+
+
 
 	return (
 		<div>

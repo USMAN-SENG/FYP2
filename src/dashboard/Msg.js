@@ -11,7 +11,6 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import {
 	doc,
 	getDoc,
@@ -71,8 +70,8 @@ export default function Msg() {
 				if (docSnap.data().officeAddress) {
 					// do nothing
 				} else {
-					// we should navigate to the sign up
-					navigate("/signup");
+					// we should navigate to the CustomizeAppoinment
+					navigate("/CustomizeAppoinment");
 				}
 
 				getCustomersEmail();
