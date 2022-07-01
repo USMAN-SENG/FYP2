@@ -5,6 +5,7 @@ import Homepage from "./screens/Homepage";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import CustomizeAppoinment from "./screens/CustomizeAppoinment";
+import AboutScreen from "./screens/AboutScreen";
 
 import AppointmentPage from "./appointmentWebsite/AppointmentPage";
 import FAQpage from "./appointmentWebsite/FAQpage";
@@ -22,6 +23,7 @@ function App() {
 				<Route index element={<Homepage />} />
 				<Route path="/signup" element={<SignUpScreen />} />
 				<Route path="/login" element={<LoginScreen />} />
+				<Route path="/AboutScreen" element = {<AboutScreen />} />
 				<Route path="/CustomizeAppoinment" element={<CustomizeAppoinment />} />
 
 				<Route path="/AppointmentPage/:ownerEmail" element={<AppointmentPage />} />

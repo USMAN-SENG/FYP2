@@ -416,6 +416,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 1.25rem;
   margin-right: 1.25rem;
 }
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -423,10 +427,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-}
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
 }
 .my-2 {
   margin-top: 0.5rem;
@@ -459,14 +459,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-20 {
   height: 5rem;
 }
+.h-\[40rem\] {
+  height: 40rem;
+}
 .h-96 {
   height: 24rem;
 }
 .h-60 {
   height: 15rem;
-}
-.h-\[40rem\] {
-  height: 40rem;
 }
 .w-full {
   width: 100%;
@@ -534,6 +534,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .to-blue-500 {
   --tw-gradient-to: #3b82f6;
 }
+.p-10 {
+  padding: 2.5rem;
+}
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -591,6 +594,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .text-black {
   --tw-text-opacity: 1;

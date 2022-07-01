@@ -10,7 +10,7 @@ export default function Header() {
           <div style={mystyle}><img src={require('./BookingZen.png')} /></div>
         </div>
         <div className='flex-1 hover:underline'><Link to={"/"}>Home</Link></div>
-        <div className='flex-1 hover:underline'><Link to={"#"}> About us</Link></div>
+        <div className='flex-1 hover:underline'><Link to={"/AboutScreen"}> About us</Link></div>
         <div className='flex-1 hover:underline'><Link to = {"/signup"}>Sign up</Link></div>
     </div>
   )
