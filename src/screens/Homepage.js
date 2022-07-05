@@ -53,11 +53,7 @@ const Homepage = (props) => {
 						</div>
 					</div>
 					<div className="flex flex-1 backdrop-blur-md justify-center items-center">
-						<iframe
-							width="500"
-							height="300"
-							src="https://drive.google.com/file/d/1gaeG2N-HlNuadmgmuTTPmGOzClFtL34F/preview"
-						></iframe>
+					<iframe width="500" height="300" src="https://www.youtube.com/embed/28Rwl57jDbs" title="816-D pitching video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 				</div>
 				{/*================================================= why us section ============================================*/}

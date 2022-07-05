@@ -62,7 +62,7 @@ export default function DashHeader({ ownerEmail, logout }) {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-							Menue
+							Menu
 						</Typography>
 
 						<Link to={`/AppointmentPage/${ownerEmail}`}>
