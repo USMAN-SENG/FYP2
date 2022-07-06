@@ -78,7 +78,7 @@ export default function Calendar() {
 				console.log("outside querySnapshot.forEach");
 				console.log("copyOfEvents is");
 				console.log(copyOfEvents);
-
+				events = [];
 				copyOfEvents.forEach((event, index) => {
 					events.push({
 						event_id: index,
@@ -130,12 +130,12 @@ export default function Calendar() {
 											weekStartOn: 6,
 											startHour: 1,
 											endHour: 24,
-											step: 60,
+											step: 30,
 										}}
 										day={{
 											startHour: 1,
 											endHour: 24,
-											step: 60,
+											step: 30,
 										}}
 										view="month"
 										events={events}
