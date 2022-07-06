@@ -1,12 +1,12 @@
 import { Paper, Button } from '@mui/material'
-import React, { Component } from 'react'
+import React from 'react'
 import Header from '../components/Header'
 import TextField from '@mui/material/TextField';
 import {Email,Lock} from '@mui/icons-material';
 import { SmallFooter } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from "react";
-import { login, logout, useAuth} from "../firebase";
+import { login,  useAuth} from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 

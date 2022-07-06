@@ -1,11 +1,10 @@
-import { ButtonStep } from "./formComponents/ButtonStep";
 import { ChooseWorkHours } from "./ChooseWorkHours";
 import { AddFAQ } from "./AddFAQ";
 import AddPersonalAbout from "./AddPersonalAbout";
 import Transition from "./Transition";
 
 //import { useParams } from "react-router-dom";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useAuth } from "../firebase";
 import { useState, useLayoutEffect } from "react";
 import Grid from "@mui/material/Grid";

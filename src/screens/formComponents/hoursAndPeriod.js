@@ -1,8 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Input from "@mui/material/Input";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 
 const MIN = 1;
 const MAX = 24;

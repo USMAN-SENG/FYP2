@@ -12,8 +12,6 @@ import {
 //onAuthStateChanged is used to listen to login and logout
 import {
 	getFirestore,
-	collection,
-	addDoc,
 	doc,
 	setDoc,
   updateDoc,

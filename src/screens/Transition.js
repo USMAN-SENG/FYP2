@@ -1,9 +1,7 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { ButtonStep } from "./formComponents/ButtonStep";
 
 export default function Transition({
 	spacingBetweenButtons,
@@ -12,9 +10,6 @@ export default function Transition({
 	increaseFormStep,
 	ownerEmail,
 }) {
-
-	let disablePreviousButton = false;
-	let disableNextButton = false;
 
 	return (
 		<div>
@@ -31,15 +26,6 @@ export default function Transition({
 					<Link to={"/Dashboard/Calendar"}>Go To The dashboard</Link>
 				</Button>
 			</Stack>
-      {/* <ButtonStep
-				spacingBetweenButtons={spacingBetweenButtons}
-				decreaseFormStep={decreaseFormStep}
-				formStep={formStep}
-				increaseFormStep={increaseFormStep}
-				disablePreviousButton={disablePreviousButton}
-				disableNextButton={disableNextButton}
-				submitButton={"submit"}
-			/> */}
 		</div>
 	);
 }

@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 // const fs = require("fs");
 
 const Homepage = (props) => {
-	const [loading, setLoading] = useState(false);
 	const [reloadState, setReloadState] = useState(0);
 
 	useEffect(() => {
